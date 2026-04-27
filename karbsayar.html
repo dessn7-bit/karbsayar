@@ -1,9 +1,17 @@
 <!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="UTF-8">
+<!-- saved from url=(0048)file:///C:/Users/Kaan/Downloads/karbsayar_2.html -->
+<html lang="tr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#a8c5b9">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="KarbSayar">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="application-name" content="KarbSayar">
+<link rel="manifest" href="file:///C:/Users/Kaan/Downloads/manifest.webmanifest">
+<link rel="apple-touch-icon" href="file:///C:/Users/Kaan/Downloads/icon.svg">
+<link rel="icon" type="image/svg+xml" href="file:///C:/Users/Kaan/Downloads/icon.svg">
 <title>KarbSayar</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -219,6 +227,71 @@ input[type=date]:focus,.in:focus,select:focus{border-color:#5b9279;background:#f
 .meal-type-pill:not(.active):hover,.meal-type-pill:not(.active):active{background:#faf5ed;border-color:#d6cebd}
 .meal-type-tag{display:inline-flex;align-items:center;gap:3px;font-size:10px;background:#ecf0ed;color:#5b9279;padding:2px 6px;border-radius:4px;font-weight:500;margin-right:4px}
 
+/* TDD pills */
+.tdd-row{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.25)}
+.tdd-pill{flex:1;background:rgba(255,255,255,.18);padding:6px 10px;border-radius:6px;font-size:11px;text-align:center}
+.tdd-pill b{font-weight:700}
+.tdd-pill.tdd-total{background:rgba(255,255,255,.28);font-weight:600}
+
+/* Quick actions (bazal + hipo) */
+.quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.quick-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:11px 8px;border:1.5px solid;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;background:#fff}
+.quick-btn-basal{border-color:#5d4d7d;color:#5d4d7d}
+.quick-btn-basal:hover,.quick-btn-basal:active{background:#5d4d7d;color:#fff}
+.quick-btn-hypo{border-color:#dc6b6b;color:#a03030}
+.quick-btn-hypo:hover,.quick-btn-hypo:active{background:#dc6b6b;color:#fff}
+.basal-done{display:flex;align-items:center;justify-content:center;gap:6px;padding:11px 8px;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:10px;font-size:12px;font-weight:500;color:#047857}
+
+/* Bazal & hipo log girişleri */
+.basal-tag{display:inline-flex;align-items:center;gap:3px;font-size:10px;background:#ebe5f0;color:#5d4d7d;padding:2px 6px;border-radius:4px;font-weight:500;margin-right:4px}
+.hypo-tag{display:inline-flex;align-items:center;gap:3px;font-size:10px;background:#ffe5e5;color:#a03030;padding:2px 6px;border-radius:4px;font-weight:500;margin-right:4px}
+.entry-basal{border-left:3px solid #5d4d7d}
+.entry-hypo{border-left:3px solid #dc6b6b;background:#fff5f5}
+
+/* Hipo formu */
+.hypo-card{background:linear-gradient(135deg,#fff5f5,#ffeded);border:2px solid #f5a8a8;border-radius:16px;padding:16px}
+.hypo-card h3{font-size:14px;font-weight:700;color:#a03030;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+
+/* Sick mode toggle */
+.sick-toggle{display:flex;align-items:center;justify-content:space-between;background:#fff7ed;border:1px solid #fdba74;border-radius:8px;padding:10px 12px;margin-bottom:12px;cursor:pointer;transition:all .15s}
+.sick-toggle.active{background:linear-gradient(135deg,#ea580c,#c2410c);border-color:#9a3412;color:#fff;box-shadow:0 2px 6px rgba(194,65,12,.2)}
+.sick-toggle .l{font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px}
+.sick-toggle .l .em{font-size:16px}
+.sick-toggle .switch{width:40px;height:22px;background:#cbd5e1;border-radius:12px;position:relative;flex-shrink:0;transition:background .15s}
+.sick-toggle .switch::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:2px;left:2px;transition:left .15s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.sick-toggle.active .switch{background:rgba(255,255,255,.35)}
+.sick-toggle.active .switch::after{left:20px}
+
+/* Heatmap */
+.heatmap-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:2px;margin-top:8px}
+.heatmap-cell{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:4px;font-size:10px;font-variant-numeric:tabular-nums;line-height:1;padding:2px;color:#fff;font-weight:600}
+.heatmap-cell.empty{background:#ede4d3;color:#a39885;font-weight:400}
+.heatmap-cell .h{font-size:8px;opacity:.85;margin-top:1px}
+.heatmap-legend{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:10px;color:#8a7d6a}
+.heatmap-legend-bar{flex:1;height:8px;background:linear-gradient(90deg,#86efac,#fbbf24,#dc6b6b);border-radius:4px;margin:0 8px}
+
+/* Trend kartı */
+.trend-card{background:#ecf0ed;border:1px solid #a8c5b9;border-radius:12px;padding:14px;margin-bottom:12px}
+.trend-card .t{font-size:11px;color:#5b9279;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+.trend-card .v{font-size:24px;font-weight:700;color:#3d6850;font-variant-numeric:tabular-nums;margin-bottom:8px}
+.trend-card .sug{font-size:13px;color:#3d6850;line-height:1.4;margin-top:8px;padding-top:8px;border-top:1px solid #a8c5b9}
+.trend-card .sug b{color:#1e3a30}
+
+/* HbA1c kartı */
+.hba1c-card{background:linear-gradient(135deg,#fff7ed,#fef3c7);border:1px solid #fbbf24;border-radius:12px;padding:14px;margin-bottom:12px}
+.hba1c-card .t{font-size:11px;color:#92400e;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.hba1c-card .v{font-size:32px;font-weight:700;color:#78350f;font-variant-numeric:tabular-nums;line-height:1}
+.hba1c-card .u{font-size:14px;color:#92400e;font-weight:500;margin-left:4px}
+.hba1c-card .s{font-size:11px;color:#92400e;margin-top:6px;line-height:1.4}
+
+/* CGM Sensör badge */
+.sensor-badge{display:flex;align-items:center;gap:8px;background:#ecf0ed;border:1px solid #a8c5b9;color:#3d6850;padding:8px 12px;border-radius:8px;font-size:12px;margin-bottom:8px;line-height:1.3}
+.sensor-badge .icn{flex-shrink:0;color:#5b9279}
+.sensor-badge.sensor-warning{background:#fff7ed;border-color:#fdba74;color:#9a3412}
+.sensor-badge.sensor-warning .icn{color:#ea580c}
+.sensor-badge.sensor-expired{background:#fff5f5;border-color:#f5a8a8;color:#a03030}
+.sensor-badge.sensor-expired .icn{color:#dc6b6b}
+
 /* Şablonlar / Sık Yenenler */
 .templates-row{display:flex;gap:6px;overflow-x:auto;padding:8px 0;margin-bottom:8px;-webkit-overflow-scrolling:touch}
 .templates-row::-webkit-scrollbar{display:none}
@@ -304,72 +377,437 @@ input[type=date]:focus,.in:focus,select:focus{border-color:#5b9279;background:#f
 .mt-summary .s{font-size:9px;color:#a39885;margin-top:1px}
 .section-title{font-size:13px;font-weight:600;color:#2d3b3d;margin:12px 0 8px}
 
-/* Karanlık mod */
-body.dark{background:linear-gradient(135deg,#3a3530,#2d3b3d);color:#ede4d3}
-body.dark .hdr{background:#2d3b3d;border-bottom-color:#3a3530}
-body.dark .hdr h1>span{color:#f5efe6}
-body.dark .hdr-sub{color:#a39885}
-body.dark .card{background:#2d3b3d;border-color:#3a3530;color:#ede4d3}
-body.dark .card h2{color:#f5efe6}
-body.dark .card-active{border-color:#3b82f6}
-body.dark .in,body.dark select,body.dark input[type=date]{background:#3a3530;border-color:#3a3530;color:#f5efe6}
-body.dark .in:focus,body.dark select:focus,body.dark input[type=date]:focus{border-color:#3b82f6;background:#2d3b3d}
-body.dark .entry{background:#3a3530;color:#ede4d3}
-body.dark .entry-meta{color:#a39885}
-body.dark .muted{color:#a39885}
-body.dark .nav{background:#2d3b3d;border-top-color:#3a3530}
-body.dark .lib-item{background:#2d3b3d;border-color:#3a3530}
-body.dark .day-btn{background:#2d3b3d;border-color:#3a3530;color:#ede4d3}
-body.dark .day-btn:hover{border-color:#3b82f6}
-body.dark .day-btn .c{color:#a39885}
-body.dark .empty{color:#8a7d6a}
-body.dark .meal-item{background:#3a3530;color:#ede4d3}
-body.dark .meal-totals,body.dark .meal-bg-row{background:#3a3530}
-body.dark .corr-input-block,body.dark .corr-preview{background:#3a3530;color:#ede4d3}
-body.dark .corr-preview .breakdown{color:#a39885;border-top-color:#3a3530}
-body.dark .stat-card,body.dark .mt-summary{background:#2d3b3d;border-color:#3a3530}
+/* Karanlık mod — Warm Charcoal Mat */
+body.dark{background:#2d2a25;color:#ddd5c5}
+body.dark .hdr{background:#332f2a;border-bottom-color:#3a362f;color:#e8dfcd}
+body.dark .hdr h1>span,body.dark .hdr h1{color:#e8dfcd}
+body.dark .hdr-sub,body.dark .muted{color:#9a9082}
+body.dark .tiny.muted{color:#867c6e}
+
+/* Kartlar - mat, zeminden hafif yüksek */
+body.dark .card{background:#34302a;border-color:#403b33;color:#ddd5c5;box-shadow:none}
+body.dark .card h2{color:#e8dfcd}
+body.dark .card-active{border-color:#7a9a8a;box-shadow:0 0 0 1px rgba(122,154,138,.15)}
+
+/* Hero kart - mat sage→lavender, daha az parlak */
+body.dark .card-blue{background:linear-gradient(135deg,#6b8a7d 0%,#7a7588 100%);box-shadow:none;color:#f5efe2}
+
+/* Doz kartı - mat sage */
+body.dark .dose-card{background:linear-gradient(135deg,#5d7d6b,#4a6856);box-shadow:none;color:#f5efe2}
+
+/* IOB kartı - mat mauve */
+body.dark .iob-card{background:linear-gradient(135deg,#8a7f95,#6f6578);box-shadow:none;color:#f5efe2}
+
+/* Düzeltme/correction kartı */
+body.dark .corr-trigger{background:#34302a;border-color:#5a4d6a;color:#a89bb5}
+body.dark .corr-trigger:hover,body.dark .corr-trigger:active{background:#3a362f;border-style:solid}
+body.dark .corr-card{background:linear-gradient(135deg,#3a3540,#322d38);border-color:#5a4d6a}
+body.dark .corr-input-block,body.dark .corr-preview{background:#2d2a32;color:#ddd5c5}
+body.dark .corr-preview .breakdown{color:#9a9082;border-top-color:#403b33}
+
+/* Inputlar - mat, ayırt edilebilir */
+body.dark .in,body.dark select,body.dark input[type=date],body.dark input[type=text],body.dark input[type=number]{
+  background:#252320;border-color:#403b33;color:#e8dfcd
+}
+body.dark .in::placeholder,body.dark input::placeholder{color:#6a6258}
+body.dark .in:focus,body.dark select:focus,body.dark input:focus{border-color:#7a9a8a;background:#2a2724}
+
+/* Log girdileri */
+body.dark .entry{background:#2a2724;color:#ddd5c5;border-color:transparent}
+body.dark .entry-meta{color:#9a9082}
+body.dark .entry-name{color:#e8dfcd}
+
+/* Nav alt bar */
+body.dark .nav{background:#332f2a;border-top-color:#3a362f}
+body.dark .nav .nav-btn{color:#9a9082}
+body.dark .nav .nav-btn.active{color:#a8c5b9}
+
+/* Kütüphane */
+body.dark .lib-item{background:#34302a;border-color:#403b33}
+body.dark .lib-name{color:#e8dfcd}
+body.dark .lib-meta{color:#9a9082}
+
+/* Geçmiş gün düğmeleri */
+body.dark .day-btn{background:#34302a;border-color:#403b33;color:#ddd5c5}
+body.dark .day-btn:hover{border-color:#7a9a8a}
+body.dark .day-btn .c{color:#9a9082}
+
+body.dark .empty{color:#6a6258}
+
+/* Öğün sepeti & meal totals */
+body.dark .meal-item{background:#2a2724;color:#ddd5c5}
+body.dark .meal-totals,body.dark .meal-bg-row{background:#2a2724}
+
+/* İstatistik kartları */
+body.dark .stat-card,body.dark .mt-summary{background:#34302a;border-color:#403b33}
 body.dark .stat-card .v,body.dark .mt-summary .v{color:#a8c5b9}
-body.dark .stat-card .lbl{color:#a39885}
-body.dark .bar-row .bar-bg{background:#3a3530}
-body.dark .bar-row .label,body.dark .bar-row .v{color:#ede4d3}
-body.dark .meal-type-pill{background:#3a3530;border-color:#3a3530;color:#d6cebd}
-body.dark .meal-type-pill.active{background:#3b82f6;border-color:#3b82f6;color:#fff}
-body.dark .meal-type-tag{background:#2d3b3d;color:#a8c5b9}
-body.dark .radio-opt{background:#3a3530;border-color:#3a3530;color:#ede4d3}
-body.dark .radio-opt.active{background:#3d6850;border-color:#3b82f6;color:#dceae0}
-body.dark .search-bar{background:#2d3b3d;border-color:#3a3530}
-body.dark .search-bar input{color:#f5efe6}
-body.dark .qty-grams{color:#a39885}
+body.dark .stat-card .lbl,body.dark .mt-summary .nm,body.dark .stat-card .s,body.dark .mt-summary .s{color:#9a9082}
+body.dark .bar-row .bar-bg{background:#252320}
+body.dark .bar-row .bar-fill{background:linear-gradient(90deg,#7a9a8a,#5d7d6b)}
+body.dark .bar-row .label,body.dark .bar-row .v{color:#ddd5c5}
+body.dark .stat-period button{background:#34302a;border-color:#403b33;color:#9a9082}
+body.dark .stat-period button.active{background:#5d7d6b;border-color:#7a9a8a;color:#f5efe2}
+body.dark .section-title{color:#e8dfcd}
+
+/* Öğün tipi pills */
+body.dark .meal-type-pill{background:#2a2724;border-color:#403b33;color:#9a9082}
+body.dark .meal-type-pill.active{background:#5d7d6b;border-color:#7a9a8a;color:#f5efe2}
+body.dark .meal-type-tag{background:#34302a;color:#a8c5b9}
+
+/* Radio seçenekler */
+body.dark .radio-opt{background:#2a2724;border-color:#403b33;color:#ddd5c5}
+body.dark .radio-opt.active{background:#3a4540;border-color:#7a9a8a;color:#a8c5b9}
+
+/* Arama çubuğu */
+body.dark .search-bar{background:#34302a;border-color:#403b33}
+body.dark .search-bar input{color:#e8dfcd}
+body.dark .qty-grams{color:#9a9082}
 body.dark .qty-grams b{color:#a8c5b9}
-body.dark .suggestions{background:#2d3b3d;border-color:#3a3530}
-body.dark .suggestion{color:#ede4d3;border-bottom-color:#3a3530}
-body.dark .suggestion:hover,body.dark .suggestion:active{background:#3a3530}
-body.dark .preview-meta{color:#a39885}
-body.dark .macro-blue{background:#3d6850}
+body.dark .suggestions{background:#34302a;border-color:#403b33}
+body.dark .suggestion{color:#ddd5c5;border-bottom-color:#3a362f}
+body.dark .suggestion:hover,body.dark .suggestion:active{background:#2a2724}
+body.dark .preview-meta{color:#9a9082}
+
+/* Macro renkleri */
+body.dark .macro-blue{background:#3a4540}
 body.dark .macro-blue .l{color:#a8c5b9}
-body.dark .macro-blue .v{color:#dceae0}
-body.dark .macro-slate{background:#3a3530}
-body.dark .macro-slate .l{color:#a39885}
-body.dark .macro-slate .v{color:#ede4d3}
-body.dark .lib-name{color:#f5efe6}
-body.dark .lib-meta{color:#a39885}
-body.dark .icon-btn{color:#8a7d6a}
-body.dark .icon-btn:hover{color:#f87171;background:#7f1d1d}
-body.dark .icon-btn-blue:hover{color:#a8c5b9;background:#3d6850}
-body.dark .qc-preset{background:#2d3b3d;border-color:#5d4d7d;color:#b8b0c4}
-body.dark .qc-preset:hover,body.dark .qc-preset.active{background:#5d4d7d;color:#fff}
-body.dark .ok{color:#86efac}
-body.dark .stat-period button{background:#3a3530;border-color:#3a3530;color:#a39885}
-body.dark .stat-period button.active{background:#3b82f6;border-color:#3b82f6;color:#fff}
-body.dark .section-title{color:#f5efe6}
-body.dark .template-list-item{background:#2d3b3d;border-color:#3a3530}
-body.dark .template-list-item .nm{color:#f5efe6}
-body.dark .template-save-btn{background:#2d3b3d;color:#b8b0c4;border-color:#5d4d7d}
-body.dark .qty-row .in,body.dark .qty-row select{background:#3a3530}
+body.dark .macro-blue .v{color:#e8dfcd}
+body.dark .macro-slate{background:#2a2724}
+body.dark .macro-slate .l{color:#9a9082}
+body.dark .macro-slate .v{color:#ddd5c5}
+
+/* Şablon stili */
+body.dark .template-list-item{background:#34302a;border-color:#403b33}
+body.dark .template-list-item .nm{color:#e8dfcd}
+body.dark .template-list-item .mt{color:#9a9082}
+body.dark .template-list-item .mt .v{color:#a8c5b9}
+body.dark .template-save-btn{background:#34302a;color:#a89bb5;border-color:#5a4d6a}
+body.dark .template-pill{background:linear-gradient(135deg,#3a4540,#3a3540);border-color:#5a4d6a;color:#cdc4d3}
+body.dark .template-section-title{color:#a89bb5}
+
+/* Edit form */
+body.dark .edit-entry-form{background:#3a4540;border-color:#5d7d6b}
+body.dark .edit-entry-row label{color:#9a9082}
+
+/* Notes ve uyarılar - matlaştırıldı */
+body.dark .notes-row label{color:#9a9082}
+body.dark .notes-row .in{background:#2d2a24;border-color:#4a3f30}
+body.dark .notes-row .in:focus{background:#322e26;border-color:#8a7858}
+body.dark .entry-note{background:#2d2a24;color:#c5b896;border-color:#4a3f30}
+body.dark .fp-warning{background:#332a22;border-color:#5a4530;color:#d4b890}
+body.dark .fp-warning b{color:#e5cba0}
+body.dark .fp-warning .icn{color:#c79b6a}
+
+/* Yemek sonrası KŞ */
+body.dark .pbg-line{background:#2d3540;color:#a8c5d9;border-color:#3a4a5a}
+body.dark .pbg-line.delta-up{background:#3d322a;color:#d4b890;border-color:#5a4530}
+body.dark .pbg-line.delta-down{background:#2a3a30;color:#a8c8b3;border-color:#3d5040}
+body.dark .pbg-link{background:#3a3540;color:#a89bb5;border-color:#5a4d6a}
+body.dark .pbg-link:hover{background:#403545;border-style:solid}
+body.dark .pbg-input-row{background:#3a3540;border-color:#5a4d6a}
+body.dark .pbg-input-row .in{background:#2d2a32}
+
+/* Hızlı düzeltme presetleri */
+body.dark .qc-preset{background:#34302a;border-color:#5a4d6a;color:#a89bb5}
+body.dark .qc-preset:hover,body.dark .qc-preset.active{background:#5a4d6a;color:#f5efe2}
+
+/* Egzersiz toggle */
+body.dark .exercise-toggle{background:#2d3a32;border-color:#3d5040;color:#a8c8b3}
+body.dark .exercise-toggle.active{background:linear-gradient(135deg,#5d7d6b,#4a6856);border-color:#7a9a8a;color:#f5efe2;box-shadow:none}
+body.dark .exercise-toggle .switch{background:#403b33}
+body.dark .exercise-toggle.active .switch{background:rgba(255,255,255,.25)}
+
+/* Ikon butonlar */
+body.dark .icon-btn{color:#867c6e}
+body.dark .icon-btn:hover{color:#e8a8a8;background:#3a2d2d}
+body.dark .icon-btn-blue{color:#867c6e}
+body.dark .icon-btn-blue:hover{color:#a8c5b9;background:#2d3a32}
+
+/* OK / başarı */
+body.dark .ok{color:#a8c8b3}
+
+/* Butonlar */
+body.dark .btn-secondary{background:#403b33;color:#ddd5c5;border-color:#4a4339}
+body.dark .btn-secondary:hover,body.dark .btn-secondary:active{background:#4a4339}
+body.dark .btn-primary{background:linear-gradient(135deg,#5d7d6b,#4a6856);color:#f5efe2;box-shadow:none}
+body.dark .btn-primary:hover,body.dark .btn-primary:active{background:linear-gradient(135deg,#5d7d6b,#3d5849)}
+body.dark .btn-primary:disabled{background:#403b33;color:#6a6258;opacity:.6}
+body.dark .btn-link{color:#a8c5b9}
+
+/* note-info (yedek altı uyarı) - mat */
+body.dark .note-info{background:#332a22;color:#c5b896;border-color:#4a3f30}
+body.dark .note-info .icn{color:#c79b6a}
+
+/* Settings labels */
+body.dark .checkbox-row,body.dark .set-row{color:#ddd5c5}
+body.dark .lbl-text{color:#ddd5c5}
+
+/* Error mesajları */
+body.dark .err{background:#3a2d2d;color:#e8a8a8;border-color:#5a3d3d}
+
+/* Confidence tag - dark mat */
+body.dark .conf-yuksek{background:#2a3a30;color:#a8c8b3}
+body.dark .conf-orta{background:#3d322a;color:#d4b890}
+body.dark .conf-dusuk{background:#3a2d2d;color:#e8a8a8}
+body.dark .tag-db{background:#2a3a30;color:#a8c8b3}
+body.dark .tag-ai{background:#3a3540;color:#a89bb5}
+
+/* Lib note */
+body.dark .lib-note{color:#867c6e}
+
+/* Add more link */
+body.dark .add-more-link{color:#a8c5b9;border-color:#403b33}
+body.dark .add-more-link:hover{background:#34302a;border-color:#a8c5b9}
+
+/* Karanlık mod — yeni elementler */
+body.dark .tdd-pill{background:rgba(255,255,255,.12)}
+body.dark .tdd-pill.tdd-total{background:rgba(255,255,255,.22)}
+body.dark .quick-btn{background:#34302a}
+body.dark .quick-btn-basal{border-color:#8a7ca0;color:#cdc4d3}
+body.dark .quick-btn-basal:hover,body.dark .quick-btn-basal:active{background:#5a4d6a;color:#f5efe2}
+body.dark .quick-btn-hypo{border-color:#c47878;color:#e8a8a8}
+body.dark .quick-btn-hypo:hover,body.dark .quick-btn-hypo:active{background:#7a3a3a;color:#f5efe2}
+body.dark .basal-done{background:#2a3a30;border-color:#3d5040;color:#a8c8b3}
+body.dark .basal-tag{background:#3a3540;color:#cdc4d3}
+body.dark .hypo-tag{background:#3a2d2d;color:#e8a8a8}
+body.dark .entry-basal{border-left-color:#8a7ca0}
+body.dark .entry-hypo{border-left-color:#c47878;background:#3a2a2a}
+
+/* Hipo formu - dark */
+body.dark .hypo-card{background:linear-gradient(135deg,#3a2a2a,#332626);border-color:#5a3d3d}
+body.dark .hypo-card h3{color:#e8a8a8}
+
+/* Sick toggle - dark */
+body.dark .sick-toggle{background:#3d322a;border-color:#5a4530;color:#d4b890}
+body.dark .sick-toggle.active{background:linear-gradient(135deg,#a05818,#7c3e10);border-color:#c2410c;color:#fff;box-shadow:none}
+body.dark .sick-toggle .switch{background:#403b33}
+body.dark .sick-toggle.active .switch{background:rgba(255,255,255,.25)}
+
+/* Heatmap - dark */
+body.dark .heatmap-cell.empty{background:#252320;color:#6a6258}
+body.dark .heatmap-legend{color:#9a9082}
+
+/* Trend kartı - dark */
+body.dark .trend-card{background:#2a3a32;border-color:#3d5040}
+body.dark .trend-card .t{color:#a8c8b3}
+body.dark .trend-card .v{color:#a8c5b9}
+body.dark .trend-card .sug{color:#cdc4b8;border-top-color:#3d5040}
+body.dark .trend-card .sug b{color:#a8c5b9}
+
+/* HbA1c kartı - dark */
+body.dark .hba1c-card{background:linear-gradient(135deg,#3d322a,#332a22);border-color:#5a4530}
+body.dark .hba1c-card .t{color:#d4b890}
+body.dark .hba1c-card .v{color:#e5cba0}
+body.dark .hba1c-card .u{color:#d4b890}
+body.dark .hba1c-card .s{color:#c5b896}
+
+/* Sensor badge - dark */
+body.dark .sensor-badge{background:#2a3a30;border-color:#3d5040;color:#a8c8b3}
+body.dark .sensor-badge .icn{color:#7ba593}
+body.dark .sensor-badge.sensor-warning{background:#3d322a;border-color:#5a4530;color:#d4b890}
+body.dark .sensor-badge.sensor-warning .icn{color:#c79b6a}
+body.dark .sensor-badge.sensor-expired{background:#3a2a2a;border-color:#5a3d3d;color:#e8a8a8}
+body.dark .sensor-badge.sensor-expired .icn{color:#c47878}
+
+/* Hızlı KŞ kartı - dark */
+body.dark .quick-bg-card{background:#34302a;border-color:#403b33;box-shadow:none}
+body.dark .qbg-title{color:#a8c5b9}
+body.dark .qbg-latest-meta{color:#9a9082}
+body.dark .qbg-adj{background:#252320;border-color:#403b33;color:#ddd5c5}
+body.dark .qbg-adj:hover,body.dark .qbg-adj:active{background:#5b9279;color:#fff;border-color:#5b9279}
+body.dark .qbg-input.bg-low{background:#3a2a2a;border-color:#c47878;color:#e8a8a8}
+body.dark .qbg-input.bg-target{background:#2a3a30;border-color:#7ba593;color:#a8c8b3}
+body.dark .qbg-input.bg-high{background:#3d322a;border-color:#c79b6a;color:#d4b890}
+body.dark .qbg-input.bg-very-high{background:#3a2a2a;border-color:#dc2626;color:#f87171}
+body.dark .qbg-preset{background:#34302a}
+body.dark .qbg-preset.bg-low{border-color:#5a3d3d;color:#c47878}
+body.dark .qbg-preset.bg-target{border-color:#3d5040;color:#7ba593}
+body.dark .qbg-preset.bg-high{border-color:#5a4530;color:#c79b6a}
+body.dark .qbg-preset.bg-very-high{border-color:#5a2d2d;color:#f87171}
+body.dark .qbg-preset.active{background:#a8c5b9;color:#2a2724;border-color:#a8c5b9}
+body.dark .qbg-action{background:#34302a}
+body.dark .qbg-action-meal{border-color:#3d5040;color:#a8c8b3}
+body.dark .qbg-action-meal:hover,body.dark .qbg-action-meal:active{background:#5b9279;color:#fff;border-color:#5b9279}
+body.dark .qbg-action-corr{border-color:#5a4d6a;color:#cdc4d3}
+body.dark .qbg-action-corr:hover,body.dark .qbg-action-corr:active{background:#5d4d7d;color:#fff;border-color:#5d4d7d}
+body.dark .qbg-action-hypo{border-color:#5a3d3d;color:#e8a8a8}
+body.dark .qbg-action-hypo:hover,body.dark .qbg-action-hypo:active{background:#7a3a3a;color:#fff;border-color:#7a3a3a}
+body.dark .qbg-action-log{border-color:#403b33;color:#ddd5c5}
+body.dark .qbg-action-log:hover,body.dark .qbg-action-log:active{background:#ddd5c5;color:#2a2724;border-color:#ddd5c5}
+body.dark .qbg-timeline{border-top-color:#403b33}
+body.dark .qbg-timeline-item.bg-low{background:#3a2a2a;color:#e8a8a8}
+body.dark .qbg-timeline-item.bg-target{background:#2a3a30;color:#a8c8b3}
+body.dark .qbg-timeline-item.bg-high{background:#3d322a;color:#d4b890}
+body.dark .qbg-timeline-item.bg-very-high{background:#3a2a2a;color:#f87171}
+
+/* Standalone BG entry - dark */
+body.dark .entry-bg{border-left-color:#7ba593}
+body.dark .bg-tag{background:#2a3a30;color:#a8c8b3}
+
+/* Hızlı KŞ kartı */
+.quick-bg-card{background:#fff;border:1px solid #ede4d3;border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(58,53,48,.04)}
+.qbg-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.qbg-title{font-size:13px;font-weight:600;color:#5b9279;display:flex;align-items:center;gap:6px}
+.qbg-latest{display:flex;align-items:baseline;gap:6px}
+.qbg-latest-v{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;padding:2px 8px;border-radius:6px}
+.qbg-latest-meta{font-size:10px;color:#8a7d6a}
+.qbg-input-row{display:grid;grid-template-columns:auto auto 1fr auto auto;gap:6px;margin-bottom:8px;align-items:center}
+.qbg-input{font-size:24px !important;font-weight:700;text-align:center;font-variant-numeric:tabular-nums;padding:10px !important}
+.qbg-input.bg-low{background:#fff5f5;border-color:#dc6b6b;color:#a03030}
+.qbg-input.bg-target{background:#f0f9f4;border-color:#5b9279;color:#3d6850}
+.qbg-input.bg-high{background:#fff7ed;border-color:#fbbf24;color:#92400e}
+.qbg-input.bg-very-high{background:#fff5f5;border-color:#dc2626;color:#991b1b}
+.qbg-adj{padding:10px 8px;background:#f5efe6;border:1px solid #ede4d3;border-radius:8px;font-size:12px;font-weight:600;color:#3a3530;cursor:pointer;font-variant-numeric:tabular-nums;min-width:42px}
+.qbg-adj:hover,.qbg-adj:active{background:#a8c5b9;color:#fff;border-color:#a8c5b9}
+.qbg-presets{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:8px}
+.qbg-preset{padding:8px 4px;background:#fff;border:1.5px solid;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-variant-numeric:tabular-nums}
+.qbg-preset.bg-low{border-color:#f5a8a8;color:#dc6b6b}
+.qbg-preset.bg-target{border-color:#a8c5b9;color:#5b9279}
+.qbg-preset.bg-high{border-color:#fbbf24;color:#a16207}
+.qbg-preset.bg-very-high{border-color:#dc2626;color:#991b1b}
+.qbg-preset.active{background:#3a3530;color:#fdfaf3;border-color:#3a3530}
+.qbg-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:10px;margin-bottom:8px}
+.qbg-action{padding:11px 8px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid;background:#fff;display:flex;align-items:center;justify-content:center;gap:6px}
+.qbg-action-meal{border-color:#a8c5b9;color:#3d6850}
+.qbg-action-meal:hover,.qbg-action-meal:active{background:#5b9279;color:#fff;border-color:#5b9279}
+.qbg-action-corr{border-color:#b8b0c4;color:#5d4d7d}
+.qbg-action-corr:hover,.qbg-action-corr:active{background:#5d4d7d;color:#fff;border-color:#5d4d7d}
+.qbg-action-hypo{border-color:#f5a8a8;color:#a03030}
+.qbg-action-hypo:hover,.qbg-action-hypo:active{background:#dc6b6b;color:#fff;border-color:#dc6b6b}
+.qbg-action-hypo-active{border-color:#dc6b6b;background:#dc6b6b;color:#fff;animation:hypopulse 1.2s ease-in-out infinite}
+@keyframes hypopulse{0%,100%{box-shadow:0 0 0 0 rgba(220,107,107,.5)}50%{box-shadow:0 0 0 6px rgba(220,107,107,0)}}
+.qbg-action-log{border-color:#d6cebd;color:#3a3530}
+.qbg-action-log:hover,.qbg-action-log:active{background:#3a3530;color:#fff;border-color:#3a3530}
+.qbg-timeline{display:flex;gap:4px;overflow-x:auto;padding-top:10px;margin-top:8px;border-top:1px solid #ede4d3;-webkit-overflow-scrolling:touch}
+.qbg-timeline::-webkit-scrollbar{display:none}
+.qbg-timeline-item{flex-shrink:0;padding:6px 8px;border-radius:6px;text-align:center;min-width:48px}
+.qbg-timeline-item .qbg-tv{font-size:13px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.qbg-timeline-item .qbg-tt{font-size:9px;opacity:.85;margin-top:2px}
+.qbg-timeline-item.bg-low{background:#fff5f5;color:#a03030}
+.qbg-timeline-item.bg-target{background:#f0f9f4;color:#3d6850}
+.qbg-timeline-item.bg-high{background:#fff7ed;color:#92400e}
+.qbg-timeline-item.bg-very-high{background:#fee2e2;color:#991b1b}
+
+/* Standalone BG (KŞ ölçüm) entry styling */
+.entry-bg{border-left:3px solid #5b9279}
+.bg-tag{display:inline-flex;align-items:center;gap:3px;font-size:10px;background:#ecf0ed;color:#5b9279;padding:2px 6px;border-radius:4px;font-weight:500;margin-right:4px}
 </style>
 </head>
 <body>
-<div class="app" id="root"></div>
+<div class="app" id="root">
+    <div class="hdr">
+      <h1><svg class="icn icn-lg" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg> <span style="color:#3a3530">KarbSayar</span></h1>
+      <div class="hdr-sub">Tip 1 Diyabet · KH Sayım</div>
+    </div>
+    <div class="content">
+    <div class="row">
+      <input type="date" value="2026-04-27" max="2026-04-27" data-act="setDate">
+      <div class="muted tiny" style="text-transform:capitalize">Bugün</div>
+    </div>
+
+    <div class="quick-bg-card">
+        <div class="qbg-header">
+          <div class="qbg-title"><svg class="icn icn-sm" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg> Şu Anki KŞ</div>
+          
+        </div>
+
+        <div class="qbg-input-row">
+          <button class="qbg-adj" data-act="adjustQBG" data-delta="-10">−10</button>
+          <button class="qbg-adj" data-act="adjustQBG" data-delta="-5">−5</button>
+          <input class="in qbg-input " type="text" inputmode="decimal" placeholder="142" value="" data-input="quickBG">
+          <button class="qbg-adj" data-act="adjustQBG" data-delta="5">+5</button>
+          <button class="qbg-adj" data-act="adjustQBG" data-delta="10">+10</button>
+        </div>
+
+        <div class="qbg-presets">
+          
+            <button class="qbg-preset  bg-target" data-act="setQBGPreset" data-val="80">80</button>
+          
+            <button class="qbg-preset  bg-target" data-act="setQBGPreset" data-val="120">120</button>
+          
+            <button class="qbg-preset  bg-target" data-act="setQBGPreset" data-val="160">160</button>
+          
+            <button class="qbg-preset  bg-high" data-act="setQBGPreset" data-val="200">200</button>
+          
+            <button class="qbg-preset  bg-very-high" data-act="setQBGPreset" data-val="250">250</button>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    <div class="card-blue">
+      <div class="lbl">Toplam Karbonhidrat</div>
+      <div style="display:flex;align-items:baseline;gap:8px">
+        <div class="big">0</div>
+        <div class="unit">g</div>
+      </div>
+      <div class="divider">
+        <div><div class="lbl-sm">Protein</div><div class="val">0g</div></div>
+        <div><div class="lbl-sm">Yağ</div><div class="val">0g</div></div>
+        <div><div class="lbl-sm">Bolus</div><div class="val">0.0 Ü</div></div>
+      </div>
+      
+    </div>
+
+    
+      
+
+      
+
+      <div class="quick-actions">
+        
+          <button class="quick-btn quick-btn-basal" data-act="commitBasal">
+            <svg class="icn icn-sm" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg> Bazalı Vur · 14Ü Lantus
+          </button>
+        
+        <button class="quick-btn quick-btn-hypo" data-act="openHypoForm">
+          <svg class="icn icn-sm" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> Hipo Yaşadım
+        </button>
+      </div>
+    <div class="card">
+      
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <h2 style="margin:0"><svg class="icn icn-sm" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Yemek Ekle</h2>
+        <button class="btn-link" data-act="toggleManual">Manuel gir →</button>
+      </div>
+      <div class="input-wrap">
+        <div style="position:relative">
+          <input class="in" type="text" placeholder="Yemek adı (pilav, baklava, ekmek...)" value="" data-input="foodInput" autocomplete="off">
+          
+        </div>
+        <div class="qty-row">
+          <input class="in" type="number" inputmode="decimal" placeholder="Miktar" value="" data-input="portionQty">
+          <select class="in" data-input="portionUnit"><option value="gram" selected="">gram (1g)</option><option value="yemek kaşığı">yemek kaşığı (15g)</option><option value="tatlı kaşığı">tatlı kaşığı (10g)</option><option value="çay kaşığı">çay kaşığı (5g)</option><option value="su bardağı">su bardağı (200g)</option><option value="çay bardağı">çay bardağı (100g)</option><option value="avuç">avuç (30g)</option></select>
+        </div>
+        <div class="qty-grams" data-display="grams"></div>
+        
+        
+        <button class="btn btn-primary btn-full" data-act="lookup">
+          <svg class="icn icn-sm" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg> Ara / Hesapla
+        </button>
+      </div>
+    </div>
+    <button class="corr-trigger" data-act="openCorrection"><svg class="icn icn-sm" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg> Sadece Düzeltme / Ara İğne</button><div class="card">
+    <h2><svg class="icn icn-sm" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Henüz Kayıt Yok</h2>
+    <div class="empty">Yemek eklemeye başla</div>
+  </div></div>
+    <div class="nav">
+      <div class="nav-grid">
+        <button class="nav-btn active" data-act="setView" data-view="today">
+          <svg class="icn icn-lg" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg><span>Bugün</span>
+        </button><button class="nav-btn " data-act="setView" data-view="library">
+          <svg class="icn icn-lg" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg><span>Kütüphane</span>
+        </button><button class="nav-btn " data-act="setView" data-view="history">
+          <svg class="icn icn-lg" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg><span>Geçmiş</span>
+        </button><button class="nav-btn " data-act="setView" data-view="settings">
+          <svg class="icn icn-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg><span>Ayarlar</span>
+        </button>
+      </div>
+    </div>
+  </div>
 
 <script>
 'use strict';
@@ -627,7 +1065,31 @@ const state = {
   statPeriod: 7,
   // Karanlık mod ve egzersiz
   darkMode: false,
-  exerciseReduction: 25
+  exerciseReduction: 25,
+  // İnsulin markaları
+  bolusBrand: 'Apidra',
+  basalBrand: 'Lantus',
+  // Bazal
+  basalDose: 14,
+  basalTime: '22:00',
+  basalReminder: false,
+  // Hasta modu
+  sickMode: false,
+  sickModeMultiplier: 30,
+  // Hipo log
+  hypoFormOpen: false,
+  hypoBG: '',
+  hypoTreatGrams: '',
+  hypoReason: '',
+  // CGM (Libre 2 Plus, Dexcom vb)
+  cgmDevice: 'Libre 2 Plus',
+  sensorStartDate: '',
+  sensorDays: 15,
+  // Hızlı KŞ kartı
+  quickBG: '',
+  quickBGActions: false,
+  // Standalone KŞ log
+  bgLog: []
 };
 
 function loadAll() {
@@ -644,6 +1106,15 @@ function loadAll() {
   if (typeof s.diaMinutes === 'number') state.diaMinutes = s.diaMinutes;
   if (typeof s.darkMode === 'boolean') state.darkMode = s.darkMode;
   if (typeof s.exerciseReduction === 'number') state.exerciseReduction = s.exerciseReduction;
+  if (s.bolusBrand) state.bolusBrand = s.bolusBrand;
+  if (s.basalBrand) state.basalBrand = s.basalBrand;
+  if (typeof s.basalDose === 'number') state.basalDose = s.basalDose;
+  if (s.basalTime) state.basalTime = s.basalTime;
+  if (typeof s.basalReminder === 'boolean') state.basalReminder = s.basalReminder;
+  if (typeof s.sickModeMultiplier === 'number') state.sickModeMultiplier = s.sickModeMultiplier;
+  if (s.cgmDevice) state.cgmDevice = s.cgmDevice;
+  if (s.sensorStartDate) state.sensorStartDate = s.sensorStartDate;
+  if (typeof s.sensorDays === 'number') state.sensorDays = s.sensorDays;
   state.apiKey = s.apiKey || '';
   state.history = {};
   LS.keys('karbsayar:log:').forEach(k => {
@@ -669,7 +1140,11 @@ function persistAllSettings() {
     insulinRatio: state.insulinRatio, ratioMode: state.ratioMode, ratios: state.ratios,
     useCorrection: state.useCorrection, isf: state.isf, targetBG: state.targetBG,
     roundStep: state.roundStep, diaMinutes: state.diaMinutes,
-    darkMode: state.darkMode, exerciseReduction: state.exerciseReduction
+    darkMode: state.darkMode, exerciseReduction: state.exerciseReduction,
+    bolusBrand: state.bolusBrand, basalBrand: state.basalBrand,
+    basalDose: state.basalDose, basalTime: state.basalTime, basalReminder: state.basalReminder,
+    sickModeMultiplier: state.sickModeMultiplier,
+    cgmDevice: state.cgmDevice, sensorStartDate: state.sensorStartDate, sensorDays: state.sensorDays
   });
 }
 
@@ -766,6 +1241,10 @@ function fmtTimeSince(min) {
   const m = Math.round(min % 60);
   return m > 0 ? `${h}sa ${m}dk` : `${h}sa`;
 }
+
+// İnsulin markaları (Türkiye'de yaygın olanlar)
+const BOLUS_BRANDS = ['Apidra', 'Humalog', 'NovoRapid', 'Fiasp', 'Lyumjev'];
+const BASAL_BRANDS = ['Lantus', 'Tresiba', 'Toujeo', 'Levemir', 'Abasaglar'];
 
 // Öğün tipleri
 const MEAL_TYPES = {
@@ -925,7 +1404,7 @@ function confirmAdd() {
   const hour = now.getHours();
   const bg = parseFloat(state.currentBG) || null;
   const iob = calcIOB(now).total;
-  const dose = applyExerciseAdjustment(calcInsulin(e.carbs, hour, bg, iob));
+  const dose = applyAllAdjustments(calcInsulin(e.carbs, hour, bg, iob));
 
   const newEntry = {
     id: Date.now().toString(),
@@ -938,7 +1417,9 @@ function confirmAdd() {
     bg: bg || null,
     mealType: state.currentMealType,
     notes: state.currentNotes || '',
-    exerciseAdjusted: dose.exerciseAdjusted || false
+    exerciseAdjusted: dose.exerciseAdjusted || false,
+    sickAdjusted: dose.sickAdjusted || false,
+    brand: state.bolusBrand
   };
   saveLog([...state.todayLog, newEntry]);
 
@@ -1049,7 +1530,7 @@ function commitMeal() {
   const bg = parseFloat(state.currentBG) || null;
   const iob = calcIOB(now).total;
   const totals = getMealTotals();
-  const dose = applyExerciseAdjustment(calcInsulin(totals.carbs, hour, bg, iob));
+  const dose = applyAllAdjustments(calcInsulin(totals.carbs, hour, bg, iob));
 
   const names = state.mealItems.map(i => i.food);
   let label;
@@ -1071,7 +1552,9 @@ function commitMeal() {
     bg: bg || null,
     mealType: state.currentMealType,
     notes: state.currentNotes || '',
-    exerciseAdjusted: dose.exerciseAdjusted || false
+    exerciseAdjusted: dose.exerciseAdjusted || false,
+    sickAdjusted: dose.sickAdjusted || false,
+    brand: state.bolusBrand
   };
   saveLog([...state.todayLog, newEntry]);
   state.mealItems = [];
@@ -1152,7 +1635,8 @@ function commitCorrection() {
     insulinRaw: preview.raw,
     bg: bg || null,
     breakdown: preview,
-    notes: state.correctionNotes || ''
+    notes: state.correctionNotes || '',
+    brand: state.bolusBrand
   };
   saveLog([...state.todayLog, newEntry]);
   state.correctionFormOpen = false;
@@ -1359,8 +1843,10 @@ function calcStats(days) {
   const dates = new Set(entries.map(e => e._date));
   const dayCount = dates.size || 1;
 
-  const mealEntries = entries.filter(e => e.type !== 'correction');
+  const mealEntries = entries.filter(e => e.type !== 'correction' && e.type !== 'basal' && e.type !== 'hypo' && e.type !== 'bg');
   const correctionEntries = entries.filter(e => e.type === 'correction');
+  const basalEntries = entries.filter(e => e.type === 'basal');
+  const hypoEntries = entries.filter(e => e.type === 'hypo');
 
   const totalC = mealEntries.reduce((s, e) => s + (e.carbs || 0), 0);
   const totalI = entries.reduce((s, e) => s + (typeof e.insulin === 'number' ? e.insulin : 0), 0);
@@ -1401,7 +1887,9 @@ function calcStats(days) {
   const avgDelta = withPrePost.length ? withPrePost.reduce((s, e) => s + (e.postMealBG.value - e.bg), 0) / withPrePost.length : null;
 
   return {
-    days, dayCount, totalEntries: entries.length, mealCount: mealEntries.length, correctionCount: correctionEntries.length,
+    days, dayCount, totalEntries: entries.length,
+    mealCount: mealEntries.length, correctionCount: correctionEntries.length,
+    basalCount: basalEntries.length, hypoCount: hypoEntries.length,
     totalC, totalI, totalP, totalF,
     avgC: totalC / dayCount, avgI: totalI / dayCount,
     topFoods, byMealType,
@@ -1414,15 +1902,21 @@ function calcStats(days) {
 // CSV EXPORT (doktor vizit için)
 // ============================================================================
 function exportCSV() {
-  const rows = [['Tarih', 'Saat', 'Tip', 'Öğün Türü', 'Yemek', 'Porsiyon (g)', 'KH (g)', 'Protein (g)', 'Yağ (g)', 'KŞ Önce', 'İnsulin (Ü)', 'KŞ Sonrası', 'KŞ Sonrası Saat', 'Notlar']];
+  const rows = [['Tarih', 'Saat', 'Tip', 'Marka', 'Öğün Türü', 'Yemek', 'Porsiyon (g)', 'KH (g)', 'Protein (g)', 'Yağ (g)', 'KŞ Önce', 'İnsulin (Ü)', 'KŞ Sonrası', 'KŞ Sonrası Saat', 'Hipo Tedavi (g)', 'Egzersiz', 'Hasta', 'Notlar']];
   const allDays = new Set([...Object.keys(state.history), state.date]);
   Array.from(allDays).sort().forEach(date => {
     const entries = (date === state.date) ? state.todayLog : (state.history[date] || []);
     entries.forEach(e => {
+      const typeLabel = e.type === 'correction' ? 'Düzeltme'
+        : e.type === 'basal' ? 'Bazal'
+        : e.type === 'hypo' ? 'Hipo'
+        : e.type === 'bg' ? 'KŞ Ölçüm'
+        : e.type === 'meal' ? 'Öğün' : 'Yemek';
       rows.push([
         date,
         e.time || '',
-        e.type === 'correction' ? 'Düzeltme' : e.type === 'meal' ? 'Öğün' : 'Yemek',
+        typeLabel,
+        e.brand || '',
         e.mealType ? mealTypeLabel(e.mealType).name : '',
         e.food || '',
         fmt(e.portion || 0, 0),
@@ -1433,7 +1927,10 @@ function exportCSV() {
         typeof e.insulin === 'number' ? fmt(e.insulin, 2) : '',
         e.postMealBG && typeof e.postMealBG.value === 'number' ? e.postMealBG.value : '',
         e.postMealBG && e.postMealBG.time ? e.postMealBG.time : '',
-        (e.notes || '').replace(/"/g, '""').replace(/[\r\n]+/g, ' ')
+        e.type === 'hypo' ? fmt(e.treatGrams || 0, 0) : '',
+        e.exerciseAdjusted ? 'Evet' : '',
+        e.sickAdjusted ? 'Evet' : '',
+        ((e.notes || '') + (e.reason ? ' [' + e.reason + ']' : '')).replace(/"/g, '""').replace(/[\r\n]+/g, ' ')
       ]);
     });
   });
@@ -1484,16 +1981,426 @@ function applyExerciseAdjustment(dose) {
 }
 
 // ============================================================================
+// HASTA MODU - bolus dozunu artır
+// ============================================================================
+function applySickModeAdjustment(dose) {
+  if (!state.sickMode || state.sickModeMultiplier <= 0) return dose;
+  const factor = 1 + state.sickModeMultiplier / 100;
+  const adjustedRaw = dose.totalRaw * factor;
+  return {
+    ...dose,
+    preSickRaw: dose.totalRaw,
+    totalRaw: adjustedRaw,
+    totalRounded: roundDose(adjustedRaw),
+    sickAdjusted: true,
+    sickIncrease: state.sickModeMultiplier
+  };
+}
+
+// Tüm doz ayarlamalarını sırayla uygula
+function applyAllAdjustments(dose) {
+  let d = applyExerciseAdjustment(dose);
+  d = applySickModeAdjustment(d);
+  return d;
+}
+
+// ============================================================================
+// HIZLI KŞ - standalone ölçüm kaydı + akıcı yönlendirme
+// ============================================================================
+function commitStandaloneBG() {
+  const bg = parseFloat(String(state.quickBG).replace(',', '.'));
+  if (isNaN(bg) || bg <= 0 || bg > 1000) { alert('Geçerli bir KŞ değeri gir'); return; }
+
+  const now = new Date();
+  const newEntry = {
+    id: Date.now().toString(),
+    type: 'bg',
+    food: `KŞ ölçüm: ${bg} mg/dL`,
+    portion: 0, carbs: 0, protein: 0, fat: 0,
+    time: now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }),
+    hour: now.getHours(),
+    source: 'ölçüm',
+    insulin: 0,
+    bg: bg
+  };
+  saveLog([...state.todayLog, newEntry]);
+  state.quickBG = '';
+  render();
+}
+
+function quickBGToMeal() {
+  if (!state.quickBG) return;
+  state.currentBG = state.quickBG;
+  state.quickBG = '';
+  render();
+  // Smooth scroll to meal/food card
+  setTimeout(() => {
+    const target = document.querySelector('[data-input="foodInput"]') || document.querySelector('[data-input="currentBG"]');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 100);
+}
+
+function quickBGToCorrection() {
+  if (!state.quickBG) return;
+  state.correctionBG = state.quickBG;
+  state.correctionFormOpen = true;
+  state.quickBG = '';
+  render();
+}
+
+function quickBGToHypo() {
+  if (!state.quickBG) return;
+  openHypoForm(state.quickBG);
+  state.quickBG = '';
+}
+
+
+function getSensorStatus() {
+  if (!state.sensorStartDate) return null;
+  const start = new Date(state.sensorStartDate + 'T00:00:00');
+  const now = new Date();
+  const elapsedMs = now - start;
+  const elapsedDays = Math.floor(elapsedMs / 86400000);
+  const remainingDays = state.sensorDays - elapsedDays;
+  return {
+    elapsedDays,
+    remainingDays,
+    totalDays: state.sensorDays,
+    expired: remainingDays < 0,
+    expiringSoon: remainingDays >= 0 && remainingDays <= 2,
+    device: state.cgmDevice
+  };
+}
+
+// ============================================================================
+// BAZAL HATIRLATMA
+// ============================================================================
+function shouldRemindBasal() {
+  if (!state.basalTime || hasBasalToday(state.todayLog)) return false;
+  const m = state.basalTime.match(/^(\d{1,2}):(\d{2})$/);
+  if (!m) return false;
+  const targetH = parseInt(m[1], 10);
+  const targetM = parseInt(m[2], 10);
+  const now = new Date();
+  const nowMin = now.getHours() * 60 + now.getMinutes();
+  const targetMin = targetH * 60 + targetM;
+  // Hedef saat geçtiyse ve hala bazal vurulmadıysa
+  return nowMin >= targetMin;
+}
+
+// ============================================================================
+// HIZLI KŞ - kısayol kartı
+// ============================================================================
+function getRecentBGs(limit) {
+  limit = limit || 6;
+  const now = new Date();
+  const yesterdayStr = new Date(now.getTime() - 86400000).toISOString().split('T')[0];
+  const candidates = [];
+
+  const sources = [
+    { date: state.date, entries: state.todayLog },
+    { date: yesterdayStr, entries: state.history[yesterdayStr] || [] }
+  ];
+
+  sources.forEach(({ date, entries }) => {
+    entries.forEach(e => {
+      if (e.bg && e.bg > 0) {
+        const t = getEntryDateTime(e, date);
+        candidates.push({
+          value: e.bg, time: e.time, date, dt: t,
+          kind: e.type === 'hypo' ? 'hypo' : (e.type === 'bg' ? 'standalone' : 'pre-meal')
+        });
+      }
+      if (e.postMealBG && typeof e.postMealBG.value === 'number' && e.postMealBG.time) {
+        const dt = new Date(date + 'T' + e.postMealBG.time + ':00');
+        if (!isNaN(dt.getTime())) {
+          candidates.push({ value: e.postMealBG.value, time: e.postMealBG.time, date, dt, kind: 'post-meal' });
+        }
+      }
+    });
+  });
+
+  candidates.sort((a, b) => b.dt - a.dt);
+  return candidates.slice(0, limit);
+}
+
+function getBGTrend() {
+  const recent = getRecentBGs(2);
+  if (recent.length < 2) return null;
+  const [latest, previous] = recent;
+  const elapsedMin = (latest.dt - previous.dt) / 60000;
+  if (elapsedMin > 240) return null;
+  const delta = latest.value - previous.value;
+  let direction;
+  if (Math.abs(delta) < 10) direction = 'flat';
+  else if (delta >= 30) direction = 'up-fast';
+  else if (delta > 0) direction = 'up';
+  else if (delta <= -30) direction = 'down-fast';
+  else direction = 'down';
+  return { delta, direction, elapsedMin, latest };
+}
+
+function commitStandaloneBG(value) {
+  const v = parseFloat(String(value).replace(',', '.'));
+  if (isNaN(v) || v <= 0) return false;
+  const now = new Date();
+  const newEntry = {
+    id: Date.now().toString(),
+    type: 'bg',
+    food: `KŞ ${v}`,
+    portion: 0, carbs: 0, protein: 0, fat: 0,
+    time: now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }),
+    hour: now.getHours(),
+    source: 'KŞ ölçüm',
+    insulin: 0,
+    bg: v
+  };
+  saveLog([...state.todayLog, newEntry]);
+  return true;
+}
+
+function applyQuickBG(targetAction) {
+  const v = parseFloat(String(state.quickBG).replace(',', '.'));
+  if (isNaN(v) || v <= 0) { alert('Geçerli bir KŞ değeri gir'); return; }
+
+  if (targetAction === 'meal') {
+    state.currentBG = String(v);
+    state.quickBG = '';
+    state.quickBGActions = false;
+    render();
+  } else if (targetAction === 'correction') {
+    state.correctionFormOpen = true;
+    state.correctionBG = String(v);
+    state.quickBG = '';
+    state.quickBGActions = false;
+    render();
+  } else if (targetAction === 'hypo') {
+    openHypoForm(v);
+    state.quickBG = '';
+    state.quickBGActions = false;
+  } else if (targetAction === 'log') {
+    if (commitStandaloneBG(v)) {
+      state.quickBG = '';
+      state.quickBGActions = false;
+      render();
+    }
+  }
+}
+
+function adjustQuickBG(delta) {
+  const v = parseFloat(String(state.quickBG).replace(',', '.'));
+  const base = isNaN(v) ? 120 : v;
+  const newVal = Math.max(20, Math.min(600, base + delta));
+  state.quickBG = String(newVal);
+  state.quickBGActions = newVal > 0;
+  render();
+}
+
+function bgRangeColor(v) {
+  if (v < 70) return 'bg-low';
+  if (v < 180) return 'bg-target';
+  if (v < 250) return 'bg-high';
+  return 'bg-very-high';
+}
+
+
+function hasBasalToday(entries) {
+  return entries.some(e => e.type === 'basal');
+}
+
+function commitBasal() {
+  const now = new Date();
+  const dose = parseFloat(String(state.basalDose).replace(',', '.'));
+  if (isNaN(dose) || dose <= 0) { alert('Geçerli bir bazal dozu gir'); return; }
+
+  const newEntry = {
+    id: Date.now().toString(),
+    type: 'basal',
+    food: `${state.basalBrand} ${dose}Ü bazal`,
+    portion: 0, carbs: 0, protein: 0, fat: 0,
+    time: now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }),
+    hour: now.getHours(),
+    source: 'bazal',
+    insulin: dose,
+    insulinRaw: dose,
+    bg: null,
+    brand: state.basalBrand
+  };
+  saveLog([...state.todayLog, newEntry]);
+  render();
+}
+
+// ============================================================================
+// HİPO LOG
+// ============================================================================
+function openHypoForm(prefilledBG) {
+  state.hypoFormOpen = true;
+  state.hypoBG = prefilledBG ? String(prefilledBG) : '';
+  state.hypoTreatGrams = '15';
+  state.hypoReason = '';
+  render();
+}
+
+function cancelHypoForm() {
+  state.hypoFormOpen = false;
+  state.hypoBG = '';
+  state.hypoTreatGrams = '';
+  state.hypoReason = '';
+  render();
+}
+
+function commitHypo() {
+  const bg = parseFloat(String(state.hypoBG).replace(',', '.'));
+  const grams = parseFloat(String(state.hypoTreatGrams).replace(',', '.'));
+  if (isNaN(bg) || bg <= 0) { alert('Geçerli bir KŞ değeri gir'); return; }
+  if (isNaN(grams) || grams < 0) { alert('Tedavi gramı geçersiz'); return; }
+
+  const now = new Date();
+  const newEntry = {
+    id: Date.now().toString(),
+    type: 'hypo',
+    food: `Hipo · ${bg} → ${grams}g KH`,
+    portion: 0, carbs: grams, protein: 0, fat: 0,
+    time: now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }),
+    hour: now.getHours(),
+    source: 'hipo',
+    insulin: 0,
+    bg: bg,
+    treatGrams: grams,
+    reason: state.hypoReason || ''
+  };
+  saveLog([...state.todayLog, newEntry]);
+  state.hypoFormOpen = false;
+  state.hypoBG = '';
+  state.hypoTreatGrams = '';
+  state.hypoReason = '';
+  render();
+}
+
+// ============================================================================
+// TDD - Total Daily Dose
+// ============================================================================
+function calcTDD(entries) {
+  let bolus = 0, basal = 0;
+  entries.forEach(e => {
+    const ins = typeof e.insulin === 'number' ? e.insulin : 0;
+    if (e.type === 'basal') basal += ins;
+    else bolus += ins;
+  });
+  return { bolus, basal, total: bolus + basal };
+}
+
+// ============================================================================
+// HbA1c TAHMİNİ - ADAG formülü (Nathan et al, 2008)
+// HbA1c = (avgBG mg/dL + 46.7) / 28.7
+// Geriye dönük 90 gün KŞ ortalaması kullanılır
+// ============================================================================
+function estimateHbA1c(days) {
+  const entries = getAllEntriesInPeriod(days);
+  const bgValues = [];
+  entries.forEach(e => {
+    if (e.bg && e.bg > 0) bgValues.push(e.bg);
+    if (e.postMealBG && typeof e.postMealBG.value === 'number') bgValues.push(e.postMealBG.value);
+  });
+  if (bgValues.length < 10) return null;
+  const avgBG = bgValues.reduce((s, v) => s + v, 0) / bgValues.length;
+  const a1c = (avgBG + 46.7) / 28.7;
+  return { avgBG, a1c, n: bgValues.length };
+}
+
+// ============================================================================
+// SAATLİK KŞ HEATMAP - hangi saatlerde sürekli yüksek/düşük
+// ============================================================================
+function calcHourlyBG(days) {
+  const entries = getAllEntriesInPeriod(days);
+  const buckets = {}; // 0-23 saat
+  for (let h = 0; h < 24; h++) buckets[h] = [];
+
+  entries.forEach(e => {
+    if (e.bg && e.bg > 0) {
+      const h = getEntryHour(e);
+      if (h >= 0 && h < 24) buckets[h].push(e.bg);
+    }
+    if (e.postMealBG && typeof e.postMealBG.value === 'number' && e.postMealBG.time) {
+      const m = e.postMealBG.time.match(/^(\d{1,2}):/);
+      if (m) {
+        const h = parseInt(m[1], 10);
+        if (h >= 0 && h < 24) buckets[h].push(e.postMealBG.value);
+      }
+    }
+  });
+
+  const result = [];
+  for (let h = 0; h < 24; h++) {
+    const arr = buckets[h];
+    if (arr.length === 0) {
+      result.push({ hour: h, n: 0, avg: null });
+    } else {
+      const avg = arr.reduce((s, v) => s + v, 0) / arr.length;
+      result.push({ hour: h, n: arr.length, avg });
+    }
+  }
+  return result;
+}
+
+// ============================================================================
+// TREND ANALİZİ - oran önerisi
+// ============================================================================
+function analyzeTrend(days) {
+  const entries = getAllEntriesInPeriod(days);
+  const meals = entries.filter(e => e.type !== 'correction' && e.type !== 'basal' && e.type !== 'hypo' && e.type !== 'bg');
+  const withDelta = meals.filter(e => e.bg && e.postMealBG && typeof e.postMealBG.value === 'number');
+  if (withDelta.length < 5) return { insufficientData: true, n: withDelta.length };
+
+  const deltas = withDelta.map(e => e.postMealBG.value - e.bg);
+  const avgDelta = deltas.reduce((s, v) => s + v, 0) / deltas.length;
+  const stdDev = Math.sqrt(deltas.reduce((s, v) => s + Math.pow(v - avgDelta, 2), 0) / deltas.length);
+
+  // Mevcut ortalama oran
+  let currentRatio;
+  if (state.ratioMode === 'fixed') {
+    currentRatio = state.insulinRatio;
+  } else {
+    const ratios = Object.values(state.ratios);
+    currentRatio = ratios.reduce((s, v) => s + v, 0) / ratios.length;
+  }
+
+  // Öneri mantığı:
+  // delta > +30: oran çok yüksek, bolus az kalıyor → oranı düşür (1Ü daha çok karşılasın - hayır az - dur)
+  // KH/insulin oranı: 1Ü = X g KH. X küçükse aynı KH için daha çok insulin çıkar.
+  // Yemek sonrası yüksek = az insulin gitti = X'i KÜÇÜLT (1Ü daha çok karb için yetsin değil, daha az karb için yetsin)
+  // Yani: delta > 30 → ratio'yu (X'i) küçült (örn 12 → 11)
+  // delta < -30 → fazla insulin gitti → ratio'yu büyüt (X'i artır)
+
+  let suggestion = null;
+  let direction = null;
+  if (Math.abs(avgDelta) > 30) {
+    if (avgDelta > 30) {
+      const newRatio = Math.max(5, Math.round(currentRatio * 0.92 * 10) / 10);
+      suggestion = newRatio;
+      direction = 'down';
+    } else {
+      const newRatio = Math.min(30, Math.round(currentRatio * 1.08 * 10) / 10);
+      suggestion = newRatio;
+      direction = 'up';
+    }
+  }
+
+  return {
+    n: withDelta.length, avgDelta, stdDev, currentRatio,
+    suggestion, direction
+  };
+}
+
+// ============================================================================
 // VIEWS
 // ============================================================================
 function renderToday() {
   const totalC = state.todayLog.reduce((s,e) => s + e.carbs, 0);
   const totalP = state.todayLog.reduce((s,e) => s + (e.protein || 0), 0);
   const totalF = state.todayLog.reduce((s,e) => s + (e.fat || 0), 0);
-  const totalInsulin = state.todayLog.reduce((s,e) => {
-    if (typeof e.insulin === 'number') return s + e.insulin;
-    return s + calcInsulin(e.carbs, getEntryHour(e)).totalRounded;
-  }, 0);
+  const tdd = calcTDD(state.todayLog);
+  const totalInsulin = tdd.bolus; // bolus only for old display compat
 
   const today = new Date().toISOString().split('T')[0];
   const isToday = state.date === today;
@@ -1507,6 +2414,73 @@ function renderToday() {
       <input type="date" value="${state.date}" max="${today}" data-act="setDate">
       <div class="muted tiny" style="text-transform:capitalize">${dateLabel}</div>
     </div>
+
+    ${isToday ? (() => {
+      const recent = getRecentBGs(6);
+      const trend = getBGTrend();
+      const trendArrow = trend ? ({
+        'up-fast': '↑↑', 'up': '↗', 'flat': '→',
+        'down': '↘', 'down-fast': '↓↓'
+      }[trend.direction] || '') : '';
+      const qVal = parseFloat(String(state.quickBG).replace(',', '.'));
+      const qValid = !isNaN(qVal) && qVal > 0;
+      const qLow = qValid && qVal < 70;
+
+      return `<div class="quick-bg-card">
+        <div class="qbg-header">
+          <div class="qbg-title">${svg('drop','icn icn-sm')} Şu Anki KŞ</div>
+          ${recent.length > 0 ? `
+            <div class="qbg-latest">
+              <span class="qbg-latest-v ${bgRangeColor(recent[0].value)}">${recent[0].value}</span>
+              <span class="qbg-latest-meta">${recent[0].time}${trend ? ` ${trendArrow}` : ''}</span>
+            </div>
+          ` : ''}
+        </div>
+
+        <div class="qbg-input-row">
+          <button class="qbg-adj" data-act="adjustQBG" data-delta="-10">−10</button>
+          <button class="qbg-adj" data-act="adjustQBG" data-delta="-5">−5</button>
+          <input class="in qbg-input ${qValid ? bgRangeColor(qVal) : ''}" type="text" inputmode="decimal" placeholder="142" value="${esc(state.quickBG)}" data-input="quickBG">
+          <button class="qbg-adj" data-act="adjustQBG" data-delta="5">+5</button>
+          <button class="qbg-adj" data-act="adjustQBG" data-delta="10">+10</button>
+        </div>
+
+        <div class="qbg-presets">
+          ${[80, 120, 160, 200, 250].map(v => `
+            <button class="qbg-preset ${state.quickBG == v ? 'active' : ''} ${bgRangeColor(v)}" data-act="setQBGPreset" data-val="${v}">${v}</button>
+          `).join('')}
+        </div>
+
+        ${qValid ? `
+          <div class="qbg-actions">
+            <button class="qbg-action qbg-action-meal" data-act="applyQBG" data-target="meal">
+              🍽 Yemek için
+            </button>
+            <button class="qbg-action qbg-action-corr" data-act="applyQBG" data-target="correction">
+              💉 Düzeltme
+            </button>
+            <button class="qbg-action ${qLow ? 'qbg-action-hypo-active' : 'qbg-action-hypo'}" data-act="applyQBG" data-target="hypo">
+              🔻 ${qLow ? 'Hipo!' : 'Hipo kaydet'}
+            </button>
+            <button class="qbg-action qbg-action-log" data-act="applyQBG" data-target="log">
+              📍 Sadece kaydet
+            </button>
+          </div>
+        ` : ''}
+
+        ${recent.length > 1 ? `
+          <div class="qbg-timeline">
+            ${recent.slice(0, 6).map((r, i) => `
+              <div class="qbg-timeline-item ${bgRangeColor(r.value)}" title="${r.time}${r.kind === 'post-meal' ? ' yemek sonrası' : r.kind === 'hypo' ? ' hipo' : r.kind === 'standalone' ? ' ölçüm' : ' yemek öncesi'}">
+                <div class="qbg-tv">${r.value}</div>
+                <div class="qbg-tt">${r.time}</div>
+              </div>
+            `).join('')}
+          </div>
+        ` : ''}
+      </div>`;
+    })() : ''}
+
     <div class="card-blue">
       <div class="lbl">Toplam Karbonhidrat</div>
       <div style="display:flex;align-items:baseline;gap:8px">
@@ -1516,9 +2490,52 @@ function renderToday() {
       <div class="divider">
         <div><div class="lbl-sm">Protein</div><div class="val">${fmt(totalP)}g</div></div>
         <div><div class="lbl-sm">Yağ</div><div class="val">${fmt(totalF)}g</div></div>
-        <div><div class="lbl-sm">Toplam İnsulin</div><div class="val">${fmt(totalInsulin, 1)} Ü</div></div>
+        <div><div class="lbl-sm">Bolus</div><div class="val">${fmt(tdd.bolus, 1)} Ü</div></div>
       </div>
-    </div>`;
+      ${tdd.basal > 0 ? `
+        <div class="tdd-row">
+          <div class="tdd-pill">Bazal: <b>${fmt(tdd.basal, 1)} Ü</b></div>
+          <div class="tdd-pill tdd-total">TDD: <b>${fmt(tdd.total, 1)} Ü</b></div>
+        </div>
+      ` : ''}
+    </div>
+
+    ${isToday ? `
+      ${(() => {
+        const sensor = getSensorStatus();
+        if (!sensor) return '';
+        if (sensor.expired) return `<div class="sensor-badge sensor-expired">
+          ${svg('alert','icn icn-sm')} ${esc(sensor.device)} sensörü süresi doldu (${Math.abs(sensor.remainingDays)} gün önce). Yenisini tak.
+        </div>`;
+        if (sensor.expiringSoon) return `<div class="sensor-badge sensor-warning">
+          ${svg('alert','icn icn-sm')} ${esc(sensor.device)}: ${sensor.elapsedDays}/${sensor.totalDays} gün · <b>${sensor.remainingDays} gün kaldı</b> — yeni sensör hazırla
+        </div>`;
+        return `<div class="sensor-badge">
+          💧 ${esc(sensor.device)}: ${sensor.elapsedDays}/${sensor.totalDays} gün · ${sensor.remainingDays} gün kaldı
+        </div>`;
+      })()}
+
+      ${shouldRemindBasal() ? `
+        <div class="sensor-badge sensor-warning">
+          ${svg('alert','icn icn-sm')} <b>Bazal saati geçti</b> (${state.basalTime}). ${state.basalDose}Ü ${state.basalBrand} vurdun mu?
+        </div>
+      ` : ''}
+
+      <div class="quick-actions">
+        ${!hasBasalToday(state.todayLog) ? `
+          <button class="quick-btn quick-btn-basal" data-act="commitBasal">
+            ${svg('drop','icn icn-sm')} Bazalı Vur · ${state.basalDose}Ü ${state.basalBrand}
+          </button>
+        ` : `
+          <div class="basal-done">
+            ${svg('check','icn icn-sm')} Bazal vuruldu (${state.basalDose}Ü ${state.basalBrand})
+          </div>
+        `}
+        <button class="quick-btn quick-btn-hypo" data-act="openHypoForm">
+          ${svg('alert','icn icn-sm')} Hipo Yaşadım
+        </button>
+      </div>
+    ` : ''}`;
 
   // IOB Kartı — sadece bugün ve aktif insülin > 0.05 ise
   if (iobInfo.total > 0.05) {
@@ -1540,7 +2557,7 @@ function renderToday() {
     const totals = getMealTotals();
     const now = new Date();
     const bg = parseFloat(state.currentBG) || null;
-    const dose = applyExerciseAdjustment(calcInsulin(totals.carbs, now.getHours(), bg, iobInfo.total));
+    const dose = applyAllAdjustments(calcInsulin(totals.carbs, now.getHours(), bg, iobInfo.total));
     const doseFmt = fmt(dose.totalRounded, state.roundStep === 1 ? 0 : 1);
 
     html += `<div class="meal-panel">
@@ -1583,6 +2600,10 @@ function renderToday() {
         <span class="l"><span class="em">🏃</span> Egzersiz var / yakında <span style="font-size:11px;opacity:.85">(−${state.exerciseReduction}%)</span></span>
         <span class="switch"></span>
       </div>
+      <div class="sick-toggle ${state.sickMode ? 'active' : ''}" data-act="toggleSickMode">
+        <span class="l"><span class="em">🤒</span> Hasta günü <span style="font-size:11px;opacity:.85">(+${state.sickModeMultiplier}%)</span></span>
+        <span class="switch"></span>
+      </div>
       <div class="notes-row">
         <label>Not (opsiyonel)</label>
         <input class="in" type="text" placeholder="Doğum günü yemeği, geç bolus..." value="${esc(state.currentNotes)}" data-input="currentNotes">
@@ -1609,7 +2630,7 @@ function renderToday() {
     const now = new Date();
     const hour = now.getHours();
     const bg = parseFloat(state.currentBG) || null;
-    const dose = applyExerciseAdjustment(calcInsulin(e.carbs, hour, bg, iobInfo.total));
+    const dose = applyAllAdjustments(calcInsulin(e.carbs, hour, bg, iobInfo.total));
     const inMeal = state.mealItems.length > 0;
 
     html += `<div class="card card-active">
@@ -1692,6 +2713,10 @@ function renderToday() {
         <span class="l"><span class="em">🏃</span> Egzersiz var / yakında <span style="font-size:11px;opacity:.85">(−${state.exerciseReduction}%)</span></span>
         <span class="switch"></span>
       </div>
+      <div class="sick-toggle ${state.sickMode ? 'active' : ''}" data-act="toggleSickMode">
+        <span class="l"><span class="em">🤒</span> Hasta günü <span style="font-size:11px;opacity:.85">(+${state.sickModeMultiplier}%)</span></span>
+        <span class="switch"></span>
+      </div>
       <div class="notes-row">
         <label>Not (opsiyonel)</label>
         <input class="in" type="text" placeholder="Stresli, geç yedim, kola eklendi..." value="${esc(state.currentNotes)}" data-input="currentNotes">
@@ -1767,6 +2792,34 @@ function renderToday() {
         <button class="btn btn-primary" data-act="commitCorrection" ${!preview || preview.rounded <= 0 ? 'disabled' : ''}>${svg('check','icn icn-sm')} Kaydet${preview && preview.rounded > 0 ? ` · ${fmt(preview.rounded, state.roundStep === 1 ? 0 : 1)} Ü` : ''}</button>
       </div>
     </div>`;
+  } else if (isToday && state.hypoFormOpen) {
+    html += `<div class="hypo-card">
+      <h3>${svg('alert','icn icn-sm')} Hipo Kaydı</h3>
+      <div class="tiny muted" style="margin-bottom:10px">15g hızlı KH (3-4 glukoz tableti, 150ml meyve suyu) standart tedavi. 15dk bekle, tekrar ölç.</div>
+
+      <div class="corr-input-block">
+        <label>Düşük KŞ değeri (mg/dL)</label>
+        <input class="in" type="text" inputmode="decimal" placeholder="örn 55" value="${esc(state.hypoBG)}" data-input="hypoBG" autofocus>
+      </div>
+
+      <div class="corr-input-block">
+        <label>Tedavi (gram hızlı KH)</label>
+        <input class="in" type="text" inputmode="decimal" placeholder="örn 15" value="${esc(state.hypoTreatGrams)}" data-input="hypoTreatGrams">
+        <div class="qc-presets" style="margin-top:6px">
+          ${[5, 10, 15, 20, 30].map(v => `<button class="qc-preset ${state.hypoTreatGrams == v ? 'active' : ''}" data-act="setHypoTreat" data-val="${v}">${v}g</button>`).join('')}
+        </div>
+      </div>
+
+      <div class="notes-row">
+        <label>Sebep (opsiyonel)</label>
+        <input class="in" type="text" placeholder="Geç yemek, fazla bolus, egzersiz..." value="${esc(state.hypoReason)}" data-input="hypoReason">
+      </div>
+
+      <div class="btn-pair">
+        <button class="btn btn-secondary" data-act="cancelHypoForm">${svg('x','icn icn-sm')} İptal</button>
+        <button class="btn btn-primary" data-act="commitHypo">${svg('check','icn icn-sm')} Kaydet</button>
+      </div>
+    </div>`;
   } else if (isToday) {
     const sugHtml = state.suggestions.length ? `<div class="suggestions">
       ${state.suggestions.map(s => `<button class="suggestion" data-act="pickSuggestion" data-name="${esc(s.name)}">
@@ -1833,23 +2886,33 @@ function renderToday() {
         ${state.todayLog.map(e => {
           const ins = typeof e.insulin === 'number' ? e.insulin : calcInsulin(e.carbs, getEntryHour(e)).totalRounded;
           const isCorrection = e.type === 'correction';
+          const isBasal = e.type === 'basal';
+          const isHypo = e.type === 'hypo';
+          const isBG = e.type === 'bg';
           const isMeal = e.type === 'meal' && Array.isArray(e.items) && e.items.length > 1;
-          const mt = !isCorrection && e.mealType ? mealTypeLabel(e.mealType) : null;
+          const mt = !isCorrection && !isBasal && !isHypo && !isBG && e.mealType ? mealTypeLabel(e.mealType) : null;
           let metaText;
-          if (isCorrection) {
-            metaText = `${e.time} · ${e.bg ? `KŞ ${e.bg}` : 'manuel'} · düzeltme`;
+          if (isBasal) {
+            metaText = `${e.time} · ${e.brand || ''} · bazal`;
+          } else if (isHypo) {
+            metaText = `${e.time} · KŞ ${e.bg} → ${fmt(e.treatGrams || 0)}g KH · hipo`;
+          } else if (isBG) {
+            metaText = `${e.time} · KŞ ölçüm`;
+          } else if (isCorrection) {
+            metaText = `${e.time} · ${e.bg ? `KŞ ${e.bg}` : 'manuel'} · düzeltme${e.brand ? ` · ${e.brand}` : ''}`;
           } else if (isMeal) {
-            metaText = `${e.time} · ${e.items.length} yemek (${fmt(e.portion)}g) · öğün`;
+            metaText = `${e.time} · ${e.items.length} yemek (${fmt(e.portion)}g) · öğün${e.brand ? ` · ${e.brand}` : ''}`;
           } else {
-            metaText = `${e.time} · ${portionLabel(e)} · ${e.source}`;
+            metaText = `${e.time} · ${portionLabel(e)} · ${e.source}${e.brand ? ` · ${e.brand}` : ''}`;
           }
           if (e.exerciseAdjusted) metaText += ' · 🏃';
+          if (e.sickAdjusted) metaText += ' · 🤒';
 
           // Yemek sonrası KŞ durumu
           const now = new Date();
           const entryTime = getEntryDateTime(e, state.date);
           const elapsedMin = (now - entryTime) / 60000;
-          const eligibleForPostBG = !isCorrection && (e.carbs || 0) >= 10 && elapsedMin >= 90 && elapsedMin <= 240 && isToday;
+          const eligibleForPostBG = !isCorrection && !isBasal && !isHypo && !isBG && (e.carbs || 0) >= 10 && elapsedMin >= 90 && elapsedMin <= 240 && isToday;
           const hasPostBG = e.postMealBG && typeof e.postMealBG.value === 'number';
           const postBGDelta = hasPostBG && e.bg ? (e.postMealBG.value - e.bg) : null;
 
@@ -1901,13 +2964,14 @@ function renderToday() {
             </div>`;
           }
 
-          return `<div class="entry" style="flex-direction:column;align-items:stretch">
+          return `<div class="entry ${isBasal ? 'entry-basal' : isHypo ? 'entry-hypo' : isBG ? 'entry-bg' : ''}" style="flex-direction:column;align-items:stretch">
             <div style="display:flex;align-items:center;gap:10px;width:100%">
               <div class="entry-flex">
-                <div class="entry-name">${mt ? `<span class="meal-type-tag">${mt.emoji} ${mt.name}</span>` : ''}${esc(e.food)}</div>
+                <div class="entry-name">${mt ? `<span class="meal-type-tag">${mt.emoji} ${mt.name}</span>` : ''}${isBasal ? '<span class="basal-tag">🌙 Bazal</span>' : ''}${isHypo ? '<span class="hypo-tag">⚠ Hipo</span>' : ''}${isBG ? '<span class="bg-tag">💧 KŞ</span>' : ''}${esc(e.food)}</div>
                 <div class="entry-meta">${metaText}</div>
                 ${isMeal ? `<div class="entry-meta" style="margin-top:3px;font-size:10px">${e.items.map(i => esc(i.food)).join(' · ')}</div>` : ''}
                 ${e.notes ? `<div class="entry-note">📝 ${esc(e.notes)}</div>` : ''}
+                ${isHypo && e.reason ? `<div class="entry-note">📝 ${esc(e.reason)}</div>` : ''}
                 ${hasPostBG ? `
                   <div class="pbg-line ${postBGDelta !== null ? (postBGDelta > 30 ? 'delta-up' : postBGDelta < -30 ? 'delta-down' : '') : ''}">
                     💧 Sonrası: ${e.postMealBG.value} mg/dL${postBGDelta !== null ? ` (${postBGDelta >= 0 ? '+' : ''}${Math.round(postBGDelta)})` : ''} · ${e.postMealBG.time}
@@ -1915,11 +2979,14 @@ function renderToday() {
                 ` : eligibleForPostBG ? `
                   <button class="pbg-link" data-act="startPostBG" data-id="${e.id}">+ Yemek sonrası KŞ ekle</button>
                 ` : ''}
-                <span class="entry-dose">${svg('drop','icn icn-sm')} ${fmt(ins, state.roundStep === 1 ? 0 : 1)} Ü</span>
+                ${!isHypo && !isBG ? `<span class="entry-dose">${svg('drop','icn icn-sm')} ${fmt(ins, state.roundStep === 1 ? 0 : 1)} Ü</span>` : ''}
               </div>
-              <div class="entry-val"><div class="v">${isCorrection ? '—' : fmt(e.carbs, 1) + 'g'}</div><div class="u">${isCorrection ? '' : 'KH'}</div></div>
+              <div class="entry-val">
+                <div class="v">${isCorrection || isBasal ? '—' : isBG ? `${e.bg}` : isHypo ? `+${fmt(e.treatGrams || 0)}g` : fmt(e.carbs, 1) + 'g'}</div>
+                <div class="u">${isCorrection || isBasal ? '' : isBG ? 'mg/dL' : 'KH'}</div>
+              </div>
               ${isToday ? `
-                <button class="icon-btn icon-btn-blue" data-act="startEditEntry" data-id="${e.id}">${svg('edit','icn icn-sm')}</button>
+                ${!isBasal && !isHypo && !isBG ? `<button class="icon-btn icon-btn-blue" data-act="startEditEntry" data-id="${e.id}">${svg('edit','icn icn-sm')}</button>` : ''}
                 <button class="icon-btn" data-act="deleteEntry" data-id="${e.id}">${svg('trash','icn icn-sm')}</button>
               ` : ''}
             </div>
@@ -2051,7 +3118,7 @@ function renderHistory() {
         <div class="stat-card">
           <div class="lbl">Toplam İnsulin</div>
           <div class="v">${fmt(stats.totalI, 1)}<span class="u">Ü</span></div>
-          <div class="s">${stats.correctionCount} düzeltme</div>
+          <div class="s">${stats.correctionCount} düzeltme${stats.hypoCount > 0 ? ` · ${stats.hypoCount} hipo ⚠` : ''}</div>
         </div>
       </div>
 
@@ -2105,6 +3172,71 @@ function renderHistory() {
           `).join('')}
         </div>
       ` : ''}
+
+      ${(() => {
+        // HbA1c tahmini
+        const a1c = estimateHbA1c(state.statPeriod);
+        if (!a1c) return '';
+        return `<div class="hba1c-card">
+          <div class="t">${svg('drop','icn icn-sm')} Tahmini HbA1c (ADAG formülü)</div>
+          <div><span class="v">${a1c.a1c.toFixed(1)}</span><span class="u">%</span></div>
+          <div class="s">Son ${state.statPeriod} gün · ${a1c.n} ölçüm · Ortalama KŞ ${fmt(a1c.avgBG, 0)} mg/dL<br>${a1c.a1c < 7 ? '✓ Hedef altı' : a1c.a1c < 8 ? '⚠ Hafif yüksek (hedef <7)' : '⚠ Yüksek — doktorunla konuş'}. Tahmindir, gerçek lab sonucu farklı olabilir.</div>
+        </div>`;
+      })()}
+
+      ${(() => {
+        // Trend & oran önerisi
+        const t = analyzeTrend(state.statPeriod);
+        if (t.insufficientData) return `<div class="trend-card">
+          <div class="t">${svg('drop','icn icn-sm')} Trend & Oran Analizi</div>
+          <div class="sug" style="border-top:none;padding-top:0">Yemek sonrası KŞ verisi henüz az (${t.n}). En az 5 öğünde "yemek sonrası KŞ" ekleyince oran önerisi çıkar.</div>
+        </div>`;
+        if (!t.suggestion) return `<div class="trend-card">
+          <div class="t">${svg('drop','icn icn-sm')} Trend & Oran Analizi</div>
+          <div><span class="v">${t.avgDelta >= 0 ? '+' : ''}${fmt(t.avgDelta, 0)} mg/dL</span></div>
+          <div class="sug">✓ Yemek sonrası KŞ ortalama hedefe yakın (${t.n} öğün, std ±${fmt(t.stdDev, 0)}). KH/insulin oranın <b>1Ü ≈ ${fmt(t.currentRatio, 1)}g</b> doğru çalışıyor.</div>
+        </div>`;
+        return `<div class="trend-card">
+          <div class="t">${svg('drop','icn icn-sm')} Trend & Oran Önerisi</div>
+          <div><span class="v">${t.avgDelta >= 0 ? '+' : ''}${fmt(t.avgDelta, 0)} mg/dL</span></div>
+          <div class="sug">
+            ${t.direction === 'down'
+              ? `Yemek sonrası KŞ <b>ortalama yüksek</b> (${t.n} öğün, std ±${fmt(t.stdDev, 0)}). Mevcut oranın <b>1Ü = ${fmt(t.currentRatio, 1)}g</b>. Daha çok insulin gerekiyor → oranı <b>1Ü = ${t.suggestion}g</b>'a düşürmeyi doktorla konuş.`
+              : `Yemek sonrası KŞ <b>ortalama düşük</b> (${t.n} öğün, std ±${fmt(t.stdDev, 0)}). Mevcut oranın <b>1Ü = ${fmt(t.currentRatio, 1)}g</b>. Daha az insulin yeter → oranı <b>1Ü = ${t.suggestion}g</b>'a yükseltmeyi doktorla konuş.`}
+          </div>
+        </div>`;
+      })()}
+
+      ${(() => {
+        // Saatlik KŞ heatmap
+        const hourly = calcHourlyBG(state.statPeriod);
+        const hasData = hourly.some(h => h.n > 0);
+        if (!hasData) return '';
+        const colorFor = (avg) => {
+          if (avg === null) return null;
+          if (avg < 70) return '#dc6b6b';
+          if (avg < 100) return '#86efac';
+          if (avg < 140) return '#5b9279';
+          if (avg < 180) return '#fbbf24';
+          if (avg < 250) return '#f97316';
+          return '#dc2626';
+        };
+        return `<div class="section-title">Saatlik KŞ Ortalaması</div>
+        <div class="card" style="margin-bottom:12px;padding:14px">
+          <div class="tiny muted" style="margin-bottom:6px">Hangi saatlerde sürekli yüksek/düşük → bazal/timing ipucu</div>
+          <div class="heatmap-grid">
+            ${hourly.map(b => {
+              if (b.n === 0) return `<div class="heatmap-cell empty">—<div class="h">${String(b.hour).padStart(2,'0')}</div></div>`;
+              return `<div class="heatmap-cell" style="background:${colorFor(b.avg)}">${fmt(b.avg, 0)}<div class="h">${String(b.hour).padStart(2,'0')}</div></div>`;
+            }).join('')}
+          </div>
+          <div class="heatmap-legend">
+            <span>düşük</span>
+            <div class="heatmap-legend-bar"></div>
+            <span>yüksek</span>
+          </div>
+        </div>`;
+      })()}
 
       <button class="btn btn-secondary btn-full" style="margin-bottom:16px" data-act="exportCSV">${svg('drop','icn icn-sm')} Tüm Veriyi CSV İndir (Doktor için)</button>
     `}
@@ -2216,6 +3348,71 @@ function renderSettings() {
         <input class="in" type="text" inputmode="decimal" value="${state.diaMinutes / 60}" data-input="diaHours">
         <span>saat</span>
       </div>
+    </div>
+
+    <div class="card">
+      <h2>CGM (Sensör)</h2>
+      <div class="set-row">
+        <span class="lbl-text">Cihaz:</span>
+        <select class="in" data-input="cgmDevice">
+          ${['Libre 2 Plus','Libre 3','Libre 2','Dexcom G7','Dexcom G6','Medtronic Guardian','Yok'].map(d => `<option value="${d}" ${state.cgmDevice === d ? 'selected' : ''}>${d}</option>`).join('')}
+        </select>
+      </div>
+      ${state.cgmDevice !== 'Yok' ? `
+        <div class="set-row" style="margin-top:8px">
+          <span class="lbl-text">Sensör başlangıç:</span>
+          <input class="in" type="date" value="${esc(state.sensorStartDate || '')}" data-input="sensorStartDate" max="${new Date().toISOString().split('T')[0]}">
+        </div>
+        ${(() => {
+          const s = getSensorStatus();
+          if (!s) return '<p class="tiny muted" style="margin-top:8px">Sensör tarihini gir, kaç gün kaldığını anasayfada gör.</p>';
+          if (s.expired) return `<div class="ok" style="color:#a03030;margin-top:8px">⚠ ${Math.abs(s.remainingDays)} gün önce süresi doldu</div>`;
+          if (s.expiringSoon) return `<div class="ok" style="color:#92400e;margin-top:8px">⚠ ${s.remainingDays} gün kaldı, hazırlan</div>`;
+          return `<div class="ok" style="margin-top:8px">✓ ${s.elapsedDays}/${s.totalDays} gün · ${s.remainingDays} gün kaldı</div>`;
+        })()}
+      ` : ''}
+    </div>
+
+    <div class="card">
+      <h2>İnsulin Markaları</h2>
+      <div class="set-row">
+        <span class="lbl-text">Bolus (yemek):</span>
+        <select class="in" data-input="bolusBrand">
+          ${BOLUS_BRANDS.map(b => `<option value="${b}" ${state.bolusBrand === b ? 'selected' : ''}>${b}</option>`).join('')}
+        </select>
+      </div>
+      <div class="set-row" style="margin-top:8px">
+        <span class="lbl-text">Bazal (uzun etkili):</span>
+        <select class="in" data-input="basalBrand">
+          ${BASAL_BRANDS.map(b => `<option value="${b}" ${state.basalBrand === b ? 'selected' : ''}>${b}</option>`).join('')}
+        </select>
+      </div>
+      <p class="tiny muted" style="margin-top:8px">Her log girişinde marka kayıt olur. Doktora gösterilen CSV'de görünür.</p>
+    </div>
+
+    <div class="card">
+      <h2>Bazal Doz</h2>
+      <div class="set-row">
+        <span class="lbl-text">Günlük doz:</span>
+        <input class="in" type="text" inputmode="decimal" value="${state.basalDose}" data-input="basalDose">
+        <span>Ü</span>
+      </div>
+      <div class="set-row" style="margin-top:8px">
+        <span class="lbl-text">Vuruş saati:</span>
+        <input class="in" type="text" inputmode="numeric" placeholder="22:00" value="${esc(state.basalTime)}" data-input="basalTime" style="max-width:80px">
+      </div>
+      <p class="tiny muted" style="margin-top:8px">Bugün sayfasında "Bazalı Vur" düğmesiyle tek tıkla kayıt yapılır.</p>
+    </div>
+
+    <div class="card">
+      <h2>Hasta Günü Modu</h2>
+      <p class="tiny muted" style="margin-bottom:12px">Ateş/grip günlerinde insulin direnci artar. Toggle açıkken bolus dozları bu yüzde kadar artırılır. <b>Önemli:</b> uzun süreli hastalıkta keton kontrolü ve doktor takibi şart.</p>
+      <div class="set-row">
+        <span class="lbl-text">🤒 Doz artışı:</span>
+        <input class="in" type="text" inputmode="decimal" value="${state.sickModeMultiplier}" data-input="sickModeMultiplier">
+        <span>%</span>
+      </div>
+      <p class="tiny muted" style="margin-top:8px">Tipik: hafif hastalık 20%, orta 30-50%, ağır 50%+.</p>
     </div>
 
     <div class="card">
@@ -2364,6 +3561,29 @@ document.addEventListener('click', (ev) => {
   else if (act === 'toggleExercise') {
     state.exerciseMode = !state.exerciseMode;
     render();
+  }
+  else if (act === 'toggleSickMode') {
+    state.sickMode = !state.sickMode;
+    render();
+  }
+  else if (act === 'commitBasal') commitBasal();
+  else if (act === 'openHypoForm') openHypoForm(state.currentBG);
+  else if (act === 'cancelHypoForm') cancelHypoForm();
+  else if (act === 'commitHypo') commitHypo();
+  else if (act === 'setHypoTreat') {
+    state.hypoTreatGrams = t.dataset.val;
+    render();
+  }
+  else if (act === 'setQBGPreset') {
+    state.quickBG = t.dataset.val;
+    state.quickBGActions = true;
+    render();
+  }
+  else if (act === 'adjustQBG') {
+    adjustQuickBG(parseInt(t.dataset.delta, 10));
+  }
+  else if (act === 'applyQBG') {
+    applyQuickBG(t.dataset.target);
   }
   else if (act === 'saveAsTemplate') saveCurrentAsTemplate();
   else if (act === 'loadTemplate') {
@@ -2517,6 +3737,16 @@ document.addEventListener('input', (ev) => {
   else if (key === 'currentNotes') state.currentNotes = t.value;
   else if (key === 'correctionNotes') state.correctionNotes = t.value;
   else if (key === 'postBgValue') state.postBgValue = t.value;
+  else if (key === 'hypoBG') state.hypoBG = t.value;
+  else if (key === 'hypoTreatGrams') { state.hypoTreatGrams = t.value; render(); }
+  else if (key === 'hypoReason') state.hypoReason = t.value;
+  else if (key === 'quickBG') {
+    state.quickBG = t.value;
+    const v = parseFloat(String(t.value).replace(',', '.'));
+    const wasActive = state.quickBGActions;
+    state.quickBGActions = !isNaN(v) && v > 0;
+    if (wasActive !== state.quickBGActions) render();
+  }
   else if (key === 'apiKey') { state.apiKey = t.value; saveSettings({ apiKey: t.value }); }
 });
 
@@ -2593,10 +3823,64 @@ document.addEventListener('change', (ev) => {
     t.value = state.exerciseReduction;
     render();
   }
+  else if (key === 'bolusBrand') {
+    state.bolusBrand = t.value;
+    saveSettings({ bolusBrand: state.bolusBrand });
+    render();
+  }
+  else if (key === 'basalBrand') {
+    state.basalBrand = t.value;
+    saveSettings({ basalBrand: state.basalBrand });
+    render();
+  }
+  else if (key === 'basalDose') {
+    const v = parseSettingNumber(t.value);
+    if (v !== null && v >= 0 && v <= 200) {
+      state.basalDose = v;
+      saveSettings({ basalDose: v });
+    }
+    t.value = state.basalDose;
+    render();
+  }
+  else if (key === 'basalTime') {
+    if (/^\d{1,2}:\d{2}$/.test(t.value)) {
+      state.basalTime = t.value;
+      saveSettings({ basalTime: state.basalTime });
+    }
+  }
+  else if (key === 'sickModeMultiplier') {
+    const v = parseSettingNumber(t.value);
+    if (v !== null && v >= 0 && v <= 100) {
+      state.sickModeMultiplier = v;
+      saveSettings({ sickModeMultiplier: v });
+    }
+    t.value = state.sickModeMultiplier;
+    render();
+  }
+  else if (key === 'cgmDevice') {
+    state.cgmDevice = t.value;
+    saveSettings({ cgmDevice: state.cgmDevice });
+    render();
+  }
+  else if (key === 'sensorStartDate') {
+    if (t.value) {
+      state.sensorStartDate = t.value;
+      saveSettings({ sensorStartDate: state.sensorStartDate });
+      render();
+    }
+  }
 });
 
 loadAll();
 render();
+
+// PWA service worker kaydı (Android'de install prompt + offline için)
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
 </script>
-</body>
-</html>
+
+
+</body></html>
