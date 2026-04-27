@@ -4,14 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#a8c5b9">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="KarbSayar">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="application-name" content="KarbSayar">
-<link rel="manifest" href="./manifest.webmanifest">
-<link rel="apple-touch-icon" href="./icon.svg">
-<link rel="icon" type="image/svg+xml" href="./icon.svg">
 <title>KarbSayar</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -312,187 +304,68 @@ input[type=date]:focus,.in:focus,select:focus{border-color:#5b9279;background:#f
 .mt-summary .s{font-size:9px;color:#a39885;margin-top:1px}
 .section-title{font-size:13px;font-weight:600;color:#2d3b3d;margin:12px 0 8px}
 
-/* Karanlık mod — Warm Charcoal Mat */
-body.dark{background:#2d2a25;color:#ddd5c5}
-body.dark .hdr{background:#332f2a;border-bottom-color:#3a362f;color:#e8dfcd}
-body.dark .hdr h1>span,body.dark .hdr h1{color:#e8dfcd}
-body.dark .hdr-sub,body.dark .muted{color:#9a9082}
-body.dark .tiny.muted{color:#867c6e}
-
-/* Kartlar - mat, zeminden hafif yüksek */
-body.dark .card{background:#34302a;border-color:#403b33;color:#ddd5c5;box-shadow:none}
-body.dark .card h2{color:#e8dfcd}
-body.dark .card-active{border-color:#7a9a8a;box-shadow:0 0 0 1px rgba(122,154,138,.15)}
-
-/* Hero kart - mat sage→lavender, daha az parlak */
-body.dark .card-blue{background:linear-gradient(135deg,#6b8a7d 0%,#7a7588 100%);box-shadow:none;color:#f5efe2}
-
-/* Doz kartı - mat sage */
-body.dark .dose-card{background:linear-gradient(135deg,#5d7d6b,#4a6856);box-shadow:none;color:#f5efe2}
-
-/* IOB kartı - mat mauve */
-body.dark .iob-card{background:linear-gradient(135deg,#8a7f95,#6f6578);box-shadow:none;color:#f5efe2}
-
-/* Düzeltme/correction kartı */
-body.dark .corr-trigger{background:#34302a;border-color:#5a4d6a;color:#a89bb5}
-body.dark .corr-trigger:hover,body.dark .corr-trigger:active{background:#3a362f;border-style:solid}
-body.dark .corr-card{background:linear-gradient(135deg,#3a3540,#322d38);border-color:#5a4d6a}
-body.dark .corr-input-block,body.dark .corr-preview{background:#2d2a32;color:#ddd5c5}
-body.dark .corr-preview .breakdown{color:#9a9082;border-top-color:#403b33}
-
-/* Inputlar - mat, ayırt edilebilir */
-body.dark .in,body.dark select,body.dark input[type=date],body.dark input[type=text],body.dark input[type=number]{
-  background:#252320;border-color:#403b33;color:#e8dfcd
-}
-body.dark .in::placeholder,body.dark input::placeholder{color:#6a6258}
-body.dark .in:focus,body.dark select:focus,body.dark input:focus{border-color:#7a9a8a;background:#2a2724}
-
-/* Log girdileri */
-body.dark .entry{background:#2a2724;color:#ddd5c5;border-color:transparent}
-body.dark .entry-meta{color:#9a9082}
-body.dark .entry-name{color:#e8dfcd}
-
-/* Nav alt bar */
-body.dark .nav{background:#332f2a;border-top-color:#3a362f}
-body.dark .nav .nav-btn{color:#9a9082}
-body.dark .nav .nav-btn.active{color:#a8c5b9}
-
-/* Kütüphane */
-body.dark .lib-item{background:#34302a;border-color:#403b33}
-body.dark .lib-name{color:#e8dfcd}
-body.dark .lib-meta{color:#9a9082}
-
-/* Geçmiş gün düğmeleri */
-body.dark .day-btn{background:#34302a;border-color:#403b33;color:#ddd5c5}
-body.dark .day-btn:hover{border-color:#7a9a8a}
-body.dark .day-btn .c{color:#9a9082}
-
-body.dark .empty{color:#6a6258}
-
-/* Öğün sepeti & meal totals */
-body.dark .meal-item{background:#2a2724;color:#ddd5c5}
-body.dark .meal-totals,body.dark .meal-bg-row{background:#2a2724}
-
-/* İstatistik kartları */
-body.dark .stat-card,body.dark .mt-summary{background:#34302a;border-color:#403b33}
+/* Karanlık mod */
+body.dark{background:linear-gradient(135deg,#3a3530,#2d3b3d);color:#ede4d3}
+body.dark .hdr{background:#2d3b3d;border-bottom-color:#3a3530}
+body.dark .hdr h1>span{color:#f5efe6}
+body.dark .hdr-sub{color:#a39885}
+body.dark .card{background:#2d3b3d;border-color:#3a3530;color:#ede4d3}
+body.dark .card h2{color:#f5efe6}
+body.dark .card-active{border-color:#3b82f6}
+body.dark .in,body.dark select,body.dark input[type=date]{background:#3a3530;border-color:#3a3530;color:#f5efe6}
+body.dark .in:focus,body.dark select:focus,body.dark input[type=date]:focus{border-color:#3b82f6;background:#2d3b3d}
+body.dark .entry{background:#3a3530;color:#ede4d3}
+body.dark .entry-meta{color:#a39885}
+body.dark .muted{color:#a39885}
+body.dark .nav{background:#2d3b3d;border-top-color:#3a3530}
+body.dark .lib-item{background:#2d3b3d;border-color:#3a3530}
+body.dark .day-btn{background:#2d3b3d;border-color:#3a3530;color:#ede4d3}
+body.dark .day-btn:hover{border-color:#3b82f6}
+body.dark .day-btn .c{color:#a39885}
+body.dark .empty{color:#8a7d6a}
+body.dark .meal-item{background:#3a3530;color:#ede4d3}
+body.dark .meal-totals,body.dark .meal-bg-row{background:#3a3530}
+body.dark .corr-input-block,body.dark .corr-preview{background:#3a3530;color:#ede4d3}
+body.dark .corr-preview .breakdown{color:#a39885;border-top-color:#3a3530}
+body.dark .stat-card,body.dark .mt-summary{background:#2d3b3d;border-color:#3a3530}
 body.dark .stat-card .v,body.dark .mt-summary .v{color:#a8c5b9}
-body.dark .stat-card .lbl,body.dark .mt-summary .nm,body.dark .stat-card .s,body.dark .mt-summary .s{color:#9a9082}
-body.dark .bar-row .bar-bg{background:#252320}
-body.dark .bar-row .bar-fill{background:linear-gradient(90deg,#7a9a8a,#5d7d6b)}
-body.dark .bar-row .label,body.dark .bar-row .v{color:#ddd5c5}
-body.dark .stat-period button{background:#34302a;border-color:#403b33;color:#9a9082}
-body.dark .stat-period button.active{background:#5d7d6b;border-color:#7a9a8a;color:#f5efe2}
-body.dark .section-title{color:#e8dfcd}
-
-/* Öğün tipi pills */
-body.dark .meal-type-pill{background:#2a2724;border-color:#403b33;color:#9a9082}
-body.dark .meal-type-pill.active{background:#5d7d6b;border-color:#7a9a8a;color:#f5efe2}
-body.dark .meal-type-tag{background:#34302a;color:#a8c5b9}
-
-/* Radio seçenekler */
-body.dark .radio-opt{background:#2a2724;border-color:#403b33;color:#ddd5c5}
-body.dark .radio-opt.active{background:#3a4540;border-color:#7a9a8a;color:#a8c5b9}
-
-/* Arama çubuğu */
-body.dark .search-bar{background:#34302a;border-color:#403b33}
-body.dark .search-bar input{color:#e8dfcd}
-body.dark .qty-grams{color:#9a9082}
+body.dark .stat-card .lbl{color:#a39885}
+body.dark .bar-row .bar-bg{background:#3a3530}
+body.dark .bar-row .label,body.dark .bar-row .v{color:#ede4d3}
+body.dark .meal-type-pill{background:#3a3530;border-color:#3a3530;color:#d6cebd}
+body.dark .meal-type-pill.active{background:#3b82f6;border-color:#3b82f6;color:#fff}
+body.dark .meal-type-tag{background:#2d3b3d;color:#a8c5b9}
+body.dark .radio-opt{background:#3a3530;border-color:#3a3530;color:#ede4d3}
+body.dark .radio-opt.active{background:#3d6850;border-color:#3b82f6;color:#dceae0}
+body.dark .search-bar{background:#2d3b3d;border-color:#3a3530}
+body.dark .search-bar input{color:#f5efe6}
+body.dark .qty-grams{color:#a39885}
 body.dark .qty-grams b{color:#a8c5b9}
-body.dark .suggestions{background:#34302a;border-color:#403b33}
-body.dark .suggestion{color:#ddd5c5;border-bottom-color:#3a362f}
-body.dark .suggestion:hover,body.dark .suggestion:active{background:#2a2724}
-body.dark .preview-meta{color:#9a9082}
-
-/* Macro renkleri */
-body.dark .macro-blue{background:#3a4540}
+body.dark .suggestions{background:#2d3b3d;border-color:#3a3530}
+body.dark .suggestion{color:#ede4d3;border-bottom-color:#3a3530}
+body.dark .suggestion:hover,body.dark .suggestion:active{background:#3a3530}
+body.dark .preview-meta{color:#a39885}
+body.dark .macro-blue{background:#3d6850}
 body.dark .macro-blue .l{color:#a8c5b9}
-body.dark .macro-blue .v{color:#e8dfcd}
-body.dark .macro-slate{background:#2a2724}
-body.dark .macro-slate .l{color:#9a9082}
-body.dark .macro-slate .v{color:#ddd5c5}
-
-/* Şablon stili */
-body.dark .template-list-item{background:#34302a;border-color:#403b33}
-body.dark .template-list-item .nm{color:#e8dfcd}
-body.dark .template-list-item .mt{color:#9a9082}
-body.dark .template-list-item .mt .v{color:#a8c5b9}
-body.dark .template-save-btn{background:#34302a;color:#a89bb5;border-color:#5a4d6a}
-body.dark .template-pill{background:linear-gradient(135deg,#3a4540,#3a3540);border-color:#5a4d6a;color:#cdc4d3}
-body.dark .template-section-title{color:#a89bb5}
-
-/* Edit form */
-body.dark .edit-entry-form{background:#3a4540;border-color:#5d7d6b}
-body.dark .edit-entry-row label{color:#9a9082}
-
-/* Notes ve uyarılar - matlaştırıldı */
-body.dark .notes-row label{color:#9a9082}
-body.dark .notes-row .in{background:#2d2a24;border-color:#4a3f30}
-body.dark .notes-row .in:focus{background:#322e26;border-color:#8a7858}
-body.dark .entry-note{background:#2d2a24;color:#c5b896;border-color:#4a3f30}
-body.dark .fp-warning{background:#332a22;border-color:#5a4530;color:#d4b890}
-body.dark .fp-warning b{color:#e5cba0}
-body.dark .fp-warning .icn{color:#c79b6a}
-
-/* Yemek sonrası KŞ */
-body.dark .pbg-line{background:#2d3540;color:#a8c5d9;border-color:#3a4a5a}
-body.dark .pbg-line.delta-up{background:#3d322a;color:#d4b890;border-color:#5a4530}
-body.dark .pbg-line.delta-down{background:#2a3a30;color:#a8c8b3;border-color:#3d5040}
-body.dark .pbg-link{background:#3a3540;color:#a89bb5;border-color:#5a4d6a}
-body.dark .pbg-link:hover{background:#403545;border-style:solid}
-body.dark .pbg-input-row{background:#3a3540;border-color:#5a4d6a}
-body.dark .pbg-input-row .in{background:#2d2a32}
-
-/* Hızlı düzeltme presetleri */
-body.dark .qc-preset{background:#34302a;border-color:#5a4d6a;color:#a89bb5}
-body.dark .qc-preset:hover,body.dark .qc-preset.active{background:#5a4d6a;color:#f5efe2}
-
-/* Egzersiz toggle */
-body.dark .exercise-toggle{background:#2d3a32;border-color:#3d5040;color:#a8c8b3}
-body.dark .exercise-toggle.active{background:linear-gradient(135deg,#5d7d6b,#4a6856);border-color:#7a9a8a;color:#f5efe2;box-shadow:none}
-body.dark .exercise-toggle .switch{background:#403b33}
-body.dark .exercise-toggle.active .switch{background:rgba(255,255,255,.25)}
-
-/* Ikon butonlar */
-body.dark .icon-btn{color:#867c6e}
-body.dark .icon-btn:hover{color:#e8a8a8;background:#3a2d2d}
-body.dark .icon-btn-blue{color:#867c6e}
-body.dark .icon-btn-blue:hover{color:#a8c5b9;background:#2d3a32}
-
-/* OK / başarı */
-body.dark .ok{color:#a8c8b3}
-
-/* Butonlar */
-body.dark .btn-secondary{background:#403b33;color:#ddd5c5;border-color:#4a4339}
-body.dark .btn-secondary:hover,body.dark .btn-secondary:active{background:#4a4339}
-body.dark .btn-primary{background:linear-gradient(135deg,#5d7d6b,#4a6856);color:#f5efe2;box-shadow:none}
-body.dark .btn-primary:hover,body.dark .btn-primary:active{background:linear-gradient(135deg,#5d7d6b,#3d5849)}
-body.dark .btn-primary:disabled{background:#403b33;color:#6a6258;opacity:.6}
-body.dark .btn-link{color:#a8c5b9}
-
-/* note-info (yedek altı uyarı) - mat */
-body.dark .note-info{background:#332a22;color:#c5b896;border-color:#4a3f30}
-body.dark .note-info .icn{color:#c79b6a}
-
-/* Settings labels */
-body.dark .checkbox-row,body.dark .set-row{color:#ddd5c5}
-body.dark .lbl-text{color:#ddd5c5}
-
-/* Error mesajları */
-body.dark .err{background:#3a2d2d;color:#e8a8a8;border-color:#5a3d3d}
-
-/* Confidence tag - dark mat */
-body.dark .conf-yuksek{background:#2a3a30;color:#a8c8b3}
-body.dark .conf-orta{background:#3d322a;color:#d4b890}
-body.dark .conf-dusuk{background:#3a2d2d;color:#e8a8a8}
-body.dark .tag-db{background:#2a3a30;color:#a8c8b3}
-body.dark .tag-ai{background:#3a3540;color:#a89bb5}
-
-/* Lib note */
-body.dark .lib-note{color:#867c6e}
-
-/* Add more link */
-body.dark .add-more-link{color:#a8c5b9;border-color:#403b33}
-body.dark .add-more-link:hover{background:#34302a;border-color:#a8c5b9}
+body.dark .macro-blue .v{color:#dceae0}
+body.dark .macro-slate{background:#3a3530}
+body.dark .macro-slate .l{color:#a39885}
+body.dark .macro-slate .v{color:#ede4d3}
+body.dark .lib-name{color:#f5efe6}
+body.dark .lib-meta{color:#a39885}
+body.dark .icon-btn{color:#8a7d6a}
+body.dark .icon-btn:hover{color:#f87171;background:#7f1d1d}
+body.dark .icon-btn-blue:hover{color:#a8c5b9;background:#3d6850}
+body.dark .qc-preset{background:#2d3b3d;border-color:#5d4d7d;color:#b8b0c4}
+body.dark .qc-preset:hover,body.dark .qc-preset.active{background:#5d4d7d;color:#fff}
+body.dark .ok{color:#86efac}
+body.dark .stat-period button{background:#3a3530;border-color:#3a3530;color:#a39885}
+body.dark .stat-period button.active{background:#3b82f6;border-color:#3b82f6;color:#fff}
+body.dark .section-title{color:#f5efe6}
+body.dark .template-list-item{background:#2d3b3d;border-color:#3a3530}
+body.dark .template-list-item .nm{color:#f5efe6}
+body.dark .template-save-btn{background:#2d3b3d;color:#b8b0c4;border-color:#5d4d7d}
+body.dark .qty-row .in,body.dark .qty-row select{background:#3a3530}
 </style>
 </head>
 <body>
@@ -2724,13 +2597,6 @@ document.addEventListener('change', (ev) => {
 
 loadAll();
 render();
-
-// PWA service worker kaydı (Android'de install prompt + offline için)
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  });
-}
 </script>
 </body>
 </html>
