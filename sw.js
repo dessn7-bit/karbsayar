@@ -1,6 +1,6 @@
 // KarbSayar Service Worker — network-first, cache fallback
-const CACHE = 'karbsayar-v2';
-const ASSETS = ['./', './karbsayar.html', './manifest.webmanifest'];
+const CACHE = 'karbsayar-v3';
+const ASSETS = ['./', './karbsayar.html', './manifest.webmanifest', './icon.svg'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).catch(() => {}));
