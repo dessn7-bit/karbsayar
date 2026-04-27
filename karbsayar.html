@@ -1,0 +1,2602 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#a8c5b9">
+<title>KarbSayar</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#3a3530;background:#f7f4ee;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+input,select{font:inherit;color:inherit;outline:none;width:100%}
+input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield}
+.app{max-width:640px;margin:0 auto;padding-bottom:80px;min-height:100vh}
+.hdr{background:#fff;border-bottom:1px solid #ede4d3;padding:14px 20px;position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.hdr h1{font-size:18px;font-weight:700;display:flex;align-items:center;gap:8px}
+.hdr-sub{font-size:11px;color:#8a7d6a}
+.icn{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.icn-sm{width:16px;height:16px}
+.icn-lg{width:20px;height:20px}
+.content{padding:16px;display:flex;flex-direction:column;gap:16px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.muted{color:#8a7d6a}
+.tiny{font-size:11px}
+input[type=date],.in,select{background:#faf5ed;border:1px solid #ede4d3;border-radius:8px;padding:8px 12px;font-size:14px;font-weight:500}
+input[type=date]:focus,.in:focus,select:focus{border-color:#5b9279;background:#fff}
+.card-blue{background:linear-gradient(135deg,#a8c5b9,#b8b0c4);color:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 14px rgba(122,140,131,.18)}
+.card-blue .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;opacity:.8;margin-bottom:4px}
+.big{font-size:48px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.unit{font-size:20px;opacity:.8}
+.divider{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.2);display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-size:14px}
+.divider .lbl-sm{opacity:.7;font-size:11px}
+.divider .val{font-weight:600;font-variant-numeric:tabular-nums}
+.card{background:#fff;border:1px solid #ede4d3;border-radius:16px;padding:16px;box-shadow:0 1px 2px rgba(0,0,0,.03)}
+.card-active{border:2px solid #a8c5b9}
+.card-amber{background:#fffbeb;border:1px solid #fde68a;border-radius:16px;padding:16px}
+.card h2{font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.input-wrap{position:relative;display:flex;flex-direction:column;gap:8px}
+.input-wrap .in{padding:10px 12px;width:100%;border-radius:8px}
+.input-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.input-grid .in{padding:8px;font-size:14px}
+.qty-row{display:grid;grid-template-columns:90px 1fr;gap:8px;align-items:center}
+.qty-row .in{padding:10px 12px}
+.qty-grams{font-size:12px;color:#8a7d6a;font-weight:500;padding-left:4px;font-variant-numeric:tabular-nums}
+.qty-grams b{color:#4a7d65;font-weight:600}
+.suggestions{position:absolute;top:42px;left:0;right:0;background:#fff;border:1px solid #ede4d3;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.1);z-index:20;overflow:hidden;max-height:240px;overflow-y:auto}
+.suggestion{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;font-size:14px;border-bottom:1px solid #f5efe6;width:100%;text-align:left;cursor:pointer}
+.suggestion:last-child{border:none}
+.suggestion:hover,.suggestion:active{background:#faf5ed}
+.tag{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:500}
+.tag-lib{background:#dceae0;color:#4a7d65}
+.tag-db{background:#d1fae5;color:#047857}
+.btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:8px;font-size:14px;font-weight:600;transition:background .15s}
+.btn-primary{background:#5b9279;color:#fff}
+.btn-primary:hover,.btn-primary:active{background:#4a7d65}
+.btn-primary:disabled{background:#d6cebd}
+.btn-secondary{background:#f5efe6;color:#3a3530}
+.btn-secondary:hover,.btn-secondary:active{background:#ede4d3}
+.btn-link{font-size:11px;color:#8a7d6a}
+.btn-link:hover{color:#5b9279}
+.btn-full{width:100%}
+.err{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:#be123c;background:#fff1f2;padding:10px 12px;border-radius:8px}
+.err .icn{flex-shrink:0;margin-top:2px}
+.entry{display:flex;align-items:center;gap:10px;padding:12px;background:#faf5ed;border-radius:8px}
+.entry-name{font-weight:500;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.entry-meta{font-size:11px;color:#8a7d6a;margin-top:2px}
+.entry-val{text-align:right}
+.entry-val .v{font-weight:700;color:#5b9279;font-variant-numeric:tabular-nums}
+.entry-val .u{font-size:10px;color:#a39885}
+.entry-flex{flex:1;min-width:0}
+.icon-btn{padding:6px;color:#a39885;border-radius:6px}
+.icon-btn:hover{color:#be123c;background:#fff1f2}
+.entry-dose{display:inline-flex;align-items:center;gap:3px;background:#ecf0ed;color:#5b9279;padding:3px 8px;border-radius:9999px;font-size:11px;font-weight:600;font-variant-numeric:tabular-nums;margin-top:4px}
+.empty{text-align:center;color:#a39885;font-size:14px;padding:32px 16px}
+.preview-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.preview-name{font-size:16px;font-weight:600}
+.preview-meta{font-size:11px;color:#8a7d6a;margin-top:2px}
+.conf{font-size:11px;padding:4px 8px;border-radius:9999px;font-weight:500}
+.conf-yuksek{color:#047857;background:#d1fae5}
+.conf-orta{color:#b45309;background:#fef3c7}
+.conf-dusuk{color:#be123c;background:#ffe4e6}
+.conf-kayitli{color:#4a7d65;background:#dceae0}
+.conf-manuel{color:#3a3530;background:#f5efe6}
+.macro-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
+.macro{padding:12px;border-radius:8px;text-align:center}
+.macro-blue{background:#ecf0ed}
+.macro-blue .l{font-size:11px;color:#4a7d65;font-weight:500}
+.macro-blue .v{font-size:24px;font-weight:700;color:#3d6850;font-variant-numeric:tabular-nums}
+.macro-blue .s{font-size:10px;color:#5b9279}
+.macro-slate{background:#faf5ed}
+.macro-slate .l{font-size:11px;color:#8a7d6a;font-weight:500}
+.macro-slate .v{font-size:20px;font-weight:700;color:#2d3b3d;font-variant-numeric:tabular-nums}
+.macro-slate .s{font-size:10px;color:#a39885}
+.dose-card{background:linear-gradient(135deg,#5b9279,#3d6850);color:#fff;border-radius:12px;padding:16px;margin-bottom:12px;box-shadow:0 4px 12px rgba(91,146,121,.22)}
+.dose-card .dose-hdr{display:flex;justify-content:space-between;align-items:center;font-size:11px;opacity:.85;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px}
+.dose-card .dose-main{display:flex;align-items:baseline;justify-content:center;gap:14px;margin-bottom:10px}
+.dose-card .dose-num{display:flex;align-items:baseline;gap:4px}
+.dose-card .dose-num .v{font-size:36px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+.dose-card .dose-num .u{font-size:18px;opacity:.85}
+.dose-card .dose-num .l{font-size:10px;opacity:.7;display:block;text-align:center;margin-top:2px}
+.dose-card .arrow{font-size:20px;opacity:.6;align-self:center}
+.dose-card .dose-rounded .v{font-size:44px;color:#fff}
+.dose-card .dose-rounded .u{font-size:22px}
+.dose-card .dose-meta{font-size:11px;opacity:.85;text-align:center;border-top:1px solid rgba(255,255,255,.2);padding-top:8px}
+.dose-bg{margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.2)}
+.dose-bg label{display:block;font-size:11px;opacity:.85;margin-bottom:4px}
+.dose-bg .bg-row{display:flex;gap:8px;align-items:center}
+.dose-bg .bg-in{flex:1;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);border-radius:6px;padding:6px 10px;font-size:14px;color:#fff;font-weight:500}
+.dose-bg .bg-in::placeholder{color:rgba(255,255,255,.5)}
+.dose-bg .bg-in:focus{background:rgba(255,255,255,.25);border-color:rgba(255,255,255,.5)}
+.dose-bg .bg-unit{font-size:11px;opacity:.85}
+.dose-bg .bg-result{font-size:11px;opacity:.95;margin-top:6px}
+.note{font-size:12px;color:#3a3530;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:8px 12px;margin-bottom:12px}
+.btn-pair{display:flex;gap:8px}
+.btn-pair .btn-secondary{flex:1}
+.btn-pair .btn-primary{flex:2}
+.lib-item{background:#fff;border:1px solid #ede4d3;border-radius:12px;padding:12px}
+.lib-row{display:flex;align-items:center;gap:12px}
+.lib-name{font-size:14px;font-weight:500}
+.lib-meta{font-size:11px;color:#8a7d6a;margin-top:2px}
+.lib-meta .v{font-weight:600;color:#5b9279}
+.lib-note{font-size:11px;color:#a39885;margin-top:2px}
+.icon-btn-blue:hover{color:#5b9279;background:#ecf0ed}
+.search-bar{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #ede4d3;border-radius:12px;padding:12px}
+.search-bar input{flex:1;font-size:14px}
+.day-btn{display:block;width:100%;background:#fff;border:1px solid #ede4d3;border-radius:12px;padding:16px;text-align:left;transition:border-color .15s}
+.day-btn:hover{border-color:#a8c5b9}
+.day-btn .d{font-size:14px;font-weight:500;text-transform:capitalize}
+.day-btn .c{font-size:11px;color:#8a7d6a;margin-top:2px}
+.day-btn .t{font-size:20px;font-weight:700;color:#5b9279;font-variant-numeric:tabular-nums}
+.day-btn .tl{font-size:10px;color:#a39885}
+.set-row{display:flex;align-items:center;gap:10px;font-size:14px}
+.set-row .in{flex:0 0 100px;width:100px;padding:10px 12px;font-size:16px;text-align:center;font-weight:600}
+.set-row .lbl-text{flex:1}
+.set-time-row{padding:12px 0;border-bottom:1px solid #f5efe6}
+.set-time-row:last-child{border:none;padding-bottom:4px}
+.set-time-row:first-child{padding-top:4px}
+.set-time-row .lbl-row{display:flex;align-items:baseline;gap:8px;margin-bottom:8px}
+.set-time-row .lbl-row .em{font-size:16px}
+.set-time-row .lbl-row .name{font-size:14px;font-weight:500}
+.set-time-row .lbl-row .rng{font-size:11px;color:#a39885;font-weight:400}
+.set-time-row .input-row{display:flex;align-items:center;gap:10px;font-size:14px}
+.set-time-row .input-row .in{flex:0 0 100px;padding:10px 12px;font-size:16px;text-align:center;font-weight:600}
+.set-time-row .input-row .un{font-size:13px;color:#3a3530}
+.radio-group{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.radio-opt{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#faf5ed;border:1px solid #ede4d3;border-radius:8px;cursor:pointer;font-size:14px}
+.radio-opt input{width:auto}
+.radio-opt.active{background:#ecf0ed;border-color:#5b9279;color:#4a7d65;font-weight:500}
+.checkbox-row{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;margin-bottom:8px;cursor:pointer}
+.checkbox-row input{width:18px;height:18px;cursor:pointer}
+.api-input{font-family:ui-monospace,monospace}
+.ok{font-size:12px;color:#047857;margin-top:8px}
+.note-info{display:flex;gap:8px;font-size:12px;color:#78350f}
+.note-info .icn{flex-shrink:0;color:#d97706;margin-top:2px}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ede4d3;z-index:20}
+.nav-grid{max-width:640px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr 1fr}
+.nav-btn{display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px;color:#a39885;transition:color .15s}
+.nav-btn.active{color:#5b9279}
+.nav-btn span{font-size:10px;font-weight:500}
+.edit-form{display:flex;flex-direction:column;gap:8px}
+.edit-form .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.edit-form label{font-size:10px;color:#8a7d6a;display:block;margin-bottom:2px}
+.spin{animation:spin 1s linear infinite}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.iob-card{background:linear-gradient(135deg,#a89bb5,#8a7ca0);color:#fff;border-radius:12px;padding:12px 16px;box-shadow:0 4px 12px rgba(138,124,160,.2)}
+.iob-row{display:flex;align-items:center;gap:12px}
+.iob-icon{flex-shrink:0;opacity:.85;display:flex}
+.iob-text{flex:1;min-width:0}
+.iob-main{font-size:14px;font-weight:500;display:flex;align-items:baseline;gap:6px}
+.iob-main .v{font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.iob-sub{font-size:11px;opacity:.85;margin-top:2px}
+
+/* Öğün sepeti */
+.meal-panel{background:linear-gradient(135deg,#fef3c7,#fde68a);border:2px solid #fbbf24;border-radius:16px;padding:16px}
+.meal-panel h3{font-size:14px;font-weight:700;color:#92400e;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.meal-items{display:flex;flex-direction:column;gap:6px;margin-bottom:12px}
+.meal-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#fff;border-radius:8px}
+.meal-item-info{flex:1;min-width:0}
+.meal-item-name{font-weight:500;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.meal-item-meta{color:#8a7d6a;font-size:11px;margin-top:2px}
+.meal-item-kh{font-size:13px;font-weight:600;color:#5b9279;font-variant-numeric:tabular-nums;flex-shrink:0}
+.meal-totals{display:grid;grid-template-columns:1fr 1fr;gap:8px;background:#fff;border-radius:8px;padding:12px;margin-bottom:12px}
+.meal-totals .item{text-align:center}
+.meal-totals .item .l{color:#8a7d6a;font-size:11px;font-weight:500}
+.meal-totals .item .v{font-weight:700;font-size:22px;color:#92400e;font-variant-numeric:tabular-nums;margin-top:2px}
+.meal-totals .item.dose .v{color:#5b9279;font-size:24px}
+.meal-totals .item .breakdown{font-size:10px;color:#a39885;margin-top:2px}
+.meal-bg-row{background:#fff;border-radius:8px;padding:10px;margin-bottom:12px}
+.meal-bg-row label{font-size:11px;color:#8a7d6a;display:block;margin-bottom:6px;font-weight:500}
+.meal-bg-input{display:flex;gap:8px;align-items:center}
+.meal-bg-input .in{flex:1;padding:8px 10px}
+.add-more-link{display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;color:#5b9279;padding:10px;margin-top:8px;background:#ecf0ed;border:1px dashed #a8c5b9;border-radius:8px;font-weight:500;cursor:pointer;width:100%}
+.add-more-link:hover{background:#dceae0}
+
+/* Düzeltme / Ara iğne */
+.corr-trigger{display:flex;align-items:center;justify-content:center;gap:8px;background:#fff;border:2px dashed #b8b0c4;border-radius:12px;padding:14px;width:100%;font-size:14px;font-weight:500;color:#5d4d7d;margin-top:4px;cursor:pointer}
+.corr-trigger:hover,.corr-trigger:active{background:#f5f1f7;border-style:solid}
+.corr-card{background:linear-gradient(135deg,#f5f1f7,#ebe5f0);border:2px solid #b8b0c4;border-radius:16px;padding:16px}
+.corr-card h3{font-size:14px;font-weight:700;color:#5d4d7d;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.corr-input-block{margin-bottom:10px;background:#fff;border-radius:8px;padding:12px}
+.corr-input-block label{font-size:12px;color:#3a3530;display:block;margin-bottom:6px;font-weight:500}
+.corr-input-row{display:flex;gap:8px;align-items:center}
+.corr-input-row .in{flex:1;padding:10px 12px;font-size:16px;font-weight:600;text-align:center}
+.corr-or{text-align:center;font-size:11px;color:#a39885;margin:4px 0;font-weight:500;letter-spacing:.05em}
+.corr-preview{background:#fff;border-radius:8px;padding:14px;margin-bottom:12px;text-align:center;border:1px solid #ede4d3}
+.corr-preview .v{font-size:32px;font-weight:700;color:#5d4d7d;font-variant-numeric:tabular-nums;line-height:1}
+.corr-preview .arrow{display:inline-block;margin:0 6px;color:#a39885}
+.corr-preview .vr{font-size:36px;font-weight:700;color:#5d4d7d;font-variant-numeric:tabular-nums}
+.corr-preview .l{font-size:11px;color:#8a7d6a;margin-top:6px}
+.corr-preview .breakdown{font-size:11px;color:#3a3530;margin-top:8px;padding-top:8px;border-top:1px solid #f5efe6}
+.corr-preview.empty{color:#a39885;padding:20px;font-size:13px}
+
+/* Öğün tipi seçici */
+.meal-type-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
+.meal-type-pill{padding:8px 4px;border:1px solid #ede4d3;background:#fff;border-radius:8px;font-size:11px;font-weight:500;color:#3a3530;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;transition:all .15s}
+.meal-type-pill .em{font-size:18px;line-height:1}
+.meal-type-pill.active{background:#5b9279;border-color:#5b9279;color:#fff;box-shadow:0 2px 6px rgba(91,146,121,.22)}
+.meal-type-pill:not(.active):hover,.meal-type-pill:not(.active):active{background:#faf5ed;border-color:#d6cebd}
+.meal-type-tag{display:inline-flex;align-items:center;gap:3px;font-size:10px;background:#ecf0ed;color:#5b9279;padding:2px 6px;border-radius:4px;font-weight:500;margin-right:4px}
+
+/* Şablonlar / Sık Yenenler */
+.templates-row{display:flex;gap:6px;overflow-x:auto;padding:8px 0;margin-bottom:8px;-webkit-overflow-scrolling:touch}
+.templates-row::-webkit-scrollbar{display:none}
+.template-pill{flex-shrink:0;display:flex;align-items:center;gap:6px;background:linear-gradient(135deg,#cdd9d3,#b8b0c4);border:1px solid #a8a0b8;color:#3d3450;padding:8px 12px;border-radius:999px;font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap}
+.template-pill:hover,.template-pill:active{background:linear-gradient(135deg,#b8b0c4,#a8a0b8);color:#fff}
+.template-pill .em{font-size:14px;line-height:1}
+.template-section-title{font-size:11px;color:#5d4d7d;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;padding:0 4px}
+.template-list-item{display:flex;align-items:center;gap:10px;padding:12px;background:#f5f1f7;border:1px solid #dccee5;border-radius:10px;margin-bottom:6px}
+.template-list-item .info{flex:1;min-width:0}
+.template-list-item .nm{font-weight:500;font-size:14px;color:#2d3b3d}
+.template-list-item .mt{color:#8a7d6a;font-size:11px;margin-top:2px}
+.template-list-item .mt .v{font-weight:600;color:#5d4d7d}
+.template-save-btn{display:flex;align-items:center;justify-content:center;gap:6px;background:#fff;border:1px dashed #b8b0c4;color:#5d4d7d;padding:10px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;width:100%;margin-bottom:10px}
+.template-save-btn:hover{background:#f5f1f7;border-style:solid}
+
+/* Notlar */
+.notes-row{margin-bottom:12px}
+.notes-row label{font-size:11px;color:#8a7d6a;display:block;margin-bottom:4px;font-weight:500}
+.notes-row .in{padding:8px 10px;font-size:13px;background:#fffbeb;border-color:#fde68a}
+.notes-row .in:focus{background:#fff;border-color:#fbbf24}
+.entry-note{font-size:11px;color:#92400e;background:#fffbeb;padding:3px 8px;border-radius:4px;margin-top:4px;display:inline-block;border:1px solid #fde68a}
+
+/* Egzersiz */
+.exercise-toggle{display:flex;align-items:center;justify-content:space-between;background:#ecfdf5;border:1px solid #6ee7b7;border-radius:8px;padding:10px 12px;margin-bottom:12px;cursor:pointer;transition:all .15s}
+.exercise-toggle.active{background:linear-gradient(135deg,#10b981,#059669);border-color:#047857;color:#fff;box-shadow:0 2px 6px rgba(5,150,105,.2)}
+.exercise-toggle .l{font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px}
+.exercise-toggle .l .em{font-size:16px}
+.exercise-toggle .switch{width:40px;height:22px;background:#d6cebd;border-radius:12px;position:relative;transition:background .15s;flex-shrink:0}
+.exercise-toggle .switch::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:2px;left:2px;transition:left .15s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.exercise-toggle.active .switch{background:rgba(255,255,255,.35)}
+.exercise-toggle.active .switch::after{left:20px}
+
+/* Yağ/Protein uyarısı */
+.fp-warning{background:#fff7ed;border:1px solid #fdba74;border-radius:8px;padding:10px 12px;margin-bottom:12px;display:flex;gap:8px;font-size:12px;color:#9a3412;line-height:1.4}
+.fp-warning .icn{flex-shrink:0;color:#ea580c;margin-top:1px;width:16px;height:16px}
+.fp-warning b{color:#7c2d12}
+
+/* Yemek sonrası KŞ */
+.pbg-line{display:flex;align-items:center;gap:6px;font-size:11px;color:#3d6850;background:#dceae0;padding:3px 8px;border-radius:4px;margin-top:4px;display:inline-block;border:1px solid #a8c5b9}
+.pbg-line.delta-up{background:#fef3c7;color:#92400e;border-color:#fde68a}
+.pbg-line.delta-down{background:#dcfce7;color:#166534;border-color:#86efac}
+.pbg-link{font-size:11px;color:#5d4d7d;background:#f5f1f7;border:1px dashed #b8b0c4;padding:3px 8px;border-radius:4px;margin-top:4px;display:inline-block;cursor:pointer;font-weight:500}
+.pbg-link:hover{background:#ebe5f0;border-style:solid}
+.pbg-input-row{display:flex;gap:6px;align-items:center;margin-top:6px;background:#f5f1f7;padding:8px;border-radius:6px;border:1px solid #b8b0c4}
+.pbg-input-row .in{flex:1;padding:6px 8px;font-size:13px;background:#fff}
+.pbg-input-row button{padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600}
+
+/* Düzenleme formu (log girdileri için) */
+.edit-entry-form{background:#ecf0ed;border:1px solid #a8c5b9;border-radius:8px;padding:10px;margin-top:6px}
+.edit-entry-row{display:flex;gap:8px;align-items:center;margin-bottom:6px;font-size:12px}
+.edit-entry-row label{flex:0 0 80px;color:#3a3530;font-weight:500}
+.edit-entry-row .in{flex:1;padding:6px 8px;font-size:13px}
+.edit-entry-row .meal-type-row{margin-bottom:0;flex:1}
+.edit-entry-row .meal-type-pill{padding:4px 2px;font-size:10px}
+.edit-entry-row .meal-type-pill .em{font-size:14px}
+
+/* Hızlı düzeltme presetleri */
+.qc-presets-label{font-size:11px;color:#8a7d6a;margin-top:8px;margin-bottom:4px}
+.qc-presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.qc-preset{padding:6px 12px;background:#fff;border:1px solid #b8b0c4;color:#5d4d7d;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer}
+.qc-preset:hover,.qc-preset.active{background:#5d4d7d;color:#fff}
+
+/* İstatistikler */
+.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.stat-card{background:linear-gradient(135deg,#fff,#faf5ed);border:1px solid #ede4d3;border-radius:12px;padding:12px;text-align:center}
+.stat-card .lbl{font-size:11px;color:#8a7d6a;font-weight:500;margin-bottom:4px}
+.stat-card .v{font-size:22px;font-weight:700;color:#3d6850;font-variant-numeric:tabular-nums;line-height:1}
+.stat-card .u{font-size:14px;color:#8a7d6a;font-weight:500}
+.stat-card .s{font-size:10px;color:#a39885;margin-top:4px}
+.stat-period{display:flex;gap:4px;margin-bottom:12px}
+.stat-period button{flex:1;padding:8px 4px;background:#f5efe6;border:1px solid #ede4d3;border-radius:6px;font-size:12px;font-weight:500;color:#3a3530;cursor:pointer}
+.stat-period button.active{background:#5b9279;border-color:#5b9279;color:#fff}
+.bar-row{display:grid;grid-template-columns:90px 1fr 60px;align-items:center;gap:8px;font-size:12px;margin-bottom:6px}
+.bar-row .label{color:#3a3530;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-row .bar-bg{background:#f5efe6;border-radius:4px;height:18px;position:relative;overflow:hidden}
+.bar-row .bar-fill{position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,#5b9279,#4a7d65);border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;color:#fff;font-size:10px;font-weight:600;min-width:18px}
+.bar-row .v{text-align:right;font-weight:600;color:#2d3b3d;font-variant-numeric:tabular-nums}
+.mt-summary-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px}
+.mt-summary{background:#faf5ed;border:1px solid #ede4d3;border-radius:8px;padding:8px 4px;text-align:center}
+.mt-summary .em{font-size:18px;line-height:1;margin-bottom:4px}
+.mt-summary .nm{font-size:10px;color:#8a7d6a;font-weight:500}
+.mt-summary .v{font-size:14px;font-weight:700;color:#3d6850;font-variant-numeric:tabular-nums;margin-top:2px}
+.mt-summary .s{font-size:9px;color:#a39885;margin-top:1px}
+.section-title{font-size:13px;font-weight:600;color:#2d3b3d;margin:12px 0 8px}
+
+/* Karanlık mod */
+body.dark{background:linear-gradient(135deg,#3a3530,#2d3b3d);color:#ede4d3}
+body.dark .hdr{background:#2d3b3d;border-bottom-color:#3a3530}
+body.dark .hdr h1>span{color:#f5efe6}
+body.dark .hdr-sub{color:#a39885}
+body.dark .card{background:#2d3b3d;border-color:#3a3530;color:#ede4d3}
+body.dark .card h2{color:#f5efe6}
+body.dark .card-active{border-color:#3b82f6}
+body.dark .in,body.dark select,body.dark input[type=date]{background:#3a3530;border-color:#3a3530;color:#f5efe6}
+body.dark .in:focus,body.dark select:focus,body.dark input[type=date]:focus{border-color:#3b82f6;background:#2d3b3d}
+body.dark .entry{background:#3a3530;color:#ede4d3}
+body.dark .entry-meta{color:#a39885}
+body.dark .muted{color:#a39885}
+body.dark .nav{background:#2d3b3d;border-top-color:#3a3530}
+body.dark .lib-item{background:#2d3b3d;border-color:#3a3530}
+body.dark .day-btn{background:#2d3b3d;border-color:#3a3530;color:#ede4d3}
+body.dark .day-btn:hover{border-color:#3b82f6}
+body.dark .day-btn .c{color:#a39885}
+body.dark .empty{color:#8a7d6a}
+body.dark .meal-item{background:#3a3530;color:#ede4d3}
+body.dark .meal-totals,body.dark .meal-bg-row{background:#3a3530}
+body.dark .corr-input-block,body.dark .corr-preview{background:#3a3530;color:#ede4d3}
+body.dark .corr-preview .breakdown{color:#a39885;border-top-color:#3a3530}
+body.dark .stat-card,body.dark .mt-summary{background:#2d3b3d;border-color:#3a3530}
+body.dark .stat-card .v,body.dark .mt-summary .v{color:#a8c5b9}
+body.dark .stat-card .lbl{color:#a39885}
+body.dark .bar-row .bar-bg{background:#3a3530}
+body.dark .bar-row .label,body.dark .bar-row .v{color:#ede4d3}
+body.dark .meal-type-pill{background:#3a3530;border-color:#3a3530;color:#d6cebd}
+body.dark .meal-type-pill.active{background:#3b82f6;border-color:#3b82f6;color:#fff}
+body.dark .meal-type-tag{background:#2d3b3d;color:#a8c5b9}
+body.dark .radio-opt{background:#3a3530;border-color:#3a3530;color:#ede4d3}
+body.dark .radio-opt.active{background:#3d6850;border-color:#3b82f6;color:#dceae0}
+body.dark .search-bar{background:#2d3b3d;border-color:#3a3530}
+body.dark .search-bar input{color:#f5efe6}
+body.dark .qty-grams{color:#a39885}
+body.dark .qty-grams b{color:#a8c5b9}
+body.dark .suggestions{background:#2d3b3d;border-color:#3a3530}
+body.dark .suggestion{color:#ede4d3;border-bottom-color:#3a3530}
+body.dark .suggestion:hover,body.dark .suggestion:active{background:#3a3530}
+body.dark .preview-meta{color:#a39885}
+body.dark .macro-blue{background:#3d6850}
+body.dark .macro-blue .l{color:#a8c5b9}
+body.dark .macro-blue .v{color:#dceae0}
+body.dark .macro-slate{background:#3a3530}
+body.dark .macro-slate .l{color:#a39885}
+body.dark .macro-slate .v{color:#ede4d3}
+body.dark .lib-name{color:#f5efe6}
+body.dark .lib-meta{color:#a39885}
+body.dark .icon-btn{color:#8a7d6a}
+body.dark .icon-btn:hover{color:#f87171;background:#7f1d1d}
+body.dark .icon-btn-blue:hover{color:#a8c5b9;background:#3d6850}
+body.dark .qc-preset{background:#2d3b3d;border-color:#5d4d7d;color:#b8b0c4}
+body.dark .qc-preset:hover,body.dark .qc-preset.active{background:#5d4d7d;color:#fff}
+body.dark .ok{color:#86efac}
+body.dark .stat-period button{background:#3a3530;border-color:#3a3530;color:#a39885}
+body.dark .stat-period button.active{background:#3b82f6;border-color:#3b82f6;color:#fff}
+body.dark .section-title{color:#f5efe6}
+body.dark .template-list-item{background:#2d3b3d;border-color:#3a3530}
+body.dark .template-list-item .nm{color:#f5efe6}
+body.dark .template-save-btn{background:#2d3b3d;color:#b8b0c4;border-color:#5d4d7d}
+body.dark .qty-row .in,body.dark .qty-row select{background:#3a3530}
+</style>
+</head>
+<body>
+<div class="app" id="root"></div>
+
+<script>
+'use strict';
+
+// ============================================================================
+// VERİTABANI
+// her giriş: n=ad, c=KH/100g, p=protein/100g, f=yağ/100g, o=not, u=birimler
+// birim formatı: [['ad', gramAğırlığı], ...]
+// ============================================================================
+const DB = {
+'beyaz ekmek':{n:'Beyaz Ekmek',c:50,p:8,f:1,o:'',u:[['dilim',30],['ince dilim',20]]},
+'tam buğday ekmeği':{n:'Tam Buğday Ekmeği',c:43,p:9,f:2,o:'',u:[['dilim',30]]},
+'çavdar ekmeği':{n:'Çavdar Ekmeği',c:48,p:9,f:1,o:'',u:[['dilim',30]]},
+'lavash':{n:'Lavaş',c:55,p:9,f:1,o:'',u:[['adet',60]]},
+'pide ekmeği':{n:'Pide Ekmeği',c:53,p:9,f:2,o:'',u:[['adet',250]]},
+'simit':{n:'Simit',c:55,p:10,f:4,o:'',u:[['adet',80]]},
+'açma':{n:'Açma',c:50,p:8,f:9,o:'',u:[['adet',70]]},
+'poğaça':{n:'Poğaça',c:40,p:8,f:18,o:'',u:[['adet',50]]},
+'börek':{n:'Su Böreği',c:30,p:10,f:15,o:'',u:[['dilim',60]]},
+'çiğ börek':{n:'Çiğ Börek',c:28,p:11,f:18,o:'',u:[['adet',30]]},
+'lahmacun':{n:'Lahmacun',c:36,p:12,f:8,o:'',u:[['adet',120]]},
+'pide':{n:'Kıymalı Pide',c:28,p:13,f:12,o:'',u:[['adet',400],['dilim',80]]},
+'pilav':{n:'Pirinç Pilavı',c:28,p:3,f:4,o:'Pişmiş',u:[['yemek kaşığı',20],['porsiyon',150],['kase',200]]},
+'bulgur pilavı':{n:'Bulgur Pilavı',c:27,p:4,f:4,o:'Pişmiş',u:[['yemek kaşığı',20],['porsiyon',150]]},
+'makarna':{n:'Makarna',c:25,p:5,f:1,o:'Haşlanmış',u:[['porsiyon',200],['yemek kaşığı',25]]},
+'kuskus':{n:'Kuskus',c:23,p:4,f:0,o:'Pişmiş',u:[['porsiyon',150],['yemek kaşığı',20]]},
+'erişte':{n:'Erişte',c:26,p:5,f:2,o:'Pişmiş',u:[['porsiyon',180]]},
+'mantı':{n:'Mantı',c:30,p:9,f:6,o:'Yoğurtlu',u:[['porsiyon',200],['yemek kaşığı',25]]},
+'pirinç çiğ':{n:'Pirinç (Çiğ)',c:78,p:7,f:1,o:'Pişmemiş',u:[['yemek kaşığı',12]]},
+'bulgur çiğ':{n:'Bulgur (Çiğ)',c:75,p:12,f:1,o:'Pişmemiş',u:[['yemek kaşığı',12]]},
+'un':{n:'Buğday Unu',c:76,p:10,f:1,o:'',u:[['yemek kaşığı',8],['su bardağı',125]]},
+'mercimek çorbası':{n:'Mercimek Çorbası',c:12,p:5,f:3,o:'',u:[['kase',250],['kepçe',150]]},
+'yayla çorbası':{n:'Yayla Çorbası',c:8,p:4,f:4,o:'',u:[['kase',250],['kepçe',150]]},
+'domates çorbası':{n:'Domates Çorbası',c:10,p:2,f:4,o:'',u:[['kase',250]]},
+'tarhana çorbası':{n:'Tarhana Çorbası',c:15,p:4,f:3,o:'',u:[['kase',250]]},
+'ezogelin':{n:'Ezogelin Çorbası',c:13,p:5,f:3,o:'',u:[['kase',250]]},
+'işkembe çorbası':{n:'İşkembe Çorbası',c:4,p:6,f:5,o:'',u:[['kase',250]]},
+'kuru fasulye':{n:'Kuru Fasulye',c:12,p:7,f:4,o:'Pişmiş yemek',u:[['porsiyon',200],['kepçe',150]]},
+'nohut':{n:'Nohut',c:14,p:7,f:5,o:'Pişmiş',u:[['porsiyon',200],['yemek kaşığı',25]]},
+'mercimek':{n:'Yeşil Mercimek',c:20,p:9,f:0,o:'Pişmiş',u:[['porsiyon',200],['yemek kaşığı',25]]},
+'kırmızı mercimek':{n:'Kırmızı Mercimek',c:20,p:9,f:0,o:'Pişmiş',u:[['porsiyon',200],['yemek kaşığı',25]]},
+'barbunya':{n:'Barbunya',c:13,p:8,f:0,o:'Pişmiş',u:[['porsiyon',200]]},
+'tavuk göğsü':{n:'Tavuk Göğsü',c:0,p:31,f:4,o:'Izgara',u:[['porsiyon',150],['göğüs',180]]},
+'tavuk but':{n:'Tavuk But',c:0,p:26,f:11,o:'Izgara',u:[['adet',150]]},
+'kıyma':{n:'Kıyma (Dana)',c:0,p:26,f:17,o:'Pişmiş',u:[['yemek kaşığı',15],['porsiyon',100]]},
+'köfte':{n:'Köfte',c:5,p:18,f:18,o:'Izgara',u:[['adet',50],['porsiyon (4 adet)',200]]},
+'adana kebap':{n:'Adana Kebap',c:3,p:20,f:22,o:'',u:[['şiş',150],['porsiyon',200]]},
+'urfa kebap':{n:'Urfa Kebap',c:3,p:20,f:20,o:'',u:[['şiş',150],['porsiyon',200]]},
+'şiş kebap':{n:'Şiş Kebap',c:1,p:28,f:14,o:'',u:[['şiş',120],['porsiyon',180]]},
+'döner':{n:'Et Döner',c:2,p:22,f:20,o:'',u:[['dürüm',250],['porsiyon',200]]},
+'tavuk döner':{n:'Tavuk Döner',c:2,p:24,f:12,o:'',u:[['dürüm',250],['porsiyon',200]]},
+'iskender':{n:'İskender Kebap',c:22,p:18,f:20,o:'Tereyağ + pide ile',u:[['porsiyon',300]]},
+'balık':{n:'Balık (Hamsi)',c:0,p:20,f:8,o:'Izgara',u:[['porsiyon',150]]},
+'somon':{n:'Somon',c:0,p:22,f:13,o:'Pişmiş',u:[['porsiyon',150]]},
+'levrek':{n:'Levrek',c:0,p:22,f:4,o:'Pişmiş',u:[['porsiyon',180]]},
+'karnıyarık':{n:'Karnıyarık',c:10,p:6,f:8,o:'',u:[['adet',200]]},
+'imam bayıldı':{n:'İmam Bayıldı',c:9,p:1,f:12,o:'',u:[['adet',180]]},
+'türlü':{n:'Türlü Yemeği',c:7,p:2,f:4,o:'',u:[['porsiyon',200]]},
+'yaprak sarma':{n:'Yaprak Sarma',c:23,p:3,f:7,o:'Zeytinyağlı',u:[['adet',15],['porsiyon (10 adet)',150]]},
+'biber dolma':{n:'Biber Dolma',c:18,p:4,f:8,o:'Etli',u:[['adet',80]]},
+'mücver':{n:'Mücver',c:12,p:5,f:10,o:'',u:[['adet',40]]},
+'patates kızartması':{n:'Patates Kızartması',c:36,p:4,f:15,o:'',u:[['porsiyon',150],['avuç',60]]},
+'haşlanmış patates':{n:'Haşlanmış Patates',c:17,p:2,f:0,o:'',u:[['adet (orta)',150]]},
+'patates püresi':{n:'Patates Püresi',c:17,p:2,f:4,o:'Sütlü',u:[['porsiyon',150],['yemek kaşığı',25]]},
+'yumurta':{n:'Yumurta',c:1,p:13,f:11,o:'',u:[['adet',50]]},
+'omlet':{n:'Omlet',c:1,p:11,f:12,o:'',u:[['porsiyon (2 yumurta)',120]]},
+'menemen':{n:'Menemen',c:5,p:7,f:9,o:'',u:[['porsiyon',200]]},
+'beyaz peynir':{n:'Beyaz Peynir',c:2,p:17,f:22,o:'Tam yağlı',u:[['dilim',30],['yemek kaşığı',20]]},
+'kaşar peyniri':{n:'Kaşar Peyniri',c:1,p:25,f:27,o:'',u:[['dilim',20],['yemek kaşığı',15]]},
+'lor peyniri':{n:'Lor Peyniri',c:3,p:17,f:4,o:'',u:[['yemek kaşığı',25]]},
+'siyah zeytin':{n:'Siyah Zeytin',c:6,p:1,f:11,o:'',u:[['adet',5]]},
+'yeşil zeytin':{n:'Yeşil Zeytin',c:4,p:1,f:15,o:'',u:[['adet',5]]},
+'tahin':{n:'Tahin',c:21,p:17,f:53,o:'',u:[['yemek kaşığı',15],['tatlı kaşığı',10]]},
+'pekmez':{n:'Pekmez',c:70,p:0,f:0,o:'',u:[['yemek kaşığı',20],['tatlı kaşığı',13]]},
+'bal':{n:'Bal',c:82,p:0,f:0,o:'',u:[['yemek kaşığı',20],['tatlı kaşığı',13],['çay kaşığı',7]]},
+'reçel':{n:'Reçel',c:65,p:0,f:0,o:'',u:[['yemek kaşığı',20],['tatlı kaşığı',13]]},
+'sucuk':{n:'Sucuk',c:2,p:22,f:38,o:'',u:[['dilim',8]]},
+'pastırma':{n:'Pastırma',c:1,p:36,f:12,o:'',u:[['dilim',5]]},
+'süt':{n:'Süt (Tam Yağlı)',c:5,p:3,f:3,o:'',u:[['su bardağı',200],['çay bardağı',100],['ml',1]]},
+'yoğurt':{n:'Yoğurt',c:4,p:4,f:3,o:'',u:[['kase',150],['yemek kaşığı',25]]},
+'ayran':{n:'Ayran',c:3,p:2,f:2,o:'',u:[['bardak',200],['ml',1]]},
+'kefir':{n:'Kefir',c:4,p:3,f:3,o:'',u:[['bardak',200]]},
+'baklava':{n:'Baklava',c:50,p:6,f:25,o:'Fıstıklı',u:[['dilim',50],['porsiyon (3 dilim)',150]]},
+'künefe':{n:'Künefe',c:40,p:8,f:15,o:'',u:[['porsiyon',120]]},
+'kazandibi':{n:'Kazandibi',c:30,p:4,f:4,o:'',u:[['dilim',100]]},
+'sütlaç':{n:'Sütlaç',c:22,p:3,f:2,o:'',u:[['kase',150]]},
+'şekerpare':{n:'Şekerpare',c:52,p:4,f:13,o:'',u:[['adet',30]]},
+'lokum':{n:'Lokum',c:80,p:0,f:0,o:'',u:[['adet',10]]},
+'un helvası':{n:'Un Helvası',c:55,p:4,f:18,o:'',u:[['yemek kaşığı',20],['porsiyon',60]]},
+'tahin helvası':{n:'Tahin Helvası',c:50,p:12,f:30,o:'',u:[['dilim',30]]},
+'revani':{n:'Revani',c:45,p:5,f:8,o:'',u:[['dilim',80]]},
+'tulumba':{n:'Tulumba Tatlısı',c:55,p:3,f:18,o:'',u:[['adet',20]]},
+'kadayıf':{n:'Kadayıf',c:48,p:5,f:15,o:'',u:[['porsiyon',100]]},
+'aşure':{n:'Aşure',c:35,p:3,f:2,o:'',u:[['kase',150]]},
+'muhallebi':{n:'Muhallebi',c:22,p:3,f:3,o:'',u:[['kase',150]]},
+'dondurma':{n:'Dondurma',c:24,p:4,f:11,o:'Vanilyalı',u:[['top',60],['kase',120]]},
+'sütlü çikolata':{n:'Sütlü Çikolata',c:55,p:8,f:30,o:'',u:[['kare',5],['adet (küçük)',25]]},
+'bitter çikolata':{n:'Bitter Çikolata',c:48,p:8,f:35,o:'%70+',u:[['kare',5]]},
+'elma':{n:'Elma',c:14,p:0,f:0,o:'',u:[['adet (orta)',180],['adet (büyük)',250]]},
+'muz':{n:'Muz',c:23,p:1,f:0,o:'',u:[['adet (orta)',120]]},
+'portakal':{n:'Portakal',c:12,p:1,f:0,o:'',u:[['adet',150]]},
+'mandalina':{n:'Mandalina',c:13,p:1,f:0,o:'',u:[['adet',80]]},
+'üzüm':{n:'Üzüm',c:17,p:1,f:0,o:'',u:[['salkım',150],['avuç',80]]},
+'karpuz':{n:'Karpuz',c:8,p:1,f:0,o:'',u:[['dilim',250]]},
+'kavun':{n:'Kavun',c:8,p:1,f:0,o:'',u:[['dilim',200]]},
+'şeftali':{n:'Şeftali',c:10,p:1,f:0,o:'',u:[['adet',150]]},
+'kayısı':{n:'Kayısı',c:11,p:1,f:0,o:'',u:[['adet',40]]},
+'erik':{n:'Erik',c:11,p:1,f:0,o:'',u:[['adet',30]]},
+'kiraz':{n:'Kiraz',c:16,p:1,f:0,o:'',u:[['adet',8],['avuç',80]]},
+'çilek':{n:'Çilek',c:8,p:1,f:0,o:'',u:[['adet',15],['avuç',100]]},
+'nar':{n:'Nar',c:19,p:2,f:1,o:'',u:[['adet (orta)',250]]},
+'incir':{n:'Taze İncir',c:19,p:1,f:0,o:'',u:[['adet',50]]},
+'armut':{n:'Armut',c:15,p:0,f:0,o:'',u:[['adet',180]]},
+'fındık':{n:'Fındık',c:17,p:15,f:61,o:'Kavrulmuş',u:[['avuç',30],['yemek kaşığı',15]]},
+'ceviz':{n:'Ceviz',c:14,p:15,f:65,o:'',u:[['adet (içi)',5],['yemek kaşığı',12]]},
+'badem':{n:'Badem',c:22,p:21,f:50,o:'',u:[['avuç',25],['yemek kaşığı',12]]},
+'antep fıstığı':{n:'Antep Fıstığı',c:28,p:20,f:46,o:'',u:[['avuç',25],['yemek kaşığı',12]]},
+'kaju':{n:'Kaju',c:30,p:18,f:44,o:'',u:[['avuç',25]]},
+'leblebi':{n:'Leblebi',c:58,p:20,f:6,o:'',u:[['avuç',30]]},
+'ay çekirdeği':{n:'Ay Çekirdeği',c:20,p:21,f:51,o:'',u:[['avuç',20]]},
+'kuru kayısı':{n:'Kuru Kayısı',c:63,p:3,f:0,o:'',u:[['adet',10]]},
+'hurma':{n:'Hurma',c:75,p:2,f:0,o:'',u:[['adet',10]]},
+'kuru üzüm':{n:'Kuru Üzüm',c:79,p:3,f:0,o:'',u:[['yemek kaşığı',12]]},
+'kuru incir':{n:'Kuru İncir',c:64,p:3,f:1,o:'',u:[['adet',20]]},
+'kola':{n:'Kola',c:10,p:0,f:0,o:'',u:[['kutu (330ml)',330],['küçük şişe (250ml)',250],['ml',1]]},
+'meyve suyu':{n:'Meyve Suyu',c:11,p:0,f:0,o:'',u:[['bardak',200],['kutu (200ml)',200],['ml',1]]},
+'türk kahvesi':{n:'Türk Kahvesi',c:1,p:0,f:0,o:'Sade',u:[['fincan',60]]},
+'bira':{n:'Bira',c:4,p:0,f:0,o:'~%5',u:[['küçük şişe (330ml)',330],['büyük şişe (500ml)',500],['ml',1]]},
+'kuru şarap':{n:'Kuru Şarap',c:3,p:0,f:0,o:'',u:[['kadeh',150]]},
+'şeker':{n:'Toz Şeker',c:100,p:0,f:0,o:'',u:[['yemek kaşığı',12],['tatlı kaşığı',8],['çay kaşığı',4]]},
+'kesme şeker':{n:'Kesme Şeker',c:100,p:0,f:0,o:'',u:[['adet',3]]},
+'pizza':{n:'Pizza (Margherita)',c:30,p:11,f:10,o:'',u:[['dilim',100]]},
+'hamburger':{n:'Hamburger',c:27,p:13,f:12,o:'Standart',u:[['adet',250]]},
+'tost':{n:'Tost (Kaşarlı)',c:28,p:13,f:13,o:'',u:[['adet',150]]},
+'sandviç':{n:'Sandviç',c:26,p:12,f:8,o:'',u:[['adet',180]]}
+};
+
+// Generic units for foods without specific definitions
+const GENERIC_UNITS = [
+  ['gram', 1],
+  ['yemek kaşığı', 15],
+  ['tatlı kaşığı', 10],
+  ['çay kaşığı', 5],
+  ['su bardağı', 200],
+  ['çay bardağı', 100],
+  ['avuç', 30]
+];
+
+const searchDB = (q) => {
+  q = q.toLowerCase().trim();
+  if (DB[q]) return DB[q];
+  for (const [k,v] of Object.entries(DB)) {
+    if (k.includes(q) || v.n.toLowerCase().includes(q)) return v;
+  }
+  return null;
+};
+
+function ensureGram(units) {
+  if (units.some(u => u[0] === 'gram')) return units;
+  return [...units, ['gram', 1]];
+}
+
+function getUnitsForFood(name) {
+  const q = (name || '').toLowerCase().trim();
+  if (!q) return GENERIC_UNITS;
+  // User library
+  const lib = state.library[q];
+  if (lib && Array.isArray(lib.units) && lib.units.length) return ensureGram(lib.units);
+  // DB exact
+  if (DB[q] && DB[q].u) return ensureGram(DB[q].u);
+  // DB partial
+  for (const [k, v] of Object.entries(DB)) {
+    if ((k.includes(q) || v.n.toLowerCase().includes(q)) && v.u) return ensureGram(v.u);
+  }
+  return GENERIC_UNITS;
+}
+
+const ICN = {
+  plus:'<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>',
+  trash:'<polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/>',
+  cal:'<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+  db:'<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>',
+  sett:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+  alert:'<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>',
+  check:'<polyline points="20 6 9 17 4 12"/>',
+  x:'<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
+  search:'<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
+  edit:'<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>',
+  hist:'<polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>',
+  act:'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
+  drop:'<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>',
+  spin:'<circle cx="12" cy="12" r="10" stroke-opacity=".25"/><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"/>'
+};
+const svg = (name, cls = 'icn') => `<svg class="${cls}" viewBox="0 0 24 24">${ICN[name]}</svg>`;
+const svgSpin = `<svg class="icn spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">${ICN.spin}</svg>`;
+
+const LS = {
+  get:(k)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):null}catch(e){return null}},
+  set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},
+  del:(k)=>{try{localStorage.removeItem(k)}catch(e){}},
+  keys:(p)=>{try{return Object.keys(localStorage).filter(k=>k.startsWith(p))}catch(e){return[]}}
+};
+
+// ============================================================================
+// STATE
+// ============================================================================
+const state = {
+  view: 'today',
+  date: new Date().toISOString().split('T')[0],
+  todayLog: [],
+  library: {},
+  history: {},
+  estimate: null,
+  currentBG: '',
+  loading: false,
+  error: null,
+  insulinRatio: 10,
+  ratioMode: 'fixed',
+  ratios: { breakfast: 10, lunch: 10, dinner: 10, night: 12 },
+  useCorrection: false,
+  isf: 50,
+  targetBG: 110,
+  roundStep: 0.5,
+  diaMinutes: 240,
+  apiKey: '',
+  foodInput: '',
+  portionQty: '',
+  portionUnit: 'gram',
+  manualMode: false,
+  manualCarbs: '',
+  manualProtein: '',
+  manualFat: '',
+  librarySearch: '',
+  editingFood: null,
+  suggestions: [],
+  // Çoklu yemek (öğün sepeti)
+  mealItems: [],
+  currentMealType: null,
+  currentNotes: '',
+  exerciseMode: false,
+  // Düzeltme / Ara iğne formu
+  correctionFormOpen: false,
+  correctionBG: '',
+  correctionManual: '',
+  correctionNotes: '',
+  // Şablonlar
+  templates: {},
+  // Düzenleme
+  editingEntry: null,
+  editDraft: {},
+  // Yemek sonrası KŞ
+  postBgInputId: null,
+  postBgValue: '',
+  // İstatistikler
+  statPeriod: 7,
+  // Karanlık mod ve egzersiz
+  darkMode: false,
+  exerciseReduction: 25
+};
+
+function loadAll() {
+  state.library = LS.get('karbsayar:library') || {};
+  state.templates = LS.get('karbsayar:templates') || {};
+  const s = LS.get('karbsayar:settings') || {};
+  if (typeof s.insulinRatio === 'number') state.insulinRatio = s.insulinRatio;
+  if (s.ratioMode) state.ratioMode = s.ratioMode;
+  if (s.ratios) state.ratios = { ...state.ratios, ...s.ratios };
+  if (typeof s.useCorrection === 'boolean') state.useCorrection = s.useCorrection;
+  if (typeof s.isf === 'number') state.isf = s.isf;
+  if (typeof s.targetBG === 'number') state.targetBG = s.targetBG;
+  if (typeof s.roundStep === 'number') state.roundStep = s.roundStep;
+  if (typeof s.diaMinutes === 'number') state.diaMinutes = s.diaMinutes;
+  if (typeof s.darkMode === 'boolean') state.darkMode = s.darkMode;
+  if (typeof s.exerciseReduction === 'number') state.exerciseReduction = s.exerciseReduction;
+  state.apiKey = s.apiKey || '';
+  state.history = {};
+  LS.keys('karbsayar:log:').forEach(k => {
+    const d = k.replace('karbsayar:log:', '');
+    state.history[d] = LS.get(k) || [];
+  });
+  loadDayLog();
+}
+function loadDayLog() { state.todayLog = LS.get(`karbsayar:log:${state.date}`) || []; }
+function saveLog(arr) {
+  state.todayLog = arr;
+  state.history[state.date] = arr;
+  LS.set(`karbsayar:log:${state.date}`, arr);
+}
+function saveLibrary(lib) { state.library = lib; LS.set('karbsayar:library', lib); }
+function saveTemplates(t) { state.templates = t; LS.set('karbsayar:templates', t); }
+function saveSettings(updates) {
+  const cur = LS.get('karbsayar:settings') || {};
+  LS.set('karbsayar:settings', { ...cur, ...updates });
+}
+function persistAllSettings() {
+  saveSettings({
+    insulinRatio: state.insulinRatio, ratioMode: state.ratioMode, ratios: state.ratios,
+    useCorrection: state.useCorrection, isf: state.isf, targetBG: state.targetBG,
+    roundStep: state.roundStep, diaMinutes: state.diaMinutes,
+    darkMode: state.darkMode, exerciseReduction: state.exerciseReduction
+  });
+}
+
+// ============================================================================
+// İNSULİN HESABI
+// ============================================================================
+function ratioKeyForHour(h) {
+  if (h >= 4 && h < 11) return 'breakfast';
+  if (h >= 11 && h < 16) return 'lunch';
+  if (h >= 16 && h < 21) return 'dinner';
+  return 'night';
+}
+function ratioLabelForHour(h) {
+  if (state.ratioMode === 'fixed') return 'sabit oran';
+  return ({ breakfast: 'kahvaltı', lunch: 'öğle', dinner: 'akşam', night: 'gece' })[ratioKeyForHour(h)];
+}
+function getRatioForHour(h) {
+  if (state.ratioMode === 'fixed') return state.insulinRatio;
+  return state.ratios[ratioKeyForHour(h)] || state.insulinRatio;
+}
+function roundDose(d) {
+  const step = Number(state.roundStep);
+  if (!step) return Math.round(d * 10) / 10;
+  return Math.round(d / step) * step;
+}
+function calcInsulin(carbs, hour, bg, iob) {
+  iob = iob || 0;
+  const ratio = getRatioForHour(hour);
+  const carbDose = ratio > 0 ? carbs / ratio : 0;
+  let rawCorrection = 0;
+  let iobReduction = 0;
+  let correction = 0;
+  if (bg && state.useCorrection && state.isf > 0) {
+    rawCorrection = Math.max(0, (bg - state.targetBG) / state.isf);
+    iobReduction = Math.min(iob, rawCorrection);
+    correction = rawCorrection - iobReduction;
+  }
+  const totalRaw = carbDose + correction;
+  return {
+    ratio, carbDose, rawCorrection, correction, iob, iobReduction, totalRaw,
+    totalRounded: roundDose(totalRaw),
+    label: ratioLabelForHour(hour)
+  };
+}
+
+// IOB (Aktif İnsülin) hesabı — hızlı insülin (rapid acting) için eğri model
+// Profil yaklaşıklığı: t/DIA=0.25→%70 aktif, 0.50→%35, 0.75→%10, 1.0→%0
+function iobFraction(elapsedMin, diaMin) {
+  if (elapsedMin <= 0) return 1;
+  if (elapsedMin >= diaMin) return 0;
+  const x = elapsedMin / diaMin;
+  if (x <= 0.25) return 1 - (x / 0.25) * 0.30;
+  if (x <= 0.50) return 0.70 - ((x - 0.25) / 0.25) * 0.35;
+  if (x <= 0.75) return 0.35 - ((x - 0.50) / 0.25) * 0.25;
+  return 0.10 - ((x - 0.75) / 0.25) * 0.10;
+}
+
+function getEntryDateTime(entry, dateStr) {
+  const [y, m, d] = dateStr.split('-').map(Number);
+  const [h, mi] = String(entry.time || '00:00').split(':').map(Number);
+  return new Date(y, m - 1, d, h || 0, mi || 0);
+}
+
+function calcIOB(now) {
+  now = now || new Date();
+  let total = 0;
+  const contributions = [];
+  const todayStr = now.toISOString().split('T')[0];
+  const yesterdayStr = new Date(now.getTime() - 86400000).toISOString().split('T')[0];
+
+  for (const dateStr of [yesterdayStr, todayStr]) {
+    const entries = (dateStr === todayStr && state.date === todayStr)
+      ? state.todayLog
+      : (state.history[dateStr] || []);
+    for (const entry of entries) {
+      if (typeof entry.insulin !== 'number' || entry.insulin <= 0) continue;
+      const entryTime = getEntryDateTime(entry, dateStr);
+      const elapsedMin = (now - entryTime) / 60000;
+      if (elapsedMin < 0 || elapsedMin >= state.diaMinutes) continue;
+      const fraction = iobFraction(elapsedMin, state.diaMinutes);
+      const contribution = entry.insulin * fraction;
+      total += contribution;
+      contributions.push({ food: entry.food, insulin: entry.insulin, active: contribution, elapsedMin });
+    }
+  }
+  contributions.sort((a, b) => a.elapsedMin - b.elapsedMin);
+  return { total, contributions };
+}
+
+function fmtTimeSince(min) {
+  if (min < 1) return 'az önce';
+  if (min < 60) return `${Math.round(min)}dk`;
+  const h = Math.floor(min / 60);
+  const m = Math.round(min % 60);
+  return m > 0 ? `${h}sa ${m}dk` : `${h}sa`;
+}
+
+// Öğün tipleri
+const MEAL_TYPES = {
+  kahvalti: { name: 'Kahvaltı', emoji: '🌅' },
+  ogle:     { name: 'Öğle',     emoji: '🌞' },
+  aksam:    { name: 'Akşam',    emoji: '🌆' },
+  ara:      { name: 'Ara öğün', emoji: '🍪' }
+};
+const MEAL_TYPE_KEYS = ['kahvalti', 'ogle', 'aksam', 'ara'];
+
+function getDefaultMealType(hour) {
+  if (hour >= 4 && hour < 11) return 'kahvalti';
+  if (hour >= 11 && hour < 15) return 'ogle';
+  if (hour >= 17 && hour < 22) return 'aksam';
+  return 'ara';
+}
+
+function mealTypeLabel(type) { return MEAL_TYPES[type] || null; }
+function getEntryHour(e) {
+  if (typeof e.hour === 'number') return e.hour;
+  if (e.time) {
+    const m = String(e.time).match(/^(\d{1,2})/);
+    if (m) return parseInt(m[1], 10);
+  }
+  return new Date().getHours();
+}
+
+// ============================================================================
+// LOGIC
+// ============================================================================
+function getCurrentUnit() {
+  const units = getUnitsForFood(state.foodInput);
+  return units.find(u => u[0] === state.portionUnit) || units[0];
+}
+
+function getCurrentGrams() {
+  const u = getCurrentUnit();
+  const qty = parseFloat(state.portionQty) || 0;
+  return qty * u[1];
+}
+
+function ensureValidUnit() {
+  const units = getUnitsForFood(state.foodInput);
+  if (!units.some(u => u[0] === state.portionUnit)) {
+    state.portionUnit = units[0][0];
+  }
+}
+
+function updateSuggestions() {
+  const q = state.foodInput.toLowerCase().trim();
+  if (q.length < 2) { state.suggestions = []; return; }
+  const fromLib = Object.entries(state.library)
+    .filter(([k,v]) => v.name.toLowerCase().includes(q))
+    .map(([k,v]) => ({ key: k, name: v.name, src: 'lib' }));
+  const fromDB = Object.entries(DB)
+    .filter(([k,v]) => k.includes(q) || v.n.toLowerCase().includes(q))
+    .filter(([k]) => !state.library[k])
+    .map(([k,v]) => ({ key: k, name: v.n, src: 'db' }));
+  state.suggestions = [...fromLib, ...fromDB].slice(0, 6);
+}
+
+function buildEstimate(food, portion, c, p, f, source, conf, notes) {
+  state.estimate = {
+    food, portion,
+    carbsPer100g: c, carbs: (c * portion) / 100,
+    proteinPer100g: p, protein: (p * portion) / 100,
+    fatPer100g: f, fat: (f * portion) / 100,
+    source, confidence: conf, notes: notes || '',
+    qty: parseFloat(state.portionQty) || 0,
+    unit: state.portionUnit,
+    unitG: getCurrentUnit()[1]
+  };
+  state.currentBG = '';
+  // Öğün tipi henüz seçilmemişse, saate göre otomatik öner
+  if (!state.currentMealType) {
+    state.currentMealType = getDefaultMealType(new Date().getHours());
+  }
+}
+
+function lookupFood() {
+  const food = state.foodInput.trim();
+  const portion = getCurrentGrams();
+  if (!food) { state.error = 'Yemek adı gerekli'; render(); return; }
+  if (!portion || portion <= 0) { state.error = 'Geçerli miktar gerekli'; render(); return; }
+  state.error = null;
+
+  const libKey = food.toLowerCase();
+  if (state.library[libKey]) {
+    const lib = state.library[libKey];
+    buildEstimate(food, portion, lib.carbsPer100g, lib.proteinPer100g, lib.fatPer100g, 'kütüphane', 'kayıtlı', lib.notes || '');
+    render(); return;
+  }
+  const db = searchDB(food);
+  if (db) {
+    buildEstimate(db.n, portion, db.c, db.p, db.f, 'veritabanı', 'yüksek', db.o);
+    render(); return;
+  }
+  if (state.apiKey) { estimateAI(food, portion); return; }
+  state.error = 'Bu yemek bulunamadı. Manuel gir veya Ayarlar\'dan API anahtarı ekle.';
+  render();
+}
+
+async function estimateAI(food, portion) {
+  state.loading = true; state.error = null; render();
+  try {
+    const prompt = `Sen bir beslenme uzmanısın. Tip 1 diyabet hastası için karbonhidrat sayımı yapıyorsun. Doğruluk kritik.
+
+Yemek: "${food}"
+Porsiyon: ${portion} gram
+
+Bu yemeğin 100 gram başına besin değerlerini ver. Türk mutfağı dahil tüm yemekleri tanı. Pişmiş halini değerlendir. Karbonhidrat: net karb (toplam - lif).
+
+SADECE şu JSON formatında cevap ver, markdown kullanma:
+{"carbsPer100g":<sayı>,"proteinPer100g":<sayı>,"fatPer100g":<sayı>,"confidence":"yüksek|orta|düşük","notes":"<varsa kısa not, yoksa boş>"}`;
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': state.apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({ model: 'claude-haiku-4-5', max_tokens: 400, messages: [{ role: 'user', content: prompt }] })
+    });
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(`API ${res.status}: ${err.substring(0, 100)}`);
+    }
+    const data = await res.json();
+    const text = data.content.filter(c => c.type === 'text').map(c => c.text).join('').trim();
+    const cleaned = text.replace(/```json|```/g, '').trim();
+    const parsed = JSON.parse(cleaned);
+    buildEstimate(food, portion, parsed.carbsPer100g, parsed.proteinPer100g, parsed.fatPer100g, 'ai', parsed.confidence, parsed.notes);
+  } catch (e) {
+    state.error = 'AI tahmin başarısız: ' + e.message;
+  }
+  state.loading = false;
+  render();
+}
+
+function submitManual() {
+  const food = state.foodInput.trim();
+  const portion = getCurrentGrams();
+  const carbs = parseFloat(state.manualCarbs);
+  if (!food) { state.error = 'Yemek adı gerekli'; render(); return; }
+  if (!portion || portion <= 0) { state.error = 'Geçerli miktar gerekli'; render(); return; }
+  if (isNaN(carbs)) { state.error = 'KH (100g başına) gerekli'; render(); return; }
+  state.error = null;
+  buildEstimate(food, portion, carbs, parseFloat(state.manualProtein) || 0, parseFloat(state.manualFat) || 0, 'manuel', 'manuel', 'Manuel girildi');
+  render();
+}
+
+function confirmAdd() {
+  if (!state.estimate) return;
+  const e = state.estimate;
+  const now = new Date();
+  const hour = now.getHours();
+  const bg = parseFloat(state.currentBG) || null;
+  const iob = calcIOB(now).total;
+  const dose = applyExerciseAdjustment(calcInsulin(e.carbs, hour, bg, iob));
+
+  const newEntry = {
+    id: Date.now().toString(),
+    food: e.food, portion: e.portion,
+    qty: e.qty, unit: e.unit, unitG: e.unitG,
+    carbs: e.carbs, protein: e.protein, fat: e.fat,
+    time: now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }),
+    hour, source: e.source,
+    insulin: dose.totalRounded, insulinRaw: dose.totalRaw, insulinRatio: dose.ratio,
+    bg: bg || null,
+    mealType: state.currentMealType,
+    notes: state.currentNotes || '',
+    exerciseAdjusted: dose.exerciseAdjusted || false
+  };
+  saveLog([...state.todayLog, newEntry]);
+
+  if (e.source === 'ai' || e.source === 'manuel') {
+    const libKey = e.food.toLowerCase();
+    saveLibrary({
+      ...state.library,
+      [libKey]: {
+        name: e.food,
+        carbsPer100g: e.carbsPer100g,
+        proteinPer100g: e.proteinPer100g || 0,
+        fatPer100g: e.fatPer100g || 0,
+        notes: e.notes || '',
+        confidence: e.confidence,
+        addedAt: new Date().toISOString()
+      }
+    });
+  }
+  state.estimate = null;
+  state.currentBG = '';
+  state.currentMealType = null;
+  state.currentNotes = '';
+  state.exerciseMode = false;
+  state.foodInput = '';
+  state.portionQty = '';
+  state.portionUnit = 'gram';
+  state.manualMode = false;
+  state.manualCarbs = '';
+  state.manualProtein = '';
+  state.manualFat = '';
+  state.suggestions = [];
+  render();
+}
+
+function deleteEntry(id) { saveLog(state.todayLog.filter(e => e.id !== id)); render(); }
+
+// ============================================================================
+// ÖĞÜN SEPETİ (çoklu yemek)
+// ============================================================================
+function getMealTotals() {
+  return state.mealItems.reduce((acc, item) => ({
+    carbs: acc.carbs + (item.carbs || 0),
+    protein: acc.protein + (item.protein || 0),
+    fat: acc.fat + (item.fat || 0),
+    portion: acc.portion + (item.portion || 0)
+  }), { carbs: 0, protein: 0, fat: 0, portion: 0 });
+}
+
+function addToMealCart() {
+  if (!state.estimate) return;
+  const e = state.estimate;
+  state.mealItems.push({
+    food: e.food, portion: e.portion,
+    qty: e.qty, unit: e.unit, unitG: e.unitG,
+    carbs: e.carbs, protein: e.protein, fat: e.fat,
+    carbsPer100g: e.carbsPer100g, proteinPer100g: e.proteinPer100g, fatPer100g: e.fatPer100g,
+    source: e.source
+  });
+  // Kütüphaneye kaydet (AI/manuel kaynaklı yemekler)
+  if (e.source === 'ai' || e.source === 'manuel') {
+    const libKey = e.food.toLowerCase();
+    saveLibrary({
+      ...state.library,
+      [libKey]: {
+        name: e.food,
+        carbsPer100g: e.carbsPer100g,
+        proteinPer100g: e.proteinPer100g || 0,
+        fatPer100g: e.fatPer100g || 0,
+        notes: e.notes || '',
+        confidence: e.confidence,
+        addedAt: new Date().toISOString()
+      }
+    });
+  }
+  // Yeni yemek için temizle
+  state.estimate = null;
+  state.foodInput = '';
+  state.portionQty = '';
+  state.portionUnit = 'gram';
+  state.manualMode = false;
+  state.manualCarbs = '';
+  state.manualProtein = '';
+  state.manualFat = '';
+  state.suggestions = [];
+  state.error = null;
+  render();
+}
+
+function removeMealItem(idx) {
+  state.mealItems.splice(idx, 1);
+  if (state.mealItems.length === 0) state.currentMealType = null;
+  render();
+}
+
+function cancelMeal() {
+  if (state.mealItems.length === 0) return;
+  if (!confirm(`Sepetteki ${state.mealItems.length} yemek silinsin mi?`)) return;
+  state.mealItems = [];
+  state.currentBG = '';
+  state.currentMealType = null;
+  render();
+}
+
+function commitMeal() {
+  if (state.mealItems.length === 0) return;
+  const now = new Date();
+  const hour = now.getHours();
+  const bg = parseFloat(state.currentBG) || null;
+  const iob = calcIOB(now).total;
+  const totals = getMealTotals();
+  const dose = applyExerciseAdjustment(calcInsulin(totals.carbs, hour, bg, iob));
+
+  const names = state.mealItems.map(i => i.food);
+  let label;
+  if (names.length === 1) label = names[0];
+  else if (names.length <= 3) label = names.join(' + ');
+  else label = `${names[0]} + ${names.length - 1} yemek daha`;
+
+  const newEntry = {
+    id: Date.now().toString(),
+    type: 'meal',
+    food: label,
+    items: state.mealItems.slice(),
+    portion: totals.portion,
+    carbs: totals.carbs, protein: totals.protein, fat: totals.fat,
+    time: now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }),
+    hour,
+    source: state.mealItems.length === 1 ? state.mealItems[0].source : 'öğün',
+    insulin: dose.totalRounded, insulinRaw: dose.totalRaw, insulinRatio: dose.ratio,
+    bg: bg || null,
+    mealType: state.currentMealType,
+    notes: state.currentNotes || '',
+    exerciseAdjusted: dose.exerciseAdjusted || false
+  };
+  saveLog([...state.todayLog, newEntry]);
+  state.mealItems = [];
+  state.currentBG = '';
+  state.currentMealType = null;
+  state.currentNotes = '';
+  state.exerciseMode = false;
+  render();
+}
+
+// ============================================================================
+// DÜZELTME / ARA İĞNE
+// ============================================================================
+function calcCorrectionPreview() {
+  const bg = parseFloat(state.correctionBG) || null;
+  const manual = parseFloat(state.correctionManual) || null;
+  if (!bg && !manual) return null;
+
+  const now = new Date();
+  const hour = now.getHours();
+  const iob = calcIOB(now).total;
+
+  if (manual && !bg) {
+    return { type: 'manual', raw: manual, rounded: roundDose(manual), iob };
+  }
+  // BG verildi
+  const dose = calcInsulin(0, hour, bg, iob);
+  if (manual) {
+    // Hem BG hem manuel — manuel kullan, ama BG bilgisini göster
+    return { type: 'manual_override', raw: manual, rounded: roundDose(manual),
+             bg, target: state.targetBG, isf: state.isf, calculated: dose.totalRaw, iob };
+  }
+  return {
+    type: 'calculated',
+    bg, target: state.targetBG, isf: state.isf,
+    rawCorrection: dose.rawCorrection,
+    iobReduction: dose.iobReduction,
+    iob,
+    raw: dose.totalRaw,
+    rounded: dose.totalRounded
+  };
+}
+
+function commitCorrection() {
+  const preview = calcCorrectionPreview();
+  if (!preview) {
+    state.error = 'KŞ veya manuel doz girmelisin';
+    render();
+    return;
+  }
+  if (preview.rounded <= 0) {
+    const bg = parseFloat(state.correctionBG) || null;
+    const iob = preview.iob || 0;
+    let msg;
+    if (bg && bg < state.targetBG) msg = `KŞ hedef altında (${bg} < ${state.targetBG}). Düzeltme gerekmiyor.`;
+    else if (iob > 0) msg = `Aktif insülin yeterli (${fmt(iob,1)} Ü). Ek düzeltme gerekmiyor.`;
+    else msg = 'Hesaplanan doz 0. Kayıt yapılmadı.';
+    alert(msg);
+    return;
+  }
+
+  const now = new Date();
+  const hour = now.getHours();
+  const bg = parseFloat(state.correctionBG) || null;
+
+  let label;
+  if (preview.type === 'manual') label = 'Manuel doz';
+  else label = `Ara iğne · KŞ ${bg}`;
+
+  const newEntry = {
+    id: Date.now().toString(),
+    type: 'correction',
+    food: label,
+    portion: 0, carbs: 0, protein: 0, fat: 0,
+    time: now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }),
+    hour, source: 'düzeltme',
+    insulin: preview.rounded,
+    insulinRaw: preview.raw,
+    bg: bg || null,
+    breakdown: preview,
+    notes: state.correctionNotes || ''
+  };
+  saveLog([...state.todayLog, newEntry]);
+  state.correctionFormOpen = false;
+  state.correctionBG = '';
+  state.correctionManual = '';
+  state.correctionNotes = '';
+  state.error = null;
+  render();
+}
+function deleteFromLibrary(key) {
+  if (!confirm(`"${state.library[key].name}" silinsin mi?`)) return;
+  const n = { ...state.library }; delete n[key];
+  saveLibrary(n); render();
+}
+function updateLibFood(key, updates) {
+  saveLibrary({ ...state.library, [key]: { ...state.library[key], ...updates } });
+  state.editingFood = null; render();
+}
+
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+const fmt = (n, d = 0) => Number(n || 0).toFixed(d);
+const fmtQty = (n) => { const v = Number(n); return v % 1 === 0 ? String(v) : v.toFixed(1); };
+
+function confClass(c) {
+  if (c === 'yüksek') return 'conf-yuksek';
+  if (c === 'orta') return 'conf-orta';
+  if (c === 'düşük') return 'conf-dusuk';
+  if (c === 'kayıtlı') return 'conf-kayitli';
+  return 'conf-manuel';
+}
+
+function portionLabel(e) {
+  if (e.qty && e.unit) {
+    if (e.unit === 'gram') return `${fmtQty(e.qty)}g`;
+    return `${fmtQty(e.qty)} ${e.unit} (${fmt(e.portion)}g)`;
+  }
+  return `${fmt(e.portion)}g`;
+}
+
+// ============================================================================
+// ŞABLONLAR
+// ============================================================================
+function saveCurrentAsTemplate() {
+  if (state.mealItems.length === 0) { alert('Önce sepete yemek ekle'); return; }
+  const suggested = state.currentMealType ? `${mealTypeLabel(state.currentMealType).name} Klasiği` : 'Sevdiğim Öğün';
+  const name = prompt('Şablon adı:', suggested);
+  if (!name || !name.trim()) return;
+  const trimmed = name.trim();
+  const key = trimmed.toLowerCase();
+  if (state.templates[key] && !confirm(`"${trimmed}" zaten var, üzerine yazılsın mı?`)) return;
+  saveTemplates({
+    ...state.templates,
+    [key]: {
+      name: trimmed,
+      mealType: state.currentMealType,
+      notes: state.currentNotes || '',
+      items: state.mealItems.slice(),
+      createdAt: new Date().toISOString()
+    }
+  });
+  alert(`"${trimmed}" şablon olarak kaydedildi.`);
+  render();
+}
+
+function loadTemplate(key) {
+  const tpl = state.templates[key];
+  if (!tpl) return;
+  if (state.mealItems.length > 0 && !confirm(`Sepetteki ${state.mealItems.length} yemek "${tpl.name}" ile değiştirilsin mi?`)) return;
+  state.mealItems = tpl.items.map(i => ({ ...i }));
+  state.currentMealType = tpl.mealType;
+  state.currentNotes = tpl.notes || '';
+  state.estimate = null;
+  state.correctionFormOpen = false;
+  render();
+}
+
+function deleteTemplate(key) {
+  const tpl = state.templates[key];
+  if (!tpl || !confirm(`"${tpl.name}" şablonu silinsin mi?`)) return;
+  const t = { ...state.templates };
+  delete t[key];
+  saveTemplates(t);
+  render();
+}
+
+// ============================================================================
+// DÜZENLEME
+// ============================================================================
+function startEditEntry(id) {
+  const entry = state.todayLog.find(e => e.id === id);
+  if (!entry) return;
+  state.editingEntry = id;
+  state.editDraft = {
+    time: entry.time || '',
+    mealType: entry.mealType || null,
+    notes: entry.notes || '',
+    bg: entry.bg ? String(entry.bg) : '',
+    insulin: typeof entry.insulin === 'number' ? String(entry.insulin) : ''
+  };
+  render();
+}
+
+function cancelEditEntry() {
+  state.editingEntry = null;
+  state.editDraft = {};
+  render();
+}
+
+function saveEditEntry(id) {
+  const idx = state.todayLog.findIndex(e => e.id === id);
+  if (idx === -1) return;
+  const draft = state.editDraft;
+  const updated = { ...state.todayLog[idx] };
+  if (draft.time && /^\d{1,2}:\d{2}$/.test(draft.time)) {
+    updated.time = draft.time;
+    const m = draft.time.match(/^(\d{1,2}):/);
+    if (m) updated.hour = parseInt(m[1], 10);
+  }
+  if (draft.mealType !== undefined) updated.mealType = draft.mealType;
+  updated.notes = draft.notes || '';
+  const bg = parseFloat(String(draft.bg).replace(',', '.'));
+  updated.bg = !isNaN(bg) && bg > 0 ? bg : null;
+  const ins = parseFloat(String(draft.insulin).replace(',', '.'));
+  if (!isNaN(ins) && ins >= 0) updated.insulin = ins;
+  const newLog = [...state.todayLog];
+  newLog[idx] = updated;
+  saveLog(newLog);
+  state.editingEntry = null;
+  state.editDraft = {};
+  render();
+}
+
+// ============================================================================
+// YEMEK SONRASI KAN ŞEKERİ (öğrenme döngüsü)
+// ============================================================================
+function entriesNeedingPostBG(now) {
+  now = now || new Date();
+  return state.todayLog.filter(e => {
+    if (e.type === 'correction') return false;
+    if (e.postMealBG && typeof e.postMealBG.value === 'number') return false;
+    if (!e.carbs || e.carbs < 10) return false;
+    const t = getEntryDateTime(e, state.date);
+    const elapsedMin = (now - t) / 60000;
+    return elapsedMin >= 90 && elapsedMin <= 240;
+  });
+}
+
+function startPostBGInput(entryId) {
+  state.postBgInputId = entryId;
+  state.postBgValue = '';
+  render();
+}
+
+function cancelPostBGInput() {
+  state.postBgInputId = null;
+  state.postBgValue = '';
+  render();
+}
+
+function savePostBG() {
+  if (!state.postBgInputId) return;
+  const v = parseFloat(String(state.postBgValue).replace(',', '.'));
+  if (isNaN(v) || v <= 0) { alert('Geçerli bir KŞ değeri gir'); return; }
+  const idx = state.todayLog.findIndex(e => e.id === state.postBgInputId);
+  if (idx === -1) return;
+  const newLog = [...state.todayLog];
+  newLog[idx] = {
+    ...newLog[idx],
+    postMealBG: {
+      value: v,
+      time: new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' }),
+      loggedAt: new Date().toISOString()
+    }
+  };
+  saveLog(newLog);
+  state.postBgInputId = null;
+  state.postBgValue = '';
+  render();
+}
+
+// ============================================================================
+// İSTATİSTİKLER (öğrenme için temel)
+// ============================================================================
+function getAllEntriesInPeriod(days) {
+  const now = new Date();
+  const cutoff = new Date(now.getTime() - days * 86400000);
+  cutoff.setHours(0, 0, 0, 0);
+  const cutoffStr = cutoff.toISOString().split('T')[0];
+  const dates = new Set(Object.keys(state.history));
+  if (state.todayLog.length > 0) dates.add(state.date);
+  const arr = [];
+  for (const d of dates) {
+    if (d < cutoffStr) continue;
+    const entries = (d === state.date) ? state.todayLog : (state.history[d] || []);
+    entries.forEach(e => arr.push({ ...e, _date: d }));
+  }
+  return arr;
+}
+
+function calcStats(days) {
+  const entries = getAllEntriesInPeriod(days);
+  if (entries.length === 0) return { empty: true, days };
+
+  const dates = new Set(entries.map(e => e._date));
+  const dayCount = dates.size || 1;
+
+  const mealEntries = entries.filter(e => e.type !== 'correction');
+  const correctionEntries = entries.filter(e => e.type === 'correction');
+
+  const totalC = mealEntries.reduce((s, e) => s + (e.carbs || 0), 0);
+  const totalI = entries.reduce((s, e) => s + (typeof e.insulin === 'number' ? e.insulin : 0), 0);
+  const totalP = mealEntries.reduce((s, e) => s + (e.protein || 0), 0);
+  const totalF = mealEntries.reduce((s, e) => s + (e.fat || 0), 0);
+
+  // En çok yenenler
+  const foodCounts = {};
+  mealEntries.forEach(e => {
+    if (e.type === 'meal' && Array.isArray(e.items) && e.items.length > 1) {
+      e.items.forEach(i => { foodCounts[i.food] = (foodCounts[i.food] || 0) + 1; });
+    } else if (e.food) {
+      foodCounts[e.food] = (foodCounts[e.food] || 0) + 1;
+    }
+  });
+  const topFoods = Object.entries(foodCounts).sort((a, b) => b[1] - a[1]).slice(0, 8);
+
+  // Öğün tipine göre
+  const byMealType = {};
+  MEAL_TYPE_KEYS.forEach(k => byMealType[k] = { c: 0, i: 0, n: 0, deltaSum: 0, deltaN: 0 });
+  mealEntries.forEach(e => {
+    const mt = e.mealType || getDefaultMealType(getEntryHour(e));
+    if (byMealType[mt]) {
+      byMealType[mt].c += e.carbs || 0;
+      byMealType[mt].i += typeof e.insulin === 'number' ? e.insulin : 0;
+      byMealType[mt].n += 1;
+      if (e.bg && e.postMealBG && typeof e.postMealBG.value === 'number') {
+        byMealType[mt].deltaSum += (e.postMealBG.value - e.bg);
+        byMealType[mt].deltaN += 1;
+      }
+    }
+  });
+
+  // Yemek sonrası KŞ analiz
+  const withPostBG = mealEntries.filter(e => e.postMealBG && typeof e.postMealBG.value === 'number');
+  const withPrePost = withPostBG.filter(e => e.bg);
+  const avgPostMealBG = withPostBG.length ? withPostBG.reduce((s, e) => s + e.postMealBG.value, 0) / withPostBG.length : null;
+  const avgDelta = withPrePost.length ? withPrePost.reduce((s, e) => s + (e.postMealBG.value - e.bg), 0) / withPrePost.length : null;
+
+  return {
+    days, dayCount, totalEntries: entries.length, mealCount: mealEntries.length, correctionCount: correctionEntries.length,
+    totalC, totalI, totalP, totalF,
+    avgC: totalC / dayCount, avgI: totalI / dayCount,
+    topFoods, byMealType,
+    postBGCount: withPostBG.length, avgPostMealBG, avgDelta,
+    withPrePostCount: withPrePost.length
+  };
+}
+
+// ============================================================================
+// CSV EXPORT (doktor vizit için)
+// ============================================================================
+function exportCSV() {
+  const rows = [['Tarih', 'Saat', 'Tip', 'Öğün Türü', 'Yemek', 'Porsiyon (g)', 'KH (g)', 'Protein (g)', 'Yağ (g)', 'KŞ Önce', 'İnsulin (Ü)', 'KŞ Sonrası', 'KŞ Sonrası Saat', 'Notlar']];
+  const allDays = new Set([...Object.keys(state.history), state.date]);
+  Array.from(allDays).sort().forEach(date => {
+    const entries = (date === state.date) ? state.todayLog : (state.history[date] || []);
+    entries.forEach(e => {
+      rows.push([
+        date,
+        e.time || '',
+        e.type === 'correction' ? 'Düzeltme' : e.type === 'meal' ? 'Öğün' : 'Yemek',
+        e.mealType ? mealTypeLabel(e.mealType).name : '',
+        e.food || '',
+        fmt(e.portion || 0, 0),
+        fmt(e.carbs || 0, 1),
+        fmt(e.protein || 0, 1),
+        fmt(e.fat || 0, 1),
+        e.bg || '',
+        typeof e.insulin === 'number' ? fmt(e.insulin, 2) : '',
+        e.postMealBG && typeof e.postMealBG.value === 'number' ? e.postMealBG.value : '',
+        e.postMealBG && e.postMealBG.time ? e.postMealBG.time : '',
+        (e.notes || '').replace(/"/g, '""').replace(/[\r\n]+/g, ' ')
+      ]);
+    });
+  });
+  const csv = rows.map(r => r.map(c => `"${String(c)}"`).join(',')).join('\r\n');
+  const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `karbsayar-${new Date().toISOString().split('T')[0]}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ============================================================================
+// YAĞ/PROTEİN GECİKME UYARISI
+// ============================================================================
+function fpBurden(fat, protein) { return (fat || 0) + (protein || 0) * 0.5; }
+function showFPWarning(fat, protein) { return (fat || 0) >= 20 || fpBurden(fat, protein) >= 30; }
+function fpWarningHtml(fat, protein) {
+  const burden = fpBurden(fat, protein);
+  const high = (fat || 0) >= 30 || burden >= 45;
+  return `<div class="fp-warning">
+    ${svg('alert','icn icn-sm')}
+    <div>
+      <b>${high ? 'Çok yüksek' : 'Yüksek'} yağ/protein:</b> ${fmt(fat, 1)}g yağ + ${fmt(protein, 1)}g protein.
+      Glikoz piki ${high ? '2-4' : '1-3'} saat gecikebilir. <b>Split bolus</b> düşün: ~%50 şimdi, ~%50 ${high ? '2sa' : '1.5sa'} sonra.
+    </div>
+  </div>`;
+}
+
+// ============================================================================
+// EGZERSİZ MODU - dose hesabını ayarla
+// ============================================================================
+function applyExerciseAdjustment(dose) {
+  if (!state.exerciseMode || state.exerciseReduction <= 0) return dose;
+  const factor = (100 - state.exerciseReduction) / 100;
+  const adjustedRaw = dose.totalRaw * factor;
+  return {
+    ...dose,
+    preExerciseRaw: dose.totalRaw,
+    totalRaw: adjustedRaw,
+    totalRounded: roundDose(adjustedRaw),
+    exerciseAdjusted: true,
+    exerciseReduction: state.exerciseReduction
+  };
+}
+
+// ============================================================================
+// VIEWS
+// ============================================================================
+function renderToday() {
+  const totalC = state.todayLog.reduce((s,e) => s + e.carbs, 0);
+  const totalP = state.todayLog.reduce((s,e) => s + (e.protein || 0), 0);
+  const totalF = state.todayLog.reduce((s,e) => s + (e.fat || 0), 0);
+  const totalInsulin = state.todayLog.reduce((s,e) => {
+    if (typeof e.insulin === 'number') return s + e.insulin;
+    return s + calcInsulin(e.carbs, getEntryHour(e)).totalRounded;
+  }, 0);
+
+  const today = new Date().toISOString().split('T')[0];
+  const isToday = state.date === today;
+  const dateLabel = isToday ? 'Bugün' : new Date(state.date).toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' });
+
+  // Aktif insülin (IOB) — sadece bugün için anlamlı
+  const iobInfo = isToday ? calcIOB() : { total: 0, contributions: [] };
+
+  let html = `<div class="content">
+    <div class="row">
+      <input type="date" value="${state.date}" max="${today}" data-act="setDate">
+      <div class="muted tiny" style="text-transform:capitalize">${dateLabel}</div>
+    </div>
+    <div class="card-blue">
+      <div class="lbl">Toplam Karbonhidrat</div>
+      <div style="display:flex;align-items:baseline;gap:8px">
+        <div class="big">${fmt(totalC)}</div>
+        <div class="unit">g</div>
+      </div>
+      <div class="divider">
+        <div><div class="lbl-sm">Protein</div><div class="val">${fmt(totalP)}g</div></div>
+        <div><div class="lbl-sm">Yağ</div><div class="val">${fmt(totalF)}g</div></div>
+        <div><div class="lbl-sm">Toplam İnsulin</div><div class="val">${fmt(totalInsulin, 1)} Ü</div></div>
+      </div>
+    </div>`;
+
+  // IOB Kartı — sadece bugün ve aktif insülin > 0.05 ise
+  if (iobInfo.total > 0.05) {
+    const last = iobInfo.contributions[iobInfo.contributions.length - 1];
+    const remainingMin = state.diaMinutes - last.elapsedMin;
+    html += `<div class="iob-card">
+      <div class="iob-row">
+        <div class="iob-icon">${svg('drop','icn icn-lg')}</div>
+        <div class="iob-text">
+          <div class="iob-main">Aktif İnsülin: <span class="v">${fmt(iobInfo.total, 1)} Ü</span></div>
+          <div class="iob-sub">Son doz ${fmtTimeSince(last.elapsedMin)} önce · ~${fmtTimeSince(remainingMin)} daha aktif</div>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  // Öğün sepeti paneli (mealItems > 0)
+  if (state.mealItems.length > 0 && isToday) {
+    const totals = getMealTotals();
+    const now = new Date();
+    const bg = parseFloat(state.currentBG) || null;
+    const dose = applyExerciseAdjustment(calcInsulin(totals.carbs, now.getHours(), bg, iobInfo.total));
+    const doseFmt = fmt(dose.totalRounded, state.roundStep === 1 ? 0 : 1);
+
+    html += `<div class="meal-panel">
+      <h3>${svg('plus','icn icn-sm')} Bu Öğün · ${state.mealItems.length} yemek</h3>
+
+      <div class="meal-type-row">
+        ${MEAL_TYPE_KEYS.map(k => `
+          <button class="meal-type-pill ${state.currentMealType === k ? 'active' : ''}" data-act="setMealType" data-type="${k}">
+            <span class="em">${MEAL_TYPES[k].emoji}</span>
+            <span>${MEAL_TYPES[k].name}</span>
+          </button>
+        `).join('')}
+      </div>
+
+      <div class="meal-items">
+        ${state.mealItems.map((item, idx) => `
+          <div class="meal-item">
+            <div class="meal-item-info">
+              <div class="meal-item-name">${esc(item.food)}</div>
+              <div class="meal-item-meta">${item.qty && item.unit !== 'gram' ? `${fmtQty(item.qty)} ${item.unit} (${fmt(item.portion)}g)` : `${fmt(item.portion)}g`}</div>
+            </div>
+            <div class="meal-item-kh">${fmt(item.carbs, 1)}g KH</div>
+            <button class="icon-btn" data-act="removeMealItem" data-idx="${idx}">${svg('trash','icn icn-sm')}</button>
+          </div>
+        `).join('')}
+      </div>
+      <div class="meal-totals">
+        <div class="item">
+          <div class="l">Toplam KH</div>
+          <div class="v">${fmt(totals.carbs, 1)}<span style="font-size:14px">g</span></div>
+        </div>
+        <div class="item dose">
+          <div class="l">Toplam İnsülin</div>
+          <div class="v">${doseFmt}<span style="font-size:14px"> Ü</span></div>
+          <div class="breakdown">${dose.label} · 1Ü=${fmt(dose.ratio)}g${dose.iobReduction > 0 ? ` · IOB −${fmt(dose.iobReduction,1)}` : dose.correction > 0 ? ` · +${fmt(dose.correction,1)} düz.` : ''}${dose.exerciseAdjusted ? ` · 🏃−${dose.exerciseReduction}%` : ''}</div>
+        </div>
+      </div>
+      ${showFPWarning(totals.fat, totals.protein) ? fpWarningHtml(totals.fat, totals.protein) : ''}
+      <div class="exercise-toggle ${state.exerciseMode ? 'active' : ''}" data-act="toggleExercise">
+        <span class="l"><span class="em">🏃</span> Egzersiz var / yakında <span style="font-size:11px;opacity:.85">(−${state.exerciseReduction}%)</span></span>
+        <span class="switch"></span>
+      </div>
+      <div class="notes-row">
+        <label>Not (opsiyonel)</label>
+        <input class="in" type="text" placeholder="Doğum günü yemeği, geç bolus..." value="${esc(state.currentNotes)}" data-input="currentNotes">
+      </div>
+      ${state.useCorrection ? `
+        <div class="meal-bg-row">
+          <label>Şu anki kan şekerin (opsiyonel — düzeltme için)</label>
+          <div class="meal-bg-input">
+            <input class="in" type="text" inputmode="decimal" placeholder="örn 180" value="${esc(state.currentBG)}" data-input="currentBG">
+            <span class="tiny muted">mg/dL</span>
+          </div>
+        </div>
+      ` : ''}
+      <button class="template-save-btn" data-act="saveAsTemplate">${svg('plus','icn icn-sm')} Bu Öğünü Şablon Olarak Kaydet</button>
+      <div class="btn-pair">
+        <button class="btn btn-secondary" data-act="cancelMeal">Sepeti Boşalt</button>
+        <button class="btn btn-primary" data-act="commitMeal">${svg('check','icn icn-sm')} Öğünü Kaydet · ${doseFmt} Ü</button>
+      </div>
+    </div>`;
+  }
+
+  if (state.estimate) {
+    const e = state.estimate;
+    const now = new Date();
+    const hour = now.getHours();
+    const bg = parseFloat(state.currentBG) || null;
+    const dose = applyExerciseAdjustment(calcInsulin(e.carbs, hour, bg, iobInfo.total));
+    const inMeal = state.mealItems.length > 0;
+
+    html += `<div class="card card-active">
+      <div class="preview-row">
+        <div>
+          <div class="preview-name">${esc(e.food)}</div>
+          <div class="preview-meta">${portionLabel(e)} · kaynak: ${e.source}</div>
+        </div>
+        <span class="conf ${confClass(e.confidence)}">${e.confidence}</span>
+      </div>
+
+      <div class="meal-type-row">
+        ${MEAL_TYPE_KEYS.map(k => `
+          <button class="meal-type-pill ${state.currentMealType === k ? 'active' : ''}" data-act="setMealType" data-type="${k}">
+            <span class="em">${MEAL_TYPES[k].emoji}</span>
+            <span>${MEAL_TYPES[k].name}</span>
+          </button>
+        `).join('')}
+      </div>
+
+      <div class="macro-grid">
+        <div class="macro macro-blue"><div class="l">KH</div><div class="v">${fmt(e.carbs, 1)}</div><div class="s">${e.carbsPer100g}g/100g</div></div>
+        <div class="macro macro-slate"><div class="l">Protein</div><div class="v">${fmt(e.protein, 1)}</div><div class="s">${e.proteinPer100g}g/100g</div></div>
+        <div class="macro macro-slate"><div class="l">Yağ</div><div class="v">${fmt(e.fat, 1)}</div><div class="s">${e.fatPer100g}g/100g</div></div>
+      </div>
+      <div class="dose-card">
+        <div class="dose-hdr">
+          <span>${svg('drop','icn icn-sm')} Öğün İnsulini</span>
+          <span>${dose.label}</span>
+        </div>
+        <div class="dose-main">
+          <div class="dose-num">
+            <div>
+              <div style="display:flex;align-items:baseline;gap:3px"><span class="v">${fmt(dose.totalRaw, 2)}</span><span class="u">Ü</span></div>
+              <span class="l">hesap</span>
+            </div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="dose-num dose-rounded">
+            <div>
+              <div style="display:flex;align-items:baseline;gap:3px"><span class="v">${fmt(dose.totalRounded, state.roundStep === 1 ? 0 : 1)}</span><span class="u">Ü</span></div>
+              <span class="l">${state.roundStep ? `kalem (${state.roundStep}Ü)` : 'gerçek'}</span>
+            </div>
+          </div>
+        </div>
+        <div class="dose-meta">
+          ${(() => {
+            const parts = [`1 Ü = ${fmt(dose.ratio)}g KH`, `KH: ${fmt(dose.carbDose, 2)} Ü`];
+            if (dose.correction > 0 || dose.iobReduction > 0) {
+              parts.push(`Düzeltme: ${fmt(dose.rawCorrection, 2)} Ü`);
+            }
+            if (dose.iobReduction > 0) {
+              parts.push(`IOB: −${fmt(dose.iobReduction, 2)} Ü`);
+            } else if (dose.iob > 0.05) {
+              parts.push(`Aktif insülin var: ${fmt(dose.iob, 1)} Ü`);
+            }
+            if (dose.exerciseAdjusted) {
+              parts.push(`Egzersiz: −${dose.exerciseReduction}% (${fmt(dose.preExerciseRaw, 2)} → ${fmt(dose.totalRaw, 2)})`);
+            }
+            return parts.join(' · ');
+          })()}
+        </div>
+        ${state.useCorrection ? `
+          <div class="dose-bg">
+            <label>Şu anki kan şekerin (opsiyonel)</label>
+            <div class="bg-row">
+              <input class="bg-in" type="number" inputmode="decimal" placeholder="örn 180" value="${esc(state.currentBG)}" data-input="currentBG">
+              <span class="bg-unit">mg/dL</span>
+            </div>
+            ${bg ? `<div class="bg-result">${
+              bg > state.targetBG ? `Yüksek (+${bg - state.targetBG} mg/dL) → +${fmt(dose.correction, 2)} Ü düzeltme eklendi`
+              : bg < state.targetBG ? `Düşük (-${state.targetBG - bg} mg/dL) → düzeltme eklenmedi, dikkatli ol`
+              : 'Hedefte ✓'
+            }</div>` : ''}
+          </div>` : ''}
+      </div>
+      ${e.notes ? `<div class="note">💡 ${esc(e.notes)}</div>` : ''}
+      ${showFPWarning(e.fat, e.protein) ? fpWarningHtml(e.fat, e.protein) : ''}
+      <div class="exercise-toggle ${state.exerciseMode ? 'active' : ''}" data-act="toggleExercise">
+        <span class="l"><span class="em">🏃</span> Egzersiz var / yakında <span style="font-size:11px;opacity:.85">(−${state.exerciseReduction}%)</span></span>
+        <span class="switch"></span>
+      </div>
+      <div class="notes-row">
+        <label>Not (opsiyonel)</label>
+        <input class="in" type="text" placeholder="Stresli, geç yedim, kola eklendi..." value="${esc(state.currentNotes)}" data-input="currentNotes">
+      </div>
+      <div class="btn-pair">
+        <button class="btn btn-secondary" data-act="cancelEstimate">${svg('x','icn icn-sm')} İptal</button>
+        ${inMeal
+          ? `<button class="btn btn-primary" data-act="addToMeal">${svg('plus','icn icn-sm')} Öğüne Ekle</button>`
+          : `<button class="btn btn-primary" data-act="confirmAdd">${svg('check','icn icn-sm')} Güne Ekle</button>`
+        }
+      </div>
+      ${!inMeal ? `
+        <button class="add-more-link" data-act="addToMeal">
+          ${svg('plus','icn icn-sm')} Bu öğüne yemek daha ekle (sepet)
+        </button>
+      ` : ''}
+    </div>`;
+  } else if (isToday && state.correctionFormOpen) {
+    // Düzeltme / Ara iğne formu
+    const preview = calcCorrectionPreview();
+    html += `<div class="corr-card">
+      <h3>${svg('drop','icn icn-sm')} Sadece Düzeltme / Ara İğne</h3>
+
+      <div class="corr-input-block">
+        <label>Şu anki kan şekerin (mg/dL)</label>
+        <div class="corr-input-row">
+          <input class="in" type="text" inputmode="decimal" placeholder="örn 180" value="${esc(state.correctionBG)}" data-input="correctionBG">
+          <span class="tiny muted">mg/dL</span>
+        </div>
+        <div class="qc-presets-label">Hızlı seçim:</div>
+        <div class="qc-presets">
+          ${[150, 180, 200, 250, 300].map(v => `<button class="qc-preset ${state.correctionBG == v ? 'active' : ''}" data-act="setCorrectionBG" data-val="${v}">${v}</button>`).join('')}
+        </div>
+      </div>
+
+      <div class="corr-or">— YA DA —</div>
+
+      <div class="corr-input-block">
+        <label>Manuel doz (doktor verdiyse, hesap istemezsen)</label>
+        <div class="corr-input-row">
+          <input class="in" type="text" inputmode="decimal" placeholder="örn 2" value="${esc(state.correctionManual)}" data-input="correctionManual">
+          <span class="tiny muted">Ü</span>
+        </div>
+      </div>
+
+      ${preview ? `
+        <div class="corr-preview">
+          <div>
+            <span class="v">${fmt(preview.raw, 2)}</span><span style="font-size:14px;color:#a39885"> Ü</span>
+            <span class="arrow">→</span>
+            <span class="vr">${fmt(preview.rounded, state.roundStep === 1 ? 0 : 1)}</span><span style="font-size:18px;color:#5d4d7d"> Ü</span>
+          </div>
+          <div class="l">hesap → kalem ${state.roundStep ? `(${state.roundStep}Ü adım)` : ''}</div>
+          <div class="breakdown">
+            ${preview.type === 'manual' ? `Manuel: ${fmt(preview.raw, 2)} Ü${preview.iob > 0.05 ? ` · Aktif insülin: ${fmt(preview.iob, 1)} Ü (dikkat)` : ''}` :
+              preview.type === 'manual_override' ? `Manuel ${fmt(preview.raw, 2)} Ü kullanılacak (hesap önerisi: ${fmt(preview.calculated, 2)} Ü)` :
+              `KŞ ${preview.bg} → Hedef ${preview.target}, ISF ${preview.isf}<br>
+               Ham: ${fmt(preview.rawCorrection, 2)} Ü${preview.iobReduction > 0 ? ` − IOB ${fmt(preview.iobReduction, 2)} Ü = ${fmt(preview.raw, 2)} Ü` : ''}`
+            }
+          </div>
+        </div>
+      ` : `<div class="corr-preview empty">KŞ veya manuel doz gir, hesap burada görünecek</div>`}
+
+      ${state.error ? `<div class="err">${svg('alert','icn icn-sm')}<span>${esc(state.error)}</span></div>` : ''}
+
+      <div class="notes-row">
+        <label>Not (opsiyonel)</label>
+        <input class="in" type="text" placeholder="Sabah yüksekliği, geç düzeltme..." value="${esc(state.correctionNotes)}" data-input="correctionNotes">
+      </div>
+
+      <div class="btn-pair">
+        <button class="btn btn-secondary" data-act="cancelCorrection">${svg('x','icn icn-sm')} İptal</button>
+        <button class="btn btn-primary" data-act="commitCorrection" ${!preview || preview.rounded <= 0 ? 'disabled' : ''}>${svg('check','icn icn-sm')} Kaydet${preview && preview.rounded > 0 ? ` · ${fmt(preview.rounded, state.roundStep === 1 ? 0 : 1)} Ü` : ''}</button>
+      </div>
+    </div>`;
+  } else if (isToday) {
+    const sugHtml = state.suggestions.length ? `<div class="suggestions">
+      ${state.suggestions.map(s => `<button class="suggestion" data-act="pickSuggestion" data-name="${esc(s.name)}">
+        <span>${esc(s.name)}</span>
+        <span class="tag ${s.src === 'lib' ? 'tag-lib' : 'tag-db'}">${s.src === 'lib' ? 'kayıtlı' : 'DB'}</span>
+      </button>`).join('')}
+    </div>` : '';
+
+    // Birim seçici options
+    ensureValidUnit();
+    const units = getUnitsForFood(state.foodInput);
+    const unitOptions = units.map(([n, g]) =>
+      `<option value="${esc(n)}" ${n === state.portionUnit ? 'selected' : ''}>${esc(n)} (${g}g)</option>`
+    ).join('');
+    const grams = getCurrentGrams();
+    const gramsDisplay = grams > 0 ? `= <b>${fmt(grams)} gram</b>` : '';
+
+    html += `<div class="card">
+      ${Object.keys(state.templates).length > 0 ? `
+        <div class="template-section-title">${svg('plus','icn icn-sm')} SIK YENENLER</div>
+        <div class="templates-row">
+          ${Object.entries(state.templates).slice(0, 12).map(([key, tpl]) => {
+            const mt = tpl.mealType ? mealTypeLabel(tpl.mealType) : null;
+            return `<button class="template-pill" data-act="loadTemplate" data-key="${esc(key)}" title="${esc(tpl.name)}">
+              ${mt ? `<span class="em">${mt.emoji}</span>` : ''}
+              <span>${esc(tpl.name)}</span>
+              <span style="opacity:.6;font-size:10px">· ${tpl.items.length}</span>
+            </button>`;
+          }).join('')}
+        </div>
+      ` : ''}
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <h2 style="margin:0">${svg('plus','icn icn-sm')} Yemek Ekle</h2>
+        <button class="btn-link" data-act="toggleManual">${state.manualMode ? '← Otomatik ara' : 'Manuel gir →'}</button>
+      </div>
+      <div class="input-wrap">
+        <div style="position:relative">
+          <input class="in" type="text" placeholder="Yemek adı (pilav, baklava, ekmek...)" value="${esc(state.foodInput)}" data-input="foodInput" autocomplete="off">
+          ${!state.manualMode ? sugHtml : ''}
+        </div>
+        <div class="qty-row">
+          <input class="in" type="number" inputmode="decimal" placeholder="Miktar" value="${esc(state.portionQty)}" data-input="portionQty">
+          <select class="in" data-input="portionUnit">${unitOptions}</select>
+        </div>
+        <div class="qty-grams" data-display="grams">${gramsDisplay}</div>
+        ${state.manualMode ? `<div class="input-grid" style="margin-top:4px">
+          <input class="in" type="number" inputmode="decimal" placeholder="KH/100g" value="${esc(state.manualCarbs)}" data-input="manualCarbs">
+          <input class="in" type="number" inputmode="decimal" placeholder="Pro/100g" value="${esc(state.manualProtein)}" data-input="manualProtein">
+          <input class="in" type="number" inputmode="decimal" placeholder="Yağ/100g" value="${esc(state.manualFat)}" data-input="manualFat">
+        </div>` : ''}
+        ${state.error ? `<div class="err">${svg('alert','icn icn-sm')}<span>${esc(state.error)}</span></div>` : ''}
+        <button class="btn btn-primary btn-full" data-act="${state.manualMode ? 'submitManual' : 'lookup'}" ${state.loading ? 'disabled' : ''}>
+          ${state.loading ? `${svgSpin} Hesaplanıyor...` : state.manualMode ? `${svg('check','icn icn-sm')} Önizle` : `${svg('search','icn icn-sm')} Ara / Hesapla`}
+        </button>
+      </div>
+    </div>
+    <button class="corr-trigger" data-act="openCorrection">${svg('drop','icn icn-sm')} Sadece Düzeltme / Ara İğne</button>`;
+  }
+
+  html += `<div class="card">
+    <h2>${svg('cal','icn icn-sm')} ${state.todayLog.length === 0 ? 'Henüz Kayıt Yok' : `${state.todayLog.length} Kayıt`}</h2>
+    ${state.todayLog.length === 0 ? `<div class="empty">${isToday ? 'Yemek eklemeye başla' : 'Bu gün için kayıt yok'}</div>` : `
+      <div style="display:flex;flex-direction:column;gap:8px">
+        ${state.todayLog.map(e => {
+          const ins = typeof e.insulin === 'number' ? e.insulin : calcInsulin(e.carbs, getEntryHour(e)).totalRounded;
+          const isCorrection = e.type === 'correction';
+          const isMeal = e.type === 'meal' && Array.isArray(e.items) && e.items.length > 1;
+          const mt = !isCorrection && e.mealType ? mealTypeLabel(e.mealType) : null;
+          let metaText;
+          if (isCorrection) {
+            metaText = `${e.time} · ${e.bg ? `KŞ ${e.bg}` : 'manuel'} · düzeltme`;
+          } else if (isMeal) {
+            metaText = `${e.time} · ${e.items.length} yemek (${fmt(e.portion)}g) · öğün`;
+          } else {
+            metaText = `${e.time} · ${portionLabel(e)} · ${e.source}`;
+          }
+          if (e.exerciseAdjusted) metaText += ' · 🏃';
+
+          // Yemek sonrası KŞ durumu
+          const now = new Date();
+          const entryTime = getEntryDateTime(e, state.date);
+          const elapsedMin = (now - entryTime) / 60000;
+          const eligibleForPostBG = !isCorrection && (e.carbs || 0) >= 10 && elapsedMin >= 90 && elapsedMin <= 240 && isToday;
+          const hasPostBG = e.postMealBG && typeof e.postMealBG.value === 'number';
+          const postBGDelta = hasPostBG && e.bg ? (e.postMealBG.value - e.bg) : null;
+
+          // Düzenleme modu
+          if (state.editingEntry === e.id) {
+            const draft = state.editDraft;
+            return `<div class="entry" style="flex-direction:column;align-items:stretch">
+              <div class="entry-flex">
+                <div class="entry-name">${esc(e.food)}</div>
+                <div class="entry-meta">${e.time} · düzenleniyor</div>
+              </div>
+              <div class="edit-entry-form">
+                <div class="edit-entry-row">
+                  <label>Saat</label>
+                  <input class="in" type="text" inputmode="numeric" placeholder="14:30" value="${esc(draft.time || '')}" data-edit-input="time">
+                </div>
+                ${!isCorrection ? `
+                  <div class="edit-entry-row">
+                    <label>Öğün</label>
+                    <div class="meal-type-row" style="margin-bottom:0">
+                      ${MEAL_TYPE_KEYS.map(k => `
+                        <button class="meal-type-pill ${draft.mealType === k ? 'active' : ''}" data-act="setEditMealType" data-type="${k}">
+                          <span class="em">${MEAL_TYPES[k].emoji}</span>
+                          <span>${MEAL_TYPES[k].name}</span>
+                        </button>
+                      `).join('')}
+                    </div>
+                  </div>
+                ` : ''}
+                <div class="edit-entry-row">
+                  <label>KŞ</label>
+                  <input class="in" type="text" inputmode="decimal" placeholder="opsiyonel" value="${esc(draft.bg || '')}" data-edit-input="bg">
+                  <span class="tiny muted">mg/dL</span>
+                </div>
+                <div class="edit-entry-row">
+                  <label>İnsulin</label>
+                  <input class="in" type="text" inputmode="decimal" placeholder="${fmt(ins, 1)}" value="${esc(draft.insulin || '')}" data-edit-input="insulin">
+                  <span class="tiny muted">Ü</span>
+                </div>
+                <div class="edit-entry-row">
+                  <label>Not</label>
+                  <input class="in" type="text" placeholder="opsiyonel" value="${esc(draft.notes || '')}" data-edit-input="notes">
+                </div>
+                <div class="btn-pair" style="margin-top:8px">
+                  <button class="btn btn-secondary" data-act="cancelEditEntry">İptal</button>
+                  <button class="btn btn-primary" data-act="saveEditEntry" data-id="${e.id}">Kaydet</button>
+                </div>
+              </div>
+            </div>`;
+          }
+
+          return `<div class="entry" style="flex-direction:column;align-items:stretch">
+            <div style="display:flex;align-items:center;gap:10px;width:100%">
+              <div class="entry-flex">
+                <div class="entry-name">${mt ? `<span class="meal-type-tag">${mt.emoji} ${mt.name}</span>` : ''}${esc(e.food)}</div>
+                <div class="entry-meta">${metaText}</div>
+                ${isMeal ? `<div class="entry-meta" style="margin-top:3px;font-size:10px">${e.items.map(i => esc(i.food)).join(' · ')}</div>` : ''}
+                ${e.notes ? `<div class="entry-note">📝 ${esc(e.notes)}</div>` : ''}
+                ${hasPostBG ? `
+                  <div class="pbg-line ${postBGDelta !== null ? (postBGDelta > 30 ? 'delta-up' : postBGDelta < -30 ? 'delta-down' : '') : ''}">
+                    💧 Sonrası: ${e.postMealBG.value} mg/dL${postBGDelta !== null ? ` (${postBGDelta >= 0 ? '+' : ''}${Math.round(postBGDelta)})` : ''} · ${e.postMealBG.time}
+                  </div>
+                ` : eligibleForPostBG ? `
+                  <button class="pbg-link" data-act="startPostBG" data-id="${e.id}">+ Yemek sonrası KŞ ekle</button>
+                ` : ''}
+                <span class="entry-dose">${svg('drop','icn icn-sm')} ${fmt(ins, state.roundStep === 1 ? 0 : 1)} Ü</span>
+              </div>
+              <div class="entry-val"><div class="v">${isCorrection ? '—' : fmt(e.carbs, 1) + 'g'}</div><div class="u">${isCorrection ? '' : 'KH'}</div></div>
+              ${isToday ? `
+                <button class="icon-btn icon-btn-blue" data-act="startEditEntry" data-id="${e.id}">${svg('edit','icn icn-sm')}</button>
+                <button class="icon-btn" data-act="deleteEntry" data-id="${e.id}">${svg('trash','icn icn-sm')}</button>
+              ` : ''}
+            </div>
+            ${state.postBgInputId === e.id ? `
+              <div class="pbg-input-row">
+                <input class="in" type="text" inputmode="decimal" placeholder="Yemek sonrası KŞ (mg/dL)" value="${esc(state.postBgValue)}" data-input="postBgValue" autofocus>
+                <button class="btn btn-secondary" data-act="cancelPostBG">İptal</button>
+                <button class="btn btn-primary" data-act="savePostBG">Kaydet</button>
+              </div>
+            ` : ''}
+          </div>`;
+        }).join('')}
+      </div>
+    `}
+  </div></div>`;
+  return html;
+}
+
+function renderLibrary() {
+  const filtered = Object.entries(state.library)
+    .filter(([k,v]) => !state.librarySearch || v.name.toLowerCase().includes(state.librarySearch.toLowerCase()))
+    .sort((a,b) => a[1].name.localeCompare(b[1].name, 'tr'));
+
+  const templateEntries = Object.entries(state.templates)
+    .sort((a,b) => a[1].name.localeCompare(b[1].name, 'tr'));
+
+  return `<div class="content">
+    ${templateEntries.length > 0 ? `
+      <div class="section-title">${svg('plus','icn icn-sm')} Şablonlar (${templateEntries.length})</div>
+      <div style="margin-bottom:8px">
+        ${templateEntries.map(([key, tpl]) => {
+          const mt = tpl.mealType ? mealTypeLabel(tpl.mealType) : null;
+          const totalC = tpl.items.reduce((s, i) => s + (i.carbs || 0), 0);
+          return `<div class="template-list-item">
+            <div class="info">
+              <div class="nm">${mt ? `<span class="meal-type-tag">${mt.emoji} ${mt.name}</span>` : ''}${esc(tpl.name)}</div>
+              <div class="mt">${tpl.items.length} yemek · <span class="v">${fmt(totalC, 1)}g KH</span> · ${tpl.items.map(i => esc(i.food)).slice(0, 3).join(', ')}${tpl.items.length > 3 ? '...' : ''}</div>
+            </div>
+            <button class="icon-btn icon-btn-blue" data-act="loadTemplate" data-key="${esc(key)}" title="Sepete yükle">${svg('plus','icn icn-sm')}</button>
+            <button class="icon-btn" data-act="deleteTemplate" data-key="${esc(key)}">${svg('trash','icn icn-sm')}</button>
+          </div>`;
+        }).join('')}
+      </div>
+    ` : ''}
+
+    <div class="search-bar">
+      ${svg('search','icn icn-sm')}
+      <input type="text" placeholder="Kayıtlı yemek ara..." value="${esc(state.librarySearch)}" data-input="librarySearch">
+    </div>
+    <div class="muted tiny" style="padding:0 4px">
+      ${Object.keys(state.library).length} kişisel kayıt · ${Object.keys(DB).length} hazır gömülü yemek
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      ${filtered.length === 0 ? `<div class="card empty">${Object.keys(state.library).length === 0 ? 'Henüz kişisel kayıt yok. Yemek ekledikçe burası dolacak.' : 'Eşleşme yok'}</div>` :
+        filtered.map(([key, food]) => state.editingFood === key ? renderEditForm(key, food) : `
+          <div class="lib-item">
+            <div class="lib-row">
+              <div class="entry-flex">
+                <div class="lib-name">${esc(food.name)}</div>
+                <div class="lib-meta">KH: <span class="v">${food.carbsPer100g}g</span> · P: ${food.proteinPer100g || 0}g · Y: ${food.fatPer100g || 0}g <span class="muted">/100g</span></div>
+                ${food.notes ? `<div class="lib-note">${esc(food.notes)}</div>` : ''}
+              </div>
+              <button class="icon-btn icon-btn-blue" data-act="editLib" data-key="${esc(key)}">${svg('edit','icn icn-sm')}</button>
+              <button class="icon-btn" data-act="deleteLib" data-key="${esc(key)}">${svg('trash','icn icn-sm')}</button>
+            </div>
+          </div>
+        `).join('')
+      }
+    </div>
+  </div>`;
+}
+
+function renderEditForm(key, food) {
+  return `<div class="lib-item">
+    <div class="edit-form">
+      <div class="lib-name">${esc(food.name)}</div>
+      <div class="grid3">
+        <div><label>KH/100g</label><input class="in" type="number" inputmode="decimal" value="${food.carbsPer100g}" data-edit="c" data-key="${esc(key)}"></div>
+        <div><label>Pro/100g</label><input class="in" type="number" inputmode="decimal" value="${food.proteinPer100g || 0}" data-edit="p" data-key="${esc(key)}"></div>
+        <div><label>Yağ/100g</label><input class="in" type="number" inputmode="decimal" value="${food.fatPer100g || 0}" data-edit="f" data-key="${esc(key)}"></div>
+      </div>
+      <input class="in" type="text" value="${esc(food.notes || '')}" placeholder="Not (opsiyonel)" data-edit="n" data-key="${esc(key)}">
+      <div class="btn-pair">
+        <button class="btn btn-secondary" data-act="cancelEdit">İptal</button>
+        <button class="btn btn-primary" data-act="saveEdit" data-key="${esc(key)}">Kaydet</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderHistory() {
+  const stats = calcStats(state.statPeriod);
+  const sorted = Object.entries(state.history)
+    .map(([d, entries]) => ({
+      date: d,
+      total: entries.reduce((s,e) => s + e.carbs, 0),
+      insulin: entries.reduce((s,e) => s + (typeof e.insulin === 'number' ? e.insulin : calcInsulin(e.carbs, getEntryHour(e)).totalRounded), 0),
+      count: entries.length
+    }))
+    .filter(h => h.count > 0)
+    .sort((a,b) => b.date.localeCompare(a.date));
+
+  const maxFoodCount = stats.empty ? 0 : Math.max(...stats.topFoods.map(f => f[1]), 1);
+
+  return `<div class="content">
+    <div class="stat-period">
+      <button class="${state.statPeriod === 7 ? 'active' : ''}" data-act="setStatPeriod" data-days="7">Son 7 gün</button>
+      <button class="${state.statPeriod === 30 ? 'active' : ''}" data-act="setStatPeriod" data-days="30">Son 30 gün</button>
+      <button class="${state.statPeriod === 90 ? 'active' : ''}" data-act="setStatPeriod" data-days="90">Son 90 gün</button>
+    </div>
+
+    ${stats.empty ? '<div class="card empty">Bu dönemde kayıt yok</div>' : `
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="lbl">Günlük Ortalama KH</div>
+          <div class="v">${fmt(stats.avgC, 0)}<span class="u">g</span></div>
+          <div class="s">${stats.dayCount} aktif gün</div>
+        </div>
+        <div class="stat-card">
+          <div class="lbl">Günlük Ortalama İnsulin</div>
+          <div class="v">${fmt(stats.avgI, 1)}<span class="u">Ü</span></div>
+          <div class="s">${stats.totalEntries} kayıt</div>
+        </div>
+        <div class="stat-card">
+          <div class="lbl">Toplam KH</div>
+          <div class="v">${fmt(stats.totalC, 0)}<span class="u">g</span></div>
+          <div class="s">${stats.mealCount} öğün</div>
+        </div>
+        <div class="stat-card">
+          <div class="lbl">Toplam İnsulin</div>
+          <div class="v">${fmt(stats.totalI, 1)}<span class="u">Ü</span></div>
+          <div class="s">${stats.correctionCount} düzeltme</div>
+        </div>
+      </div>
+
+      ${stats.avgDelta !== null ? `
+        <div class="card" style="margin-bottom:12px">
+          <h2>${svg('drop','icn icn-sm')} Yemek Sonrası KŞ Analizi</h2>
+          <div class="row" style="margin-bottom:8px">
+            <div>
+              <div class="tiny muted">Ortalama Sapma</div>
+              <div style="font-size:24px;font-weight:700;color:${stats.avgDelta > 30 ? '#dc2626' : stats.avgDelta < -30 ? '#16a34a' : '#3d6850'}">${stats.avgDelta >= 0 ? '+' : ''}${fmt(stats.avgDelta, 0)} mg/dL</div>
+            </div>
+            <div style="text-align:right">
+              <div class="tiny muted">Örnek</div>
+              <div style="font-size:14px;font-weight:600">${stats.withPrePostCount} öğün</div>
+            </div>
+          </div>
+          <div class="tiny muted" style="line-height:1.4">
+            ${stats.avgDelta > 30 ? '⚠️ Yemek sonrası KŞ ortalama hedef üstünde — KH/insulin oranını düşürmeyi (örn 1Ü = 10g → 9g) doktorla konuş.' :
+              stats.avgDelta < -30 ? '⚠️ Yemek sonrası KŞ ortalama hedef altında — KH/insulin oranını yükseltmeyi (örn 1Ü = 10g → 11g) doktorla konuş.' :
+              '✓ Yemek sonrası KŞ hedefe yakın — mevcut oranlar iyi çalışıyor.'}
+          </div>
+        </div>
+      ` : ''}
+
+      <div class="section-title">Öğün Tipine Göre Dağılım</div>
+      <div class="mt-summary-row">
+        ${MEAL_TYPE_KEYS.map(k => {
+          const m = stats.byMealType[k];
+          const avgC = m.n > 0 ? m.c / m.n : 0;
+          const avgI = m.n > 0 ? m.i / m.n : 0;
+          return `<div class="mt-summary">
+            <div class="em">${MEAL_TYPES[k].emoji}</div>
+            <div class="nm">${MEAL_TYPES[k].name}</div>
+            <div class="v">${fmt(avgC, 0)}g</div>
+            <div class="s">${fmt(avgI, 1)}Ü · n=${m.n}</div>
+          </div>`;
+        }).join('')}
+      </div>
+
+      ${stats.topFoods.length > 0 ? `
+        <div class="section-title">En Çok Yenenler (Top ${stats.topFoods.length})</div>
+        <div class="card" style="margin-bottom:12px">
+          ${stats.topFoods.map(([name, count]) => `
+            <div class="bar-row">
+              <div class="label" title="${esc(name)}">${esc(name)}</div>
+              <div class="bar-bg">
+                <div class="bar-fill" style="width:${Math.max(8, (count / maxFoodCount) * 100)}%">${count}</div>
+              </div>
+              <div class="v">${count}x</div>
+            </div>
+          `).join('')}
+        </div>
+      ` : ''}
+
+      <button class="btn btn-secondary btn-full" style="margin-bottom:16px" data-act="exportCSV">${svg('drop','icn icn-sm')} Tüm Veriyi CSV İndir (Doktor için)</button>
+    `}
+
+    <div class="section-title">Günlük Geçmiş</div>
+    ${sorted.length === 0 ? '<div class="card empty">Henüz geçmiş yok</div>' :
+      sorted.map(d => `<button class="day-btn" data-act="goToDay" data-date="${d.date}">
+        <div class="row">
+          <div>
+            <div class="d">${new Date(d.date).toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' })}</div>
+            <div class="c">${d.count} yemek · ${fmt(d.insulin, 1)} Ü insulin</div>
+          </div>
+          <div style="text-align:right"><div class="t">${fmt(d.total)}g</div><div class="tl">KH</div></div>
+        </div>
+      </button>`).join('')
+    }
+  </div>`;
+}
+
+function renderSettings() {
+  const sortedHistCount = Object.values(state.history).filter(arr => arr.length > 0).length;
+  const fixed = state.ratioMode === 'fixed';
+  return `<div class="content">
+    <div class="card">
+      <h2>${svg('drop','icn icn-sm')} KH / İnsulin Oranı</h2>
+      <p class="tiny muted" style="margin-bottom:12px">1 ünite hızlı insulin kaç gram karbonhidratı karşılıyor? Doktorun belirler.</p>
+      <div class="radio-group">
+        <label class="radio-opt ${fixed ? 'active' : ''}">
+          <input type="radio" name="ratioMode" value="fixed" ${fixed ? 'checked' : ''} data-input="ratioMode">
+          Sabit oran (her zaman aynı)
+        </label>
+        <label class="radio-opt ${!fixed ? 'active' : ''}">
+          <input type="radio" name="ratioMode" value="time" ${!fixed ? 'checked' : ''} data-input="ratioMode">
+          Saate göre değişken
+        </label>
+      </div>
+      ${fixed ? `
+        <div class="set-row">
+          <span>1 Ü =</span>
+          <input class="in" type="text" inputmode="decimal" value="${state.insulinRatio}" data-input="insulinRatio">
+          <span>g KH</span>
+        </div>
+      ` : `
+        <div>
+          <div class="set-time-row">
+            <div class="lbl-row"><span class="em">🌅</span><span class="name">Kahvaltı</span><span class="rng">04:00 – 10:59</span></div>
+            <div class="input-row"><span>1 Ü =</span><input class="in" type="text" inputmode="decimal" value="${state.ratios.breakfast}" data-input="ratio_breakfast"><span class="un">g KH</span></div>
+          </div>
+          <div class="set-time-row">
+            <div class="lbl-row"><span class="em">🌞</span><span class="name">Öğle</span><span class="rng">11:00 – 15:59</span></div>
+            <div class="input-row"><span>1 Ü =</span><input class="in" type="text" inputmode="decimal" value="${state.ratios.lunch}" data-input="ratio_lunch"><span class="un">g KH</span></div>
+          </div>
+          <div class="set-time-row">
+            <div class="lbl-row"><span class="em">🌆</span><span class="name">Akşam</span><span class="rng">16:00 – 20:59</span></div>
+            <div class="input-row"><span>1 Ü =</span><input class="in" type="text" inputmode="decimal" value="${state.ratios.dinner}" data-input="ratio_dinner"><span class="un">g KH</span></div>
+          </div>
+          <div class="set-time-row">
+            <div class="lbl-row"><span class="em">🌙</span><span class="name">Gece</span><span class="rng">21:00 – 03:59</span></div>
+            <div class="input-row"><span>1 Ü =</span><input class="in" type="text" inputmode="decimal" value="${state.ratios.night}" data-input="ratio_night"><span class="un">g KH</span></div>
+          </div>
+        </div>
+      `}
+    </div>
+
+    <div class="card">
+      <h2>Düzeltme (Yüksek KŞ)</h2>
+      <label class="checkbox-row">
+        <input type="checkbox" ${state.useCorrection ? 'checked' : ''} data-input="useCorrection">
+        Yüksek kan şekeri için düzeltme dozu hesapla
+      </label>
+      ${state.useCorrection ? `
+        <p class="tiny muted" style="margin:8px 0 12px">Yemek dozuna eklenen ek doz. Sadece KŞ hedefin üstündeyse ekler.</p>
+        <div class="set-row" style="margin-bottom:10px">
+          <span class="lbl-text">İnsulin duyarlılığı (ISF): 1 Ü =</span>
+          <input class="in" type="text" inputmode="decimal" value="${state.isf}" data-input="isf">
+          <span>mg/dL</span>
+        </div>
+        <div class="set-row">
+          <span class="lbl-text">Hedef KŞ:</span>
+          <input class="in" type="text" inputmode="decimal" value="${state.targetBG}" data-input="targetBG">
+          <span>mg/dL</span>
+        </div>
+      ` : '<p class="tiny muted" style="margin-top:8px">Kapalı: sadece KH dozu hesaplanır.</p>'}
+    </div>
+
+    <div class="card">
+      <h2>Kalem Yuvarlaması</h2>
+      <div class="radio-group" style="margin-bottom:0">
+        <label class="radio-opt ${state.roundStep === 0.5 ? 'active' : ''}">
+          <input type="radio" name="roundStep" value="0.5" ${state.roundStep === 0.5 ? 'checked' : ''} data-input="roundStep">
+          0.5 Ü adım (yarım birim kalem)
+        </label>
+        <label class="radio-opt ${state.roundStep === 1 ? 'active' : ''}">
+          <input type="radio" name="roundStep" value="1" ${state.roundStep === 1 ? 'checked' : ''} data-input="roundStep">
+          1 Ü adım (tam birim kalem)
+        </label>
+        <label class="radio-opt ${state.roundStep === 0 ? 'active' : ''}">
+          <input type="radio" name="roundStep" value="0" ${state.roundStep === 0 ? 'checked' : ''} data-input="roundStep">
+          Yuvarlama yok (pompa)
+        </label>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>${svg('drop','icn icn-sm')} İnsülin Etki Süresi (DIA)</h2>
+      <p class="tiny muted" style="margin-bottom:12px">Hızlı insülinin (NovoRapid, Humalog, Apidra vb.) vücutta aktif kalma süresi. Tipik aralık 3-5 saat. Aktif insülin (IOB) bu süreye göre hesaplanır.</p>
+      <div class="set-row">
+        <span class="lbl-text">Etki süresi:</span>
+        <input class="in" type="text" inputmode="decimal" value="${state.diaMinutes / 60}" data-input="diaHours">
+        <span>saat</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Tema & Egzersiz</h2>
+      <label class="checkbox-row">
+        <input type="checkbox" ${state.darkMode ? 'checked' : ''} data-input="darkMode">
+        🌙 Karanlık mod
+      </label>
+      <p class="tiny muted" style="margin:8px 0 12px">Akşam/gece kullanımda göz yormaması için.</p>
+      <div class="set-row">
+        <span class="lbl-text">🏃 Egzersiz dozu azaltma:</span>
+        <input class="in" type="text" inputmode="decimal" value="${state.exerciseReduction}" data-input="exerciseReduction">
+        <span>%</span>
+      </div>
+      <p class="tiny muted" style="margin-top:8px">Yemek kartında "Egzersiz var" toggle'ını açtığında dozu bu yüzde kadar azaltır. Tipik: 20-30%.</p>
+    </div>
+
+    <div class="card">
+      <h2>Anthropic API Anahtarı (opsiyonel)</h2>
+      <p class="tiny muted" style="margin-bottom:12px">
+        Veritabanında olmayan yemekler için AI tahmin. Anahtar tarayıcıda lokal saklanır.<br>
+        <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color:#5b9279">console.anthropic.com</a> üzerinden anahtar al.
+      </p>
+      <input class="in api-input" type="password" placeholder="sk-ant-..." value="${esc(state.apiKey)}" data-input="apiKey">
+      ${state.apiKey ? '<div class="ok">✓ Anahtar kayıtlı, AI tahmin aktif</div>' : ''}
+    </div>
+
+    <div class="card-amber">
+      <div class="note-info">
+        ${svg('alert','icn')}
+        <div>
+          <div style="font-weight:600;margin-bottom:4px">Önemli</div>
+          Tüm doz hesapları senin girdiğin oran ve faktörlere dayanır. Bu uygulama tıbbi tavsiye vermez. Doktorunun verdiği plana göre doz ayarla, kan şekerini ölç, gerekirse düzelt.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Veri</h2>
+      <div class="tiny muted" style="display:flex;flex-direction:column;gap:4px">
+        <div>📚 Kişisel kayıt: ${Object.keys(state.library).length}</div>
+        <div>⭐ Şablon: ${Object.keys(state.templates).length}</div>
+        <div>🗄️ Gömülü DB: ${Object.keys(DB).length}</div>
+        <div>📅 Geçmiş gün: ${sortedHistCount}</div>
+        <div style="color:#a39885;margin-top:8px">Tüm veri tarayıcında lokal.</div>
+      </div>
+      <button class="btn btn-secondary btn-full" style="margin-top:12px" data-act="exportData">Yedek İndir (JSON)</button>
+      <button class="btn btn-secondary btn-full" style="margin-top:8px" data-act="importData">Yedek Yükle (JSON)</button>
+    </div>
+  </div>`;
+}
+
+function render() {
+  const activeFocus = document.activeElement;
+  const focusKey = activeFocus && activeFocus.dataset && (activeFocus.dataset.input || activeFocus.dataset.edit);
+  const focusKeyAttr = activeFocus && activeFocus.dataset && activeFocus.dataset.key;
+  const cursorPos = activeFocus && typeof activeFocus.selectionStart === 'number' ? activeFocus.selectionStart : null;
+
+  let body;
+  if (state.view === 'today') body = renderToday();
+  else if (state.view === 'library') body = renderLibrary();
+  else if (state.view === 'history') body = renderHistory();
+  else if (state.view === 'settings') body = renderSettings();
+
+  document.getElementById('root').innerHTML = `
+    <div class="hdr">
+      <h1>${svg('act','icn icn-lg')} <span style="color:#3a3530">KarbSayar</span></h1>
+      <div class="hdr-sub">Tip 1 Diyabet · KH Sayım</div>
+    </div>
+    ${body}
+    <div class="nav">
+      <div class="nav-grid">
+        ${[
+          { id: 'today', icon: 'act', label: 'Bugün' },
+          { id: 'library', icon: 'db', label: 'Kütüphane' },
+          { id: 'history', icon: 'hist', label: 'Geçmiş' },
+          { id: 'settings', icon: 'sett', label: 'Ayarlar' }
+        ].map(t => `<button class="nav-btn ${state.view === t.id ? 'active' : ''}" data-act="setView" data-view="${t.id}">
+          ${svg(t.icon, 'icn icn-lg')}<span>${t.label}</span>
+        </button>`).join('')}
+      </div>
+    </div>
+  `;
+
+  if (focusKey) {
+    let el;
+    if (focusKeyAttr) el = document.querySelector(`[data-edit="${focusKey}"][data-key="${focusKeyAttr}"]`);
+    else el = document.querySelector(`[data-input="${focusKey}"]`);
+    if (el) {
+      el.focus();
+      if (cursorPos !== null) { try { el.setSelectionRange(cursorPos, cursorPos); } catch (e) {} }
+    }
+  }
+  document.body.classList.toggle('dark', state.darkMode);
+}
+
+// Inline güncellemeler — render olmadan
+function refreshUnitDropdown() {
+  const sel = document.querySelector('[data-input="portionUnit"]');
+  if (!sel) return;
+  ensureValidUnit();
+  const units = getUnitsForFood(state.foodInput);
+  sel.innerHTML = units.map(([n, g]) =>
+    `<option value="${esc(n)}" ${n === state.portionUnit ? 'selected' : ''}>${esc(n)} (${g}g)</option>`
+  ).join('');
+  refreshGramsDisplay();
+}
+function refreshGramsDisplay() {
+  const span = document.querySelector('[data-display="grams"]');
+  if (!span) return;
+  const grams = getCurrentGrams();
+  span.innerHTML = grams > 0 ? `= <b>${fmt(grams)} gram</b>` : '';
+}
+
+// ============================================================================
+// EVENT HANDLING
+// ============================================================================
+document.addEventListener('click', (ev) => {
+  const t = ev.target.closest('[data-act]');
+  if (!t) return;
+  const act = t.dataset.act;
+
+  if (act === 'setView') { state.view = t.dataset.view; state.error = null; render(); }
+  else if (act === 'toggleManual') { state.manualMode = !state.manualMode; state.error = null; render(); }
+  else if (act === 'lookup') lookupFood();
+  else if (act === 'submitManual') submitManual();
+  else if (act === 'cancelEstimate') {
+    state.estimate = null;
+    state.currentBG = '';
+    if (state.mealItems.length === 0) state.currentMealType = null;
+    render();
+  }
+  else if (act === 'confirmAdd') confirmAdd();
+  else if (act === 'addToMeal') addToMealCart();
+  else if (act === 'removeMealItem') removeMealItem(parseInt(t.dataset.idx, 10));
+  else if (act === 'cancelMeal') cancelMeal();
+  else if (act === 'commitMeal') commitMeal();
+  else if (act === 'setMealType') {
+    state.currentMealType = t.dataset.type;
+    render();
+  }
+  else if (act === 'setEditMealType') {
+    state.editDraft.mealType = t.dataset.type;
+    render();
+  }
+  else if (act === 'toggleExercise') {
+    state.exerciseMode = !state.exerciseMode;
+    render();
+  }
+  else if (act === 'saveAsTemplate') saveCurrentAsTemplate();
+  else if (act === 'loadTemplate') {
+    loadTemplate(t.dataset.key);
+    state.view = 'today';
+    render();
+  }
+  else if (act === 'deleteTemplate') deleteTemplate(t.dataset.key);
+  else if (act === 'startEditEntry') startEditEntry(t.dataset.id);
+  else if (act === 'cancelEditEntry') cancelEditEntry();
+  else if (act === 'saveEditEntry') saveEditEntry(t.dataset.id);
+  else if (act === 'startPostBG') startPostBGInput(t.dataset.id);
+  else if (act === 'cancelPostBG') cancelPostBGInput();
+  else if (act === 'savePostBG') savePostBG();
+  else if (act === 'setStatPeriod') {
+    state.statPeriod = parseInt(t.dataset.days, 10);
+    render();
+  }
+  else if (act === 'exportCSV') exportCSV();
+  else if (act === 'setCorrectionBG') {
+    state.correctionBG = t.dataset.val;
+    render();
+  }
+  else if (act === 'openCorrection') {
+    state.correctionFormOpen = true;
+    state.estimate = null;
+    state.error = null;
+    render();
+  }
+  else if (act === 'cancelCorrection') {
+    state.correctionFormOpen = false;
+    state.correctionBG = '';
+    state.correctionManual = '';
+    state.error = null;
+    render();
+  }
+  else if (act === 'commitCorrection') commitCorrection();
+  else if (act === 'deleteEntry') deleteEntry(t.dataset.id);
+  else if (act === 'pickSuggestion') {
+    state.foodInput = t.dataset.name;
+    state.suggestions = [];
+    // Yeni yemek için doğal birime geç
+    const units = getUnitsForFood(state.foodInput);
+    state.portionUnit = units[0][0];
+    render();
+    const inp = document.querySelector('[data-input="portionQty"]');
+    if (inp) inp.focus();
+  }
+  else if (act === 'editLib') { state.editingFood = t.dataset.key; render(); }
+  else if (act === 'cancelEdit') { state.editingFood = null; render(); }
+  else if (act === 'saveEdit') {
+    const key = t.dataset.key;
+    const c = parseFloat(document.querySelector(`[data-edit="c"][data-key="${key}"]`).value) || 0;
+    const p = parseFloat(document.querySelector(`[data-edit="p"][data-key="${key}"]`).value) || 0;
+    const f = parseFloat(document.querySelector(`[data-edit="f"][data-key="${key}"]`).value) || 0;
+    const n = document.querySelector(`[data-edit="n"][data-key="${key}"]`).value;
+    updateLibFood(key, { carbsPer100g: c, proteinPer100g: p, fatPer100g: f, notes: n });
+  }
+  else if (act === 'deleteLib') deleteFromLibrary(t.dataset.key);
+  else if (act === 'goToDay') { state.date = t.dataset.date; state.view = 'today'; loadDayLog(); render(); }
+  else if (act === 'exportData') {
+    const data = {
+      library: state.library, templates: state.templates, history: state.history,
+      settings: {
+        insulinRatio: state.insulinRatio, ratioMode: state.ratioMode, ratios: state.ratios,
+        useCorrection: state.useCorrection, isf: state.isf, targetBG: state.targetBG,
+        roundStep: state.roundStep, diaMinutes: state.diaMinutes,
+        darkMode: state.darkMode, exerciseReduction: state.exerciseReduction
+      }
+    };
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = `karbsayar-yedek-${new Date().toISOString().split('T')[0]}.json`;
+    a.click(); URL.revokeObjectURL(url);
+  }
+  else if (act === 'importData') {
+    const inp = document.createElement('input');
+    inp.type = 'file'; inp.accept = '.json,application/json';
+    inp.onchange = async (e) => {
+      const file = e.target.files[0]; if (!file) return;
+      try {
+        const txt = await file.text();
+        const data = JSON.parse(txt);
+        if (data.library) saveLibrary(data.library);
+        if (data.templates) saveTemplates(data.templates);
+        if (data.history) {
+          for (const [d, entries] of Object.entries(data.history)) LS.set(`karbsayar:log:${d}`, entries);
+          state.history = data.history;
+        }
+        if (data.settings) {
+          const s = data.settings;
+          if (typeof s.insulinRatio === 'number') state.insulinRatio = s.insulinRatio;
+          if (s.ratioMode) state.ratioMode = s.ratioMode;
+          if (s.ratios) state.ratios = { ...state.ratios, ...s.ratios };
+          if (typeof s.useCorrection === 'boolean') state.useCorrection = s.useCorrection;
+          if (typeof s.isf === 'number') state.isf = s.isf;
+          if (typeof s.targetBG === 'number') state.targetBG = s.targetBG;
+          if (typeof s.roundStep === 'number') state.roundStep = s.roundStep;
+          if (typeof s.diaMinutes === 'number') state.diaMinutes = s.diaMinutes;
+          if (typeof s.darkMode === 'boolean') state.darkMode = s.darkMode;
+          if (typeof s.exerciseReduction === 'number') state.exerciseReduction = s.exerciseReduction;
+          persistAllSettings();
+        }
+        loadDayLog();
+        alert('Yedek yüklendi.');
+        render();
+      } catch (err) { alert('Hata: ' + err.message); }
+    };
+    inp.click();
+  }
+});
+
+document.addEventListener('input', (ev) => {
+  const t = ev.target;
+  // Düzenleme formu input'ları
+  if (t.dataset && t.dataset.editInput) {
+    state.editDraft[t.dataset.editInput] = t.value;
+    return;
+  }
+  if (!t.dataset || !t.dataset.input) return;
+  const key = t.dataset.input;
+
+  if (key === 'foodInput') {
+    state.foodInput = t.value;
+    updateSuggestions();
+    // Suggestions update inline
+    const wrap = t.parentElement;
+    const old = wrap.querySelector('.suggestions');
+    if (old) old.remove();
+    if (!state.manualMode && state.suggestions.length > 0) {
+      const div = document.createElement('div');
+      div.className = 'suggestions';
+      div.innerHTML = state.suggestions.map(s => `<button class="suggestion" data-act="pickSuggestion" data-name="${esc(s.name)}">
+        <span>${esc(s.name)}</span>
+        <span class="tag ${s.src === 'lib' ? 'tag-lib' : 'tag-db'}">${s.src === 'lib' ? 'kayıtlı' : 'DB'}</span>
+      </button>`).join('');
+      wrap.appendChild(div);
+    }
+    // Birim dropdown'unu güncelle (yiyecek değişti, birimler değişebilir)
+    refreshUnitDropdown();
+  }
+  else if (key === 'portionQty') { state.portionQty = t.value; refreshGramsDisplay(); }
+  else if (key === 'manualCarbs') state.manualCarbs = t.value;
+  else if (key === 'manualProtein') state.manualProtein = t.value;
+  else if (key === 'manualFat') state.manualFat = t.value;
+  else if (key === 'librarySearch') { state.librarySearch = t.value; render(); }
+  else if (key === 'currentBG') { state.currentBG = t.value; render(); }
+  else if (key === 'correctionBG') { state.correctionBG = t.value; render(); }
+  else if (key === 'correctionManual') { state.correctionManual = t.value; render(); }
+  else if (key === 'currentNotes') state.currentNotes = t.value;
+  else if (key === 'correctionNotes') state.correctionNotes = t.value;
+  else if (key === 'postBgValue') state.postBgValue = t.value;
+  else if (key === 'apiKey') { state.apiKey = t.value; saveSettings({ apiKey: t.value }); }
+});
+
+document.addEventListener('change', (ev) => {
+  const t = ev.target;
+  if (!t.dataset) return;
+  const key = t.dataset.input;
+
+  // Sayı ayarları için doğrulayıcı: virgülü noktaya çevir, geçerli pozitif değilse eski değere döndür
+  const parseSettingNumber = (raw) => {
+    const v = parseFloat(String(raw).replace(',', '.'));
+    return (!isNaN(v) && v > 0) ? v : null;
+  };
+
+  if (t.type === 'date' && t.dataset.act === 'setDate') { state.date = t.value; loadDayLog(); render(); }
+  else if (key === 'portionUnit') { state.portionUnit = t.value; refreshGramsDisplay(); }
+  else if (key === 'ratioMode') { state.ratioMode = t.value; saveSettings({ ratioMode: state.ratioMode }); render(); }
+  else if (key === 'roundStep') { state.roundStep = parseFloat(t.value); saveSettings({ roundStep: state.roundStep }); render(); }
+  else if (key === 'useCorrection') { state.useCorrection = t.checked; saveSettings({ useCorrection: state.useCorrection }); render(); }
+  else if (key === 'insulinRatio') {
+    const v = parseSettingNumber(t.value);
+    if (v !== null) { state.insulinRatio = v; saveSettings({ insulinRatio: v }); }
+    t.value = state.insulinRatio;
+  }
+  else if (key === 'ratio_breakfast') {
+    const v = parseSettingNumber(t.value);
+    if (v !== null) { state.ratios.breakfast = v; saveSettings({ ratios: state.ratios }); }
+    t.value = state.ratios.breakfast;
+  }
+  else if (key === 'ratio_lunch') {
+    const v = parseSettingNumber(t.value);
+    if (v !== null) { state.ratios.lunch = v; saveSettings({ ratios: state.ratios }); }
+    t.value = state.ratios.lunch;
+  }
+  else if (key === 'ratio_dinner') {
+    const v = parseSettingNumber(t.value);
+    if (v !== null) { state.ratios.dinner = v; saveSettings({ ratios: state.ratios }); }
+    t.value = state.ratios.dinner;
+  }
+  else if (key === 'ratio_night') {
+    const v = parseSettingNumber(t.value);
+    if (v !== null) { state.ratios.night = v; saveSettings({ ratios: state.ratios }); }
+    t.value = state.ratios.night;
+  }
+  else if (key === 'isf') {
+    const v = parseSettingNumber(t.value);
+    if (v !== null) { state.isf = v; saveSettings({ isf: v }); }
+    t.value = state.isf;
+  }
+  else if (key === 'targetBG') {
+    const v = parseSettingNumber(t.value);
+    if (v !== null) { state.targetBG = v; saveSettings({ targetBG: v }); }
+    t.value = state.targetBG;
+  }
+  else if (key === 'diaHours') {
+    const v = parseSettingNumber(t.value);
+    if (v !== null && v >= 1 && v <= 8) {
+      state.diaMinutes = v * 60;
+      saveSettings({ diaMinutes: state.diaMinutes });
+    }
+    t.value = state.diaMinutes / 60;
+  }
+  else if (key === 'darkMode') {
+    state.darkMode = t.checked;
+    saveSettings({ darkMode: state.darkMode });
+    document.body.classList.toggle('dark', state.darkMode);
+  }
+  else if (key === 'exerciseReduction') {
+    const v = parseSettingNumber(t.value);
+    if (v !== null && v >= 0 && v <= 80) {
+      state.exerciseReduction = v;
+      saveSettings({ exerciseReduction: v });
+    }
+    t.value = state.exerciseReduction;
+    render();
+  }
+});
+
+loadAll();
+render();
+</script>
+</body>
+</html>
