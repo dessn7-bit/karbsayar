@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0048)file:///C:/Users/Kaan/Downloads/karbsayar_4.html -->
+<!-- saved from url=(0048)file:///C:/Users/Kaan/Downloads/karbsayar_5.html -->
 <html lang="tr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -238,6 +238,29 @@ input[type=date]:focus,.in:focus,select:focus{border-color:#5b9279;background:#f
 .travel-badge{background:linear-gradient(135deg,#dbeafe,#bfdbfe) !important;border-color:#60a5fa !important;color:#1e3a5f !important}
 .travel-info{margin-top:10px;padding:10px;background:#fafaf5;border:1px solid #ede4d3;border-radius:8px}
 .travel-info-row{display:flex;justify-content:space-between;font-size:12px;padding:3px 0}
+.gi-badge{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;font-size:11px;line-height:1;margin-right:2px}
+.glycemic-card{padding:14px;border-radius:12px;margin-bottom:10px;border:2px solid}
+.glycemic-high{background:linear-gradient(135deg,#fff5f5,#fee2e2);border-color:#a03030}
+.glycemic-medium{background:linear-gradient(135deg,#fef9ed,#fef3c7);border-color:#d97706}
+.glycemic-low{background:linear-gradient(135deg,#f0f9f4,#dcfce7);border-color:#5b9279}
+.glycemic-header{display:flex;align-items:center;gap:12px}
+.glycemic-icon{font-size:28px;flex-shrink:0}
+.glycemic-info{flex:1;min-width:0}
+.glycemic-label{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:#7a6f60;font-weight:600}
+.glycemic-title{font-size:18px;font-weight:700;line-height:1.2;margin-top:2px}
+.glycemic-time{text-align:right;flex-shrink:0}
+.glycemic-time-val{font-size:22px;font-weight:700;color:#3a3530;line-height:1;font-variant-numeric:tabular-nums}
+.glycemic-time-unit{font-size:11px;color:#7a6f60;font-weight:500;margin-left:1px}
+.glycemic-time-lbl{font-size:9px;color:#7a6f60;text-transform:uppercase;letter-spacing:.3px;margin-top:2px}
+.glycemic-modifier{display:flex;flex-direction:column;gap:2px;margin-top:8px;padding:6px 8px;background:rgba(255,255,255,.5);border-radius:6px;font-size:11px;color:#5a4f42}
+.glycemic-warning{margin-top:8px;padding:8px;background:#fff;border-radius:6px;font-size:12px;color:#3a3530;border-left:3px solid #a03030;line-height:1.4}
+.glycemic-note{margin-top:8px;padding:8px;background:#fff;border-radius:6px;font-size:11px;color:#7a6f60;border-left:3px solid #d97706}
+body.dark .glycemic-high{background:linear-gradient(135deg,#3d1a1a,#5a2020);border-color:#a03030}
+body.dark .glycemic-medium{background:linear-gradient(135deg,#3d3520,#4a4023);border-color:#d97706}
+body.dark .glycemic-low{background:linear-gradient(135deg,#1a3d2a,#2a4d3a);border-color:#5b9279}
+body.dark .glycemic-time-val{color:#e0d8c8}
+body.dark .glycemic-modifier{background:rgba(0,0,0,.3);color:#c8c0b0}
+body.dark .glycemic-warning,body.dark .glycemic-note{background:#34302a;color:#e0d8c8}
 body.dark .dose-breakdown-panel{background:#34302a;border-color:#403b33}
 body.dark .pattern-alarms-card{background:linear-gradient(135deg,#3d1a1a,#5a2020);border-color:#a03030}
 body.dark .pattern-alarm{background:#34302a}
@@ -1308,6 +1331,13 @@ const DB = {
 'kaymak':{n:'Kaymak',c:3.0,p:2.5,f:50.0,o:'TR ortalama',u:[['kaşık',15]]},
 'pirinç beyaz pişmiş':{n:'Pirinç (beyaz, pişmiş)',c:28.2,p:2.7,f:0.3,o:'USDA SR',u:[['porsiyon',158]]},
 'pirinç esmer pişmiş':{n:'Pirinç (esmer, pişmiş)',c:23.0,p:2.6,f:0.9,o:'USDA SR',u:[['porsiyon',195]]},
+'basmati pirinç pişmiş':{n:'Basmati Pirinç (pişmiş)',c:25.0,p:3.5,f:0.4,o:'USDA SR · Mahatma',u:[['porsiyon',158],['kase',200]]},
+'basmati pilavı':{n:'Basmati Pilavı (tereyağlı)',c:28.0,p:3.2,f:5.0,o:'TR ortalama',u:[['porsiyon',180],['kase',200]]},
+'jasmin pirinç pişmiş':{n:'Jasmin Pirinç (pişmiş)',c:29.0,p:2.9,f:0.4,o:'USDA SR',u:[['porsiyon',158]]},
+'siyah pirinç pişmiş':{n:'Siyah Pirinç (pişmiş)',c:34.0,p:4.5,f:1.5,o:'USDA SR',u:[['porsiyon',150]]},
+'kırmızı pirinç pişmiş':{n:'Kırmızı Pirinç (pişmiş)',c:25.0,p:5.0,f:1.0,o:'USDA SR',u:[['porsiyon',150]]},
+'yabani pirinç pişmiş':{n:'Yabani Pirinç (pişmiş)',c:21.0,p:4.0,f:0.3,o:'USDA SR',u:[['porsiyon',164]]},
+'arborio pirinç pişmiş':{n:'Arborio (risotto pirinci)',c:28.0,p:3.5,f:0.5,o:'USDA SR',u:[['porsiyon',158]]},
 'bulgur pişmiş':{n:'Bulgur (pişmiş)',c:18.6,p:3.1,f:0.2,o:'USDA SR',u:[['porsiyon',182]]},
 'kuskus pişmiş':{n:'Kuskus (pişmiş)',c:23.2,p:3.8,f:0.2,o:'USDA SR',u:[['porsiyon',157]]},
 'arpa pişmiş':{n:'Arpa (pişmiş)',c:28.2,p:2.3,f:0.4,o:'USDA SR',u:[['porsiyon',157]]},
@@ -4596,6 +4626,7 @@ const state = {
   exDuration: '15',
   exIntensity: 'moderate',
   exDistance: '',
+  exSteps: '',
   exBgBefore: '',
   exBgAfter: '',
   exNote: '',
@@ -5107,11 +5138,11 @@ function updateSuggestions() {
   
   // Skorlu sıralama
   const fromLib = Object.entries(state.library)
-    .map(([k, v]) => ({ key: k, name: v.name, src: 'lib', carbs: v.carbsPer100g || 0, score: matchScore(q, k, v.name) }))
+    .map(([k, v]) => ({ key: k, name: v.name, src: 'lib', carbs: v.carbsPer100g || 0, protein: v.proteinPer100g || 0, fat: v.fatPer100g || 0, score: matchScore(q, k, v.name) }))
     .filter(x => x.score > 0);
   const fromDB = Object.entries(DB)
     .filter(([k]) => !state.library[k])
-    .map(([k, v]) => ({ key: k, name: v.n, src: 'db', carbs: v.c || 0, score: matchScore(q, k, v.n) }))
+    .map(([k, v]) => ({ key: k, name: v.n, src: 'db', carbs: v.c || 0, protein: v.p || 0, fat: v.f || 0, score: matchScore(q, k, v.n) }))
     .filter(x => x.score > 0);
   
   const all = [...fromLib, ...fromDB];
@@ -6902,6 +6933,7 @@ function commitExercise() {
   const bgBefore = state.exBgBefore ? parseFloat(String(state.exBgBefore).replace(',', '.')) : null;
   const bgAfter = state.exBgAfter ? parseFloat(String(state.exBgAfter).replace(',', '.')) : null;
   const distance = state.exDistance ? parseFloat(String(state.exDistance).replace(',', '.')) : null;
+  const steps = state.exSteps ? parseInt(String(state.exSteps).replace(/[^0-9]/g, '')) : null;
   
   // IOB snapshot - egzersiz başında vücutta kaç Ü aktif insülin vardı
   const iobAtStart = calcIOB().total;
@@ -6920,6 +6952,7 @@ function commitExercise() {
   
   const desc = `${typeLabels[state.exType]} · ${duration}dk · ${intensityLabels[state.exIntensity]}`
     + (distance ? ` · ${distance}km` : '')
+    + (steps ? ` · ${steps} adım` : '')
     + (bgBefore && bgAfter ? ` · ${bgBefore}→${bgAfter}` : '');
   
   const newEntry = {
@@ -6939,11 +6972,15 @@ function commitExercise() {
     duration: duration,
     intensity: state.exIntensity,
     distance: distance,
+    steps: steps,
     iobAtStart: Math.round(iobAtStart * 100) / 100,
     note: state.exNote || ''
   };
   saveLog([...state.todayLog, newEntry]);
   state.exerciseFormOpen = false;
+  state.exSteps = '';
+  state.exDistance = '';
+  state.exNote = '';
   render();
 }
 
@@ -7204,6 +7241,7 @@ function analyzeExerciseSensitivity(days = 90) {
         duration: e.duration,
         intensity: e.intensity,
         distance: e.distance,
+        steps: e.steps,
         iob: e.iobAtStart || 0,
         bgBefore: e.bg,
         bgAfter: e.bgAfter,
@@ -7257,6 +7295,59 @@ function analyzeExerciseSensitivity(days = 90) {
     types: sortedTypes,
     summary,
     records: records.slice(-10).reverse()
+  };
+}
+
+// === ADIM SAYISI ÖĞRENME ===
+// Yürüyüş ve koşu kayıtlarından "1000 adım = X mg/dL düşüş" tahmini
+function analyzeStepsImpact(days = 90) {
+  const recent = getRecentDays(days);
+  const stepRecords = [];
+  
+  for (const [date, entries] of Object.entries(recent)) {
+    for (const e of entries) {
+      if (e.type !== 'exercise') continue;
+      if (typeof e.steps !== 'number' || e.steps <= 0) continue;
+      if (typeof e.bgDelta !== 'number') continue;
+      // Sadece yürüyüş ve koşu için adım anlamlı
+      if (e.exType !== 'walk' && e.exType !== 'run') continue;
+      stepRecords.push({
+        date, time: e.time,
+        exType: e.exType,
+        steps: e.steps,
+        duration: e.duration,
+        delta: e.bgDelta,
+        bgBefore: e.bg,
+        bgAfter: e.bgAfter,
+        iob: e.iobAtStart || 0,
+        // Adım başına düşüş (mg/dL per 1000 adım)
+        deltaPer1k: (e.bgDelta / e.steps) * 1000
+      });
+    }
+  }
+  
+  if (stepRecords.length === 0) {
+    return { status: 'empty', records: [] };
+  }
+  
+  // İstatistik
+  const totalSteps = stepRecords.reduce((s, r) => s + r.steps, 0);
+  const totalDelta = stepRecords.reduce((s, r) => s + r.delta, 0);
+  const avgPer1k = stepRecords.length > 0 ? (totalDelta / totalSteps) * 1000 : 0;
+  const avgSteps = Math.round(totalSteps / stepRecords.length);
+  const avgDelta = Math.round(totalDelta / stepRecords.length);
+  
+  // En son egzersiz (kullanıcıya somut örnek)
+  const sorted = [...stepRecords].sort((a, b) => (b.date + b.time).localeCompare(a.date + a.time));
+  
+  return {
+    status: 'ok',
+    count: stepRecords.length,
+    avgPer1k: Math.round(avgPer1k * 10) / 10,
+    avgSteps,
+    avgDelta,
+    totalSteps,
+    recent: sorted.slice(0, 5)
   };
 }
 
@@ -7337,6 +7428,212 @@ function analyzeHourlyISF(days = 30) {
 // Yağlı/proteinli yemekler 3-5 saatte gecikmeli KŞ yükselişine yol açar
 // (fat/protein delay phenomenon). Bu fonksiyon yemek tipi × post-meal KŞ
 // pattern'ını çıkarır.
+
+// ============================================================================
+// GLİSEMİK İNDEX (GI) SİSTEMİ - Yemek bazında KŞ yükseliş hızı tahmini
+// ============================================================================
+
+// Anahtar kelime tabanlı GI tahmini (lookup tablosu — sık karşılaşılan yemekler)
+// Kaynak: International GI Tables (Foster-Powell 2002), Atkinson 2008
+const GI_KEYWORDS = {
+  // YÜKSEK GI (>70) — hızlı pik
+  high: [
+    'glukoz','dextrose','şeker','bal','reçel','marmelat',
+    'beyaz ekmek','baget','francala','simit','poğaça','açma','ramazan',
+    'pilav','beyaz pilav','kuru pilav','iç pilav','şehriyeli',
+    'patates püre','patates kızartma','patates haşlanmış','patates fırın','cips',
+    'kola','gazoz','meyve suyu','energy drink',
+    'baklava','kadayıf','şekerpare','kemalpaşa','revani','tulumba','lokma','helva',
+    'corn flakes','mısır gevreği','choco pops',
+    'pirinç patlağı','mısır patlağı','popcorn','rice cake',
+    'piriniç irmik','irmik','bulamaç','muhallebi',
+    'pilav (beyaz','beyaz pirinç','jasmin'
+  ],
+  // ORTA GI (55-70)
+  medium: [
+    'esmer ekmek','tam buğday ekmek','çavdar ekmek',
+    'makarna','spagetti','penne','noodle','erişte','lazanya','mantı',
+    'kurabiye','bisküvi','kek','muffin','pankek','waffle',
+    'üzüm','muz','ananas','mango','kavun','karpuz','hurma',
+    'pizza','hamburger','sandviç','tost','dürüm','wrap',
+    'esmer pirinç','arborio','sushi pirinç',
+    'çorba','mercimek çorba','tarhana','yayla',
+    'haşlanmış havuç','tatlı patates','mısır',
+    'reçel','nutella','kakao','sütlü çikolata',
+    'yoğurt (sade)','ayran','kefir','dondurma'
+  ],
+  // DÜŞÜK GI (<55) — yavaş pik
+  low: [
+    'basmati','siyah pirinç','kırmızı pirinç','yabani pirinç','wild rice',
+    'bulgur','kuskus','kinoa','quinoa','yulaf','yulaf ezmesi','arpa',
+    'mercimek','nohut','fasulye','barbunya','bakla taze','bakla kuru','baklagil','soya','tofu',
+    'badem','ceviz','fındık','fıstık','antep','kaju','macadamia','pekan','chia','keten','susam',
+    'elma','armut','şeftali','kayısı','erik','çilek','vişne','kiraz','portakal','mandalina','greyfurt','kivi','ahududu','böğürtlen','yaban mersini','blueberry',
+    'yumurta','peynir','kaşar','beyaz peynir','lor','süzme','labne','feta','tulum','mozzarella','cheddar','parmesan','rikotta','cottage','cream cheese','gravyer',
+    'tavuk','et','kuzu','dana','sığır','köfte','biftek','sosis','salam','sucuk','pastırma','jambon','bacon','pepperoni',
+    'balık','somon','levrek','çupra','hamsi','sardalya','uskumru','palamut','ton','tuna','kalamar','karides','midye','ahtapot',
+    'salata','zeytin','avokado','marul','ıspanak','semizotu','roka','tere','maydanoz','dereotu','nane','fesleğen','kekik',
+    'yeşil sebze','brokoli','karnabahar','kabak','patlıcan','salatalık','domates','biber','soğan','sarımsak','turp','kereviz','enginar','bamya','lahana','pırasa','mantar',
+    'lif','protein bar','sade yoğurt'
+  ]
+};
+
+// Yemekten GI sınıfını çıkar — anahtar kelime + makro oranı kombinasyonu
+// Kelimeler kelime sınırında eşleşir (et → "et" kelimesi, ama "etiket" değil)
+function _giKwMatch(name, kw) {
+  // Çok kısa keyword'ler (≤3 karakter) için word boundary gerekli
+  if (kw.length <= 3) {
+    const re = new RegExp('(^|[^a-zçğıöşü])' + kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-zçğıöşü])', 'i');
+    return re.test(name);
+  }
+  return name.includes(kw);
+}
+
+function getFoodGI(foodName, item) {
+  const name = (foodName || '').toLowerCase();
+  
+  // 1. ANAHTAR KELİME EŞLEŞMESİ (en güçlü sinyal)
+  for (const kw of GI_KEYWORDS.low) {
+    if (_giKwMatch(name, kw)) return { gi: 'low', source: 'keyword', kw };
+  }
+  for (const kw of GI_KEYWORDS.high) {
+    if (_giKwMatch(name, kw)) {
+      // Yağ/protein bol varsa düşür (örn pizza yüksek değil, orta)
+      if (item) {
+        const c = item.carbs || 0, p = item.protein || 0, f = item.fat || 0;
+        const total = c + p + f;
+        if (total > 0) {
+          const cKcal = c * 4, pKcal = p * 4, fKcal = f * 9;
+          const totalKcal = cKcal + pKcal + fKcal;
+          if (totalKcal > 0) {
+            const fPct = fKcal / totalKcal;
+            const pPct = pKcal / totalKcal;
+            if (fPct >= 0.30 || pPct >= 0.25) return { gi: 'medium', source: 'keyword+macro', kw, note: 'yağ/protein yavaşlatır' };
+          }
+        }
+      }
+      return { gi: 'high', source: 'keyword', kw };
+    }
+  }
+  for (const kw of GI_KEYWORDS.medium) {
+    if (_giKwMatch(name, kw)) return { gi: 'medium', source: 'keyword', kw };
+  }
+  
+  // 2. MAKRO ORANI TABANLI tahmin (anahtar kelime yoksa)
+  if (item) {
+    const c = item.carbs || 0, p = item.protein || 0, f = item.fat || 0;
+    const total = c + p + f;
+    if (total < 1) return { gi: 'low', source: 'fallback' };
+    
+    const cKcal = c * 4, pKcal = p * 4, fKcal = f * 9;
+    const totalKcal = cKcal + pKcal + fKcal;
+    if (totalKcal === 0) return { gi: 'low', source: 'fallback' };
+    
+    const cPct = cKcal / totalKcal;
+    const fPct = fKcal / totalKcal;
+    const pPct = pKcal / totalKcal;
+    
+    // Yağ baskın (>30% kalori) → düşük GI
+    if (fPct >= 0.30) return { gi: 'low', source: 'macro', note: 'yağ ağırlıklı' };
+    // Protein baskın → düşük GI
+    if (pPct >= 0.25) return { gi: 'low', source: 'macro', note: 'protein ağırlıklı' };
+    // Yüksek KH oranlı (>70% kalori) → orta-yüksek
+    if (cPct >= 0.85) return { gi: 'high', source: 'macro', note: 'saf KH' };
+    if (cPct >= 0.70) return { gi: 'medium', source: 'macro', note: 'KH baskın' };
+    return { gi: 'medium', source: 'fallback' };
+  }
+  
+  return { gi: 'medium', source: 'unknown' };
+}
+
+const GI_LABELS = {
+  high:   { label: 'Hızlı pik',   emoji: '🔴', color: '#a03030', peakMin: 25, peakMax: 45,  description: 'KŞ hızlı yükselir, 30-45dk peak' },
+  medium: { label: 'Orta hız',    emoji: '🟡', color: '#d97706', peakMin: 45, peakMax: 75,  description: 'KŞ orta hız yükselir, 60dk peak' },
+  low:    { label: 'Yavaş/stabil',emoji: '🟢', color: '#5b9279', peakMin: 60, peakMax: 120, description: 'KŞ yavaş yükselir, 75-120dk peak' }
+};
+
+// Sepetin tamamı için glisemik pik tahmini
+// Toplam KH + ağırlıklı GI + yağ/protein etkisi → peak süre + yükseliş tahmini
+function calcGlycemicPeak(mealItems, isf, ratio) {
+  if (!mealItems || mealItems.length === 0) return null;
+  
+  let totalCarbs = 0, totalProtein = 0, totalFat = 0;
+  let weightedGiScore = 0; // 0=low, 1=medium, 2=high
+  let totalCarbWeight = 0;
+  const itemDetails = [];
+  
+  for (const item of mealItems) {
+    const c = item.carbs || 0;
+    const p = item.protein || 0;
+    const f = item.fat || 0;
+    totalCarbs += c;
+    totalProtein += p;
+    totalFat += f;
+    
+    const giInfo = getFoodGI(item.food, item);
+    const score = giInfo.gi === 'high' ? 2 : giInfo.gi === 'medium' ? 1 : 0;
+    
+    if (c > 0) {
+      weightedGiScore += score * c;
+      totalCarbWeight += c;
+    }
+    itemDetails.push({ food: item.food, carbs: c, gi: giInfo.gi, score });
+  }
+  
+  if (totalCarbs < 1) return null;
+  
+  // Ağırlıklı GI
+  const avgScore = totalCarbWeight > 0 ? weightedGiScore / totalCarbWeight : 1;
+  let combinedGi;
+  if (avgScore >= 1.5) combinedGi = 'high';
+  else if (avgScore >= 0.7) combinedGi = 'medium';
+  else combinedGi = 'low';
+  
+  // Yağ ve protein peak'i geciktirir (yağ daha güçlü)
+  const totalKcal = totalCarbs * 4 + totalProtein * 4 + totalFat * 9;
+  const fatPct = totalKcal > 0 ? (totalFat * 9) / totalKcal : 0;
+  const proteinPct = totalKcal > 0 ? (totalProtein * 4) / totalKcal : 0;
+  
+  let peakMin = GI_LABELS[combinedGi].peakMin;
+  let peakMax = GI_LABELS[combinedGi].peakMax;
+  
+  // Yağ %25+ → +15dk geciktir, %35+ → +30dk
+  let fatDelay = 0;
+  if (fatPct >= 0.35) fatDelay = 30;
+  else if (fatPct >= 0.25) fatDelay = 15;
+  // Protein %25+ → +10dk
+  let proteinDelay = proteinPct >= 0.25 ? 10 : 0;
+  
+  peakMin += fatDelay + proteinDelay;
+  peakMax += fatDelay + proteinDelay;
+  
+  // Tahmini KŞ yükselişi:
+  // Tipik: 1g KH ~3-5 mg/dL yükseltir (insulin etkisi öncesi)
+  // İnsulin doğru hesap edildiyse net etki ~0 olmalı
+  // Bu pik bolus öncesi tahmini, BOLUS YOKSA değer
+  // Ama insulin pikinin geç gelişiyle (rapid 60-90dk peak), GI yüksekse mismatch olur
+  const grossRise = totalCarbs * 4; // ortalama yükseliş gross
+  
+  // KH-insulin mismatch riski (insulin peak ~75dk, eğer yemek peak<60dk ise yüksek)
+  let mismatchRisk = 'low';
+  if (peakMin < 50 && combinedGi === 'high') mismatchRisk = 'high';
+  else if (peakMin < 75 && combinedGi !== 'low') mismatchRisk = 'medium';
+  
+  return {
+    combinedGi,
+    label: GI_LABELS[combinedGi],
+    peakMin: Math.round(peakMin),
+    peakMax: Math.round(peakMax),
+    totalCarbs: Math.round(totalCarbs),
+    fatPct: Math.round(fatPct * 100),
+    proteinPct: Math.round(proteinPct * 100),
+    fatDelay,
+    proteinDelay,
+    grossRise: Math.round(grossRise),
+    mismatchRisk,
+    itemDetails
+  };
+}
 
 function classifyMeal(entry) {
   const c = entry.carbs || 0;
@@ -8717,6 +9014,60 @@ function renderBrain() {
   }
   html += '</div>';
   
+  // === KART 7B: ADIM SAYISI ÖĞRENME ===
+  const stepsA = analyzeStepsImpact(90);
+  html += `<div class="card">
+    <h2 style="margin:0 0 4px">👣 Adım Sayısı Etkisi</h2>
+    <div class="tiny muted" style="margin-bottom:12px">Yürüyüş ve koşu kayıtlarından adım/KŞ ilişkisi öğrenilir. Adım sayısı + KŞ önce/sonra girersen bu öğrenir.</div>`;
+  
+  if (stepsA.status === 'empty') {
+    html += `<div style="text-align:center;padding:20px;background:#fafaf5;border-radius:10px;color:#8a7f70">
+      <div class="tiny">⏳ Henüz adım sayısı kaydı yok. Egzersiz formunda yürüyüş/koşu girerken adım sayısı + KŞ önce/sonra mutlaka kaydet.</div>
+    </div>`;
+  } else {
+    const per1k = stepsA.avgPer1k;
+    const col = per1k < -10 ? '#a03030' : per1k < -5 ? '#d97706' : '#047857';
+    html += `<div style="display:flex;align-items:center;gap:14px;padding:14px;background:linear-gradient(135deg,#f0f8f2,#e8f0f4);border-radius:10px;margin-bottom:12px;border:1px solid #a8c5b9">
+      <div style="text-align:center;min-width:96px">
+        <div style="font-size:30px;font-weight:700;line-height:1;color:${col}">${per1k > 0 ? '+' : ''}${per1k.toFixed(1)}</div>
+        <div class="tiny muted">mg/dL</div>
+        <div class="tiny" style="font-weight:500">/ 1000 adım</div>
+      </div>
+      <div style="flex:1;font-size:13px;line-height:1.5;color:#3a3530">
+        <b>Senin için: 1000 adım ≈ <span style="color:${col}">${per1k > 0 ? '+' : ''}${per1k.toFixed(1)} mg/dL</span></b>
+        <div class="tiny muted" style="margin-top:4px">${stepsA.count} kayıt · ortalama ${stepsA.avgSteps} adım/seans · ${stepsA.avgDelta} mg/dL düşüş</div>
+      </div>
+    </div>`;
+    
+    // Tahmin tablosu
+    html += `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:12px">`;
+    for (const stepCount of [2000, 5000, 8000, 10000]) {
+      const expectedDelta = Math.round((per1k * stepCount) / 1000);
+      const deltaCol = expectedDelta < -50 ? '#a03030' : expectedDelta < -20 ? '#d97706' : '#047857';
+      html += `<div style="padding:8px 4px;background:#fafaf5;border-radius:6px;text-align:center">
+        <div style="font-size:9px;color:#8a7f70">${stepCount} adım</div>
+        <div style="font-size:14px;font-weight:600;color:${deltaCol};margin-top:2px">${expectedDelta > 0 ? '+' : ''}${expectedDelta}</div>
+        <div class="tiny muted" style="font-size:9px">mg/dL</div>
+      </div>`;
+    }
+    html += `</div>`;
+    
+    // Son egzersizler
+    html += `<div class="tiny muted" style="margin-bottom:6px">Son adımlı egzersizlerin:</div>`;
+    for (const r of stepsA.recent) {
+      const typeLabel = EX_TYPE_LABELS[r.exType] || r.exType;
+      const deltaCol = r.delta < -30 ? '#a03030' : r.delta < 0 ? '#d97706' : '#047857';
+      const bgInfo = (typeof r.bgBefore === 'number' && typeof r.bgAfter === 'number') 
+        ? `${r.bgBefore}→${r.bgAfter}` 
+        : `${r.delta} mg/dL`;
+      html += `<div style="display:flex;justify-content:space-between;align-items:center;font-size:11px;padding:6px 8px;background:#fafaf5;border-radius:6px;margin-bottom:4px">
+        <span><span class="muted">${r.date.slice(5)} · ${typeLabel}</span> · <b>${r.steps.toLocaleString('tr')} adım</b> ${r.duration}dk</span>
+        <span style="color:${deltaCol};font-weight:600">${bgInfo} ${r.delta < 0 ? '↓' : ''}</span>
+      </div>`;
+    }
+  }
+  html += '</div>';
+  
   // === KART 8: YEMEK TİPİ PATTERN ===
   const mealP = analyzeMealPatterns(30);
   const mealKeys = Object.keys(mealP).filter(k => mealP[k].status === 'ok');
@@ -9728,6 +10079,33 @@ function renderToday() {
         ${state.bolusOverridePct !== 0 ? `<button class="bolus-override-reset" data-act="bolusOverrideReset" title="Sıfırla">↺</button>` : ''}
       </div>
       ${(() => {
+        const gp = calcGlycemicPeak(state.mealItems, state.isf, dose.ratio);
+        if (!gp) return '';
+        return `<div class="glycemic-card glycemic-${gp.combinedGi}">
+          <div class="glycemic-header">
+            <div class="glycemic-icon">${gp.label.emoji}</div>
+            <div class="glycemic-info">
+              <div class="glycemic-label">Glisemik pik</div>
+              <div class="glycemic-title" style="color:${gp.label.color}">${gp.label.label}</div>
+            </div>
+            <div class="glycemic-time">
+              <div class="glycemic-time-val">${gp.peakMin}–${gp.peakMax}<span class="glycemic-time-unit">dk</span></div>
+              <div class="glycemic-time-lbl">peak süresi</div>
+            </div>
+          </div>
+          ${gp.fatDelay > 0 || gp.proteinDelay > 0 ? `<div class="glycemic-modifier">
+            ${gp.fatDelay > 0 ? `<span>🥑 Yağ %${gp.fatPct} → +${gp.fatDelay}dk geciktirir</span>` : ''}
+            ${gp.proteinDelay > 0 ? `<span>🥩 Protein %${gp.proteinPct} → +${gp.proteinDelay}dk geciktirir</span>` : ''}
+          </div>` : ''}
+          ${gp.mismatchRisk === 'high' ? `<div class="glycemic-warning">
+            ⚠ <b>Insulin-yemek uyumsuzluğu riski:</b> Hızlı pik (${gp.peakMin}dk), insulin peak (~75dk). Hipo + sonra yüksek riski. ${state.bolusBrand === 'Fiasp' || state.bolusBrand === 'Lyumjev' ? 'Fiasp/Lyumjev gibi ultra-hızlı insulin daha uyumlu.' : 'Pre-bolus zamanlamasına dikkat et.'}
+          </div>` : gp.mismatchRisk === 'medium' ? `<div class="glycemic-note">
+            ℹ Pre-bolus zamanlaması önemli (${state.bolusBrand} insulin peak ~75dk).
+          </div>` : ''}
+        </div>`;
+      })()}
+      
+      ${(() => {
         const pb = calcPrebolusTiming(state.mealItems, bg, iobInfo.total);
         if (!pb) return '';
         const cls = MEAL_CLASS_LABELS[pb.mealClass] || MEAL_CLASS_LABELS.mixed;
@@ -10024,9 +10402,15 @@ function renderToday() {
         </div>
       </div>
 
-      <div class="corr-input-block">
-        <label>Mesafe (km, opsiyonel)</label>
-        <input class="in" type="text" inputmode="decimal" placeholder="1.0" value="${esc(state.exDistance)}" data-input="exDistance">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="corr-input-block">
+          <label>Mesafe (km)</label>
+          <input class="in" type="text" inputmode="decimal" placeholder="1.0" value="${esc(state.exDistance)}" data-input="exDistance">
+        </div>
+        <div class="corr-input-block">
+          <label>Adım sayısı</label>
+          <input class="in" type="text" inputmode="numeric" placeholder="örn 5000" value="${esc(state.exSteps)}" data-input="exSteps">
+        </div>
       </div>
 
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
@@ -10185,10 +10569,14 @@ function renderToday() {
       ${state.suggestions.map(s => {
         const carbsTxt = s.carbs > 0 ? `<span class="sug-carbs">${fmt(s.carbs, 0)}g KH/100g</span>` : '';
         const isFav = isFavorite(s.name);
+        const giInfo = getFoodGI(s.name, { carbs: s.carbs, protein: s.protein || 0, fat: s.fat || 0 });
+        const giLbl = GI_LABELS[giInfo.gi];
+        const giBadge = s.carbs > 5 ? `<span class="gi-badge gi-${giInfo.gi}" title="${giLbl.description}">${giLbl.emoji}</span>` : '';
         return `<div class="suggestion-row">
           <button class="suggestion" data-act="pickSuggestion" data-name="${esc(s.name)}">
             <span class="sug-name">${esc(s.name)}</span>
             <span class="sug-meta">
+              ${giBadge}
               ${carbsTxt}
               <span class="tag ${s.src === 'lib' ? 'tag-lib' : 'tag-db'}">${s.src === 'lib' ? '📚' : 'DB'}</span>
             </span>
@@ -11697,6 +12085,7 @@ document.addEventListener('input', (ev) => {
   // Egzersiz inputları
   else if (key === 'exDuration') state.exDuration = t.value;
   else if (key === 'exDistance') state.exDistance = t.value;
+  else if (key === 'exSteps') state.exSteps = t.value;
   else if (key === 'exBgBefore') { state.exBgBefore = t.value; render(); }
   else if (key === 'exBgAfter') { state.exBgAfter = t.value; render(); }
   else if (key === 'exNote') state.exNote = t.value;
